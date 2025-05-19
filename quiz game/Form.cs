@@ -14,31 +14,6 @@ public partial class Form : System.Windows.Forms.Form
         InitializeQuestionPanel();
     }
 
-    private void textBox1_TextChanged(object sender, EventArgs e)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    private void button1_Click(object sender, EventArgs e)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    private void panel1_Paint(object sender, PaintEventArgs e)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    private void panel1_Paint_1(object sender, PaintEventArgs e)
-    {
-        throw new System.NotImplementedException();
-    }
-
     private void label1_Click(object sender, EventArgs e)
     {
         throw new System.NotImplementedException();
@@ -106,32 +81,40 @@ public partial class Form : System.Windows.Forms.Form
             AutoSize = true
         };
         quizPanel.Controls.Add(questionLabel);
+
+        Panel radioPanel = new Panel()
+        {
+            Visible = true,
+            Dock = DockStyle.Fill
+        };
+        
+        quizPanel.Controls.Add(radioPanel);
         
         RadioButton option1 = new RadioButton
         {
             Text = question.Option1,
-            Dock = DockStyle.Top,
+            Dock = DockStyle.Bottom,
             Padding = new Padding(10),
             AutoSize = true
         };
         RadioButton option2 = new RadioButton
         {
             Text = question.Option2,
-            Dock = DockStyle.Top,
+            Dock = DockStyle.Bottom,
             Padding = new Padding(10),
             AutoSize = true
         };
         RadioButton option3 = new RadioButton
         {
             Text = question.Option3,
-            Dock = DockStyle.Top,
+            Dock = DockStyle.Bottom,
             Padding = new Padding(10),
             AutoSize = true
         };
 
-        quizPanel.Controls.Add(option3);
-        quizPanel.Controls.Add(option2);
-        quizPanel.Controls.Add(option1);
+        radioPanel.Controls.Add(option3);
+        radioPanel.Controls.Add(option2);
+        radioPanel.Controls.Add(option1);
 
         Button confirmButton = new Button
         {
@@ -180,8 +163,8 @@ public partial class Form : System.Windows.Forms.Form
             readerCat.Close();
         }
             
-        var querryDif = "select id, nameDifficulty from difficulty";
-        using (SqlCommand command = new SqlCommand(querryDif, connection))
+        var querryDiff = "select id, nameDifficulty from difficulty";
+        using (SqlCommand command = new SqlCommand(querryDiff, connection))
         {
             SqlDataReader readerDif = command.ExecuteReader();
 
