@@ -34,6 +34,7 @@ partial class Form1
         difficultyCombo = new System.Windows.Forms.ComboBox();
         categoriesCombo = new System.Windows.Forms.ComboBox();
         title1 = new System.Windows.Forms.Label();
+        questionPanel = new System.Windows.Forms.Panel();
         panel.SuspendLayout();
         SuspendLayout();
         // 
@@ -43,6 +44,7 @@ partial class Form1
         panel.Controls.Add(difficultyCombo);
         panel.Controls.Add(categoriesCombo);
         panel.Controls.Add(title1);
+        panel.Controls.Add(questionPanel);
         panel.Dock = System.Windows.Forms.DockStyle.Fill;
         panel.Location = new System.Drawing.Point(0, 0);
         panel.Name = "panel";
@@ -62,7 +64,6 @@ partial class Form1
         // difficultyCombo
         // 
         difficultyCombo.FormattingEnabled = true;
-        difficultyCombo.Items.AddRange(new object[] { "Easy", "Medium", "Hard" });
         difficultyCombo.Location = new System.Drawing.Point(285, 166);
         difficultyCombo.Name = "difficultyCombo";
         difficultyCombo.Size = new System.Drawing.Size(231, 28);
@@ -72,7 +73,6 @@ partial class Form1
         // 
         categoriesCombo.FormattingEnabled = true;
         categoriesCombo.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-        categoriesCombo.Items.AddRange(new object[] { "Geography", "History", "Biology", "Films" });
         categoriesCombo.Location = new System.Drawing.Point(285, 84);
         categoriesCombo.Name = "categoriesCombo";
         categoriesCombo.Size = new System.Drawing.Size(231, 28);
@@ -90,6 +90,14 @@ partial class Form1
         title1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         title1.Click += label1_Click;
         // 
+        // questionPanel
+        // 
+        questionPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+        questionPanel.Location = new System.Drawing.Point(0, 0);
+        questionPanel.Name = "questionPanel";
+        questionPanel.Size = new System.Drawing.Size(800, 450);
+        questionPanel.TabIndex = 4;
+        // 
         // Form1
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -97,9 +105,12 @@ partial class Form1
         ClientSize = new System.Drawing.Size(800, 450);
         Controls.Add(panel);
         StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+        Load += Form1_Load;
         panel.ResumeLayout(false);
         ResumeLayout(false);
     }
+
+    private System.Windows.Forms.Panel questionPanel;
 
     private System.Windows.Forms.ComboBox difficultyCombo;
     private System.Windows.Forms.Button startButton;

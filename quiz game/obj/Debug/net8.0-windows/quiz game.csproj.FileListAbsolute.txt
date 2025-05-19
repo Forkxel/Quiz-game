@@ -21,3 +21,4 @@ C:\Users\pavel\Documents\C#\quiz game\quiz game\quiz game\bin\Debug\net8.0-windo
 C:\Users\pavel\Documents\C#\quiz game\quiz game\quiz game\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Data.SqlClient.dll
 C:\Users\pavel\Documents\C#\quiz game\quiz game\quiz game\obj\Debug\net8.0-windows\quiz game.csproj.AssemblyReference.cache
 C:\Users\pavel\Documents\C#\quiz game\quiz game\quiz game\obj\Debug\net8.0-windows\quiz game.csproj.Up2Date
+C:\Users\pavel\Documents\C#\quiz game\quiz game\quiz game\obj\Debug\net8.0-windows\quiz game.sourcelink.json
