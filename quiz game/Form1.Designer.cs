@@ -77,7 +77,6 @@ partial class Form1
         categoriesCombo.Name = "categoriesCombo";
         categoriesCombo.Size = new System.Drawing.Size(231, 28);
         categoriesCombo.TabIndex = 1;
-        categoriesCombo.SelectedIndexChanged += Categories_SelectedIndexChanged;
         // 
         // title1
         // 
