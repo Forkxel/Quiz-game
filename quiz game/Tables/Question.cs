@@ -10,4 +10,9 @@ public class Question
     public string Option3 { get; set; }
     public string Difficulty { get; set; }
     public string Category { get; set; }
+
+    public override string ToString()
+    {
+        return QuestionText + "\n" + CorrectAnswer + "\n" + Option1 + "\n" + Option2 + "\n" + Option3 + "\n";
+    }
 }

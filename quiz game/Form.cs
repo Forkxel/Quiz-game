@@ -3,13 +3,15 @@ using quiz_game.Tables;
 
 namespace quiz_game;
 
-public partial class Form1 : Form
+public partial class Form : System.Windows.Forms.Form
 {
     private SqlConnection connection = DatabaseConnection.GetInstance();
+    private Panel quizPanel;
     
-    public Form1()
+    public Form()
     {
         InitializeComponent();
+        InitializeQuestionPanel();
     }
 
     private void textBox1_TextChanged(object sender, EventArgs e)
@@ -70,13 +72,101 @@ public partial class Form1 : Form
                 Category = reader["category"].ToString(),
                 Difficulty = reader["difficulty"].ToString()
             });
+            
+            Console.WriteLine(questions[0]);
         }
         reader.Close();
 
+        DisplayQuestionOnPanel(questions[0]);
+
         panel.Visible = false;
     }
+    
+    private void InitializeQuestionPanel()
+    {
+        quizPanel = new Panel
+        {
+            Visible = false,
+            Dock = DockStyle.Fill
+        };
 
-    private void Form1_Load(object sender, EventArgs e)
+        Controls.Add(quizPanel);
+    }
+    
+    private void DisplayQuestionOnPanel(Question question)
+    {
+        quizPanel.Controls.Clear();
+        
+        Label questionLabel = new Label
+        {
+            Text = question.QuestionText,
+            Font = new Font("Arial", 12, FontStyle.Bold),
+            Dock = DockStyle.Top,
+            Padding = new Padding(10),
+            AutoSize = true
+        };
+        quizPanel.Controls.Add(questionLabel);
+        
+        RadioButton option1 = new RadioButton
+        {
+            Text = question.Option1,
+            Dock = DockStyle.Top,
+            Padding = new Padding(10),
+            AutoSize = true
+        };
+        RadioButton option2 = new RadioButton
+        {
+            Text = question.Option2,
+            Dock = DockStyle.Top,
+            Padding = new Padding(10),
+            AutoSize = true
+        };
+        RadioButton option3 = new RadioButton
+        {
+            Text = question.Option3,
+            Dock = DockStyle.Top,
+            Padding = new Padding(10),
+            AutoSize = true
+        };
+
+        quizPanel.Controls.Add(option3);
+        quizPanel.Controls.Add(option2);
+        quizPanel.Controls.Add(option1);
+
+        Button confirmButton = new Button
+        {
+            Text = "Submit",
+            Dock = DockStyle.Bottom,
+            Padding = new Padding(10),
+            AutoSize = true
+        };
+        confirmButton.Click += (sender, e) => ConfirmAnswer(question, option1, option2, option3);
+        quizPanel.Controls.Add(confirmButton);
+
+        quizPanel.Visible = true;
+    }
+
+    private void ConfirmAnswer(Question question, RadioButton option1, RadioButton option2, RadioButton option3)
+    {
+        var selectedAnswer = "";
+
+        if (option1.Checked) selectedAnswer = option1.Text;
+        if (option2.Checked) selectedAnswer = option2.Text;
+        if (option3.Checked) selectedAnswer = option3.Text;
+
+        if (selectedAnswer == question.CorrectAnswer)
+        {
+            MessageBox.Show("Correct");
+        }
+        else
+        {
+            MessageBox.Show("Wrong");
+        }
+
+        quizPanel.Visible = false;
+    }
+
+    private void Form_Load(object sender, EventArgs e)
     {
         var querryCat = "select id, nameCategory from category";
         using (SqlCommand command = new SqlCommand(querryCat, connection))
@@ -104,10 +194,5 @@ public partial class Form1 : Form
             
         categoriesCombo.DisplayMember = "Name";
         difficultyCombo.DisplayMember = "Name";
-    }
-
-    private void DisplayQuestionOnPanel(Question question)
-    {
-        
     }
 }   

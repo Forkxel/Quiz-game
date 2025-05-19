@@ -1,6 +1,6 @@
 ﻿namespace quiz_game;
 
-partial class Form1
+partial class Form
 {
     /// <summary>
     ///  Required designer variable.
@@ -33,8 +33,7 @@ partial class Form1
         startButton = new System.Windows.Forms.Button();
         difficultyCombo = new System.Windows.Forms.ComboBox();
         categoriesCombo = new System.Windows.Forms.ComboBox();
-        title1 = new System.Windows.Forms.Label();
-        questionPanel = new System.Windows.Forms.Panel();
+        title = new System.Windows.Forms.Label();
         panel.SuspendLayout();
         SuspendLayout();
         // 
@@ -43,8 +42,7 @@ partial class Form1
         panel.Controls.Add(startButton);
         panel.Controls.Add(difficultyCombo);
         panel.Controls.Add(categoriesCombo);
-        panel.Controls.Add(title1);
-        panel.Controls.Add(questionPanel);
+        panel.Controls.Add(title);
         panel.Dock = System.Windows.Forms.DockStyle.Fill;
         panel.Location = new System.Drawing.Point(0, 0);
         panel.Name = "panel";
@@ -66,7 +64,7 @@ partial class Form1
         difficultyCombo.FormattingEnabled = true;
         difficultyCombo.Location = new System.Drawing.Point(285, 166);
         difficultyCombo.Name = "difficultyCombo";
-        difficultyCombo.Size = new System.Drawing.Size(231, 28);
+        difficultyCombo.Size = new System.Drawing.Size(231, 23);
         difficultyCombo.TabIndex = 2;
         // 
         // categoriesCombo
@@ -75,48 +73,39 @@ partial class Form1
         categoriesCombo.ImeMode = System.Windows.Forms.ImeMode.NoControl;
         categoriesCombo.Location = new System.Drawing.Point(285, 84);
         categoriesCombo.Name = "categoriesCombo";
-        categoriesCombo.Size = new System.Drawing.Size(231, 28);
+        categoriesCombo.Size = new System.Drawing.Size(231, 23);
         categoriesCombo.TabIndex = 1;
         // 
-        // title1
+        // title
         // 
-        title1.Dock = System.Windows.Forms.DockStyle.Top;
-        title1.Location = new System.Drawing.Point(0, 0);
-        title1.Name = "title1";
-        title1.Size = new System.Drawing.Size(800, 81);
-        title1.TabIndex = 0;
-        title1.Text = "Quiz game";
-        title1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        title1.Click += label1_Click;
+        title.Dock = System.Windows.Forms.DockStyle.Top;
+        title.Location = new System.Drawing.Point(0, 0);
+        title.Name = "title";
+        title.Size = new System.Drawing.Size(800, 81);
+        title.TabIndex = 0;
+        title.Text = "Quiz game";
+        title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        title.Click += label1_Click;
         // 
-        // questionPanel
+        // Form
         // 
-        questionPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-        questionPanel.Location = new System.Drawing.Point(0, 0);
-        questionPanel.Name = "questionPanel";
-        questionPanel.Size = new System.Drawing.Size(800, 450);
-        questionPanel.TabIndex = 4;
-        // 
-        // Form1
-        // 
-        AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+        AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         ClientSize = new System.Drawing.Size(800, 450);
         Controls.Add(panel);
+        Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
         StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-        Load += Form1_Load;
+        Load += Form_Load;
         panel.ResumeLayout(false);
         ResumeLayout(false);
     }
-
-    private System.Windows.Forms.Panel questionPanel;
 
     private System.Windows.Forms.ComboBox difficultyCombo;
     private System.Windows.Forms.Button startButton;
 
     private System.Windows.Forms.ComboBox categoriesCombo;
 
-    private System.Windows.Forms.Label title1;
+    private System.Windows.Forms.Label title;
 
     private System.Windows.Forms.Panel panel;
 
