@@ -47,11 +47,12 @@ public partial class Form1 : Form
         string selectedCategory = ((dynamic)categoriesCombo.SelectedItem)?.Id?.ToString();
         string selectedDifficulty = ((dynamic)difficultyCombo.SelectedItem)?.Id?.ToString();
         List<Question> questions = new List<Question>();
-        string query = "SELECT questionText, correctAnswer, option1, option2, option3, c.name, d.name" +
-                       " FROM Questions" +
-                       "inner join Category c on cat_id = c.id" +
-                       "inner join Difficulty d on dif_id = d.id" +
-                       "where q.cat_id = @CategoryId and q.dif_id = @DifficultyId";
+        string query = "SELECT questionText, correctAnswer, option1, option2, option3, cat_id, diff_id," +
+                       " c.nameCategory as category, d.nameDifficulty as difficulty" +
+                       " FROM Questions " +
+                       "inner join Category c on cat_id = c.id " +
+                       "inner join Difficulty d on diff_id = d.id " +
+                       "where cat_id = @CategoryId and diff_id = @DifficultyId";
         SqlCommand command = new SqlCommand(query, connection);
         command.Parameters.AddWithValue("@CategoryId", selectedCategory);
         command.Parameters.AddWithValue("@DifficultyId", selectedDifficulty);
@@ -66,11 +67,13 @@ public partial class Form1 : Form
                 Option1 = reader["option1"].ToString(),
                 Option2 = reader["option2"].ToString(),
                 Option3 = reader["option3"].ToString(),
-                CategoryId = Convert.ToInt32(reader["cat_id"]),
-                DifficultyId = Convert.ToInt32(reader["diff_id"])
+                Category = reader["category"].ToString(),
+                Difficulty = reader["difficulty"].ToString()
             });
         }
         reader.Close();
+
+        panel.Visible = false;
     }
 
     private void Form1_Load(object sender, EventArgs e)
@@ -107,4 +110,4 @@ public partial class Form1 : Form
     {
         
     }
-}
+}   
