@@ -107,7 +107,7 @@ public partial class Form : System.Windows.Forms.Form
             TextAlign = ContentAlignment.MiddleCenter,
             Dock = DockStyle.Top,
             Height = 100,
-            Margin = new Padding(0, 15, 0, 10),
+            Margin = new Padding(0, 20, 0, 10),
             AutoSize = false
         };
         quizPanel.Controls.Add(questionLabel);
