@@ -128,35 +128,26 @@ public partial class Form : System.Windows.Forms.Form
         quizPanel.Controls.Add(centerPanel);
         
         Font radioFont = new Font("Arial", 16, FontStyle.Regular);
+        List<string> options = new List<string> { question.Option1, question.Option2, question.Option3 };
         
-        RadioButton option1 = new RadioButton
-        {
-            Text = question.Option1,
-            AutoSize = true,
-            Margin = new Padding(0, 10, 0, 10),
-            TextAlign = ContentAlignment.MiddleCenter,
-            Font = radioFont
-        };
-        RadioButton option2 = new RadioButton
-        {
-            Text = question.Option2,
-            AutoSize = true,
-            Margin = new Padding(0, 10, 0, 10),
-            TextAlign = ContentAlignment.MiddleCenter,
-            Font = radioFont
-        };
-        RadioButton option3 = new RadioButton
-        {
-            Text = question.Option3,
-            AutoSize = true,
-            Margin = new Padding(0, 10, 0, 10),
-            TextAlign = ContentAlignment.MiddleCenter,
-            Font = radioFont
-        };
+        var rnd = new Random();
+        options = options.OrderBy(x => rnd.Next()).ToList();
+        
+        List<RadioButton> radioButtons = new List<RadioButton>();
 
-        radioPanel.Controls.Add(option1);
-        radioPanel.Controls.Add(option2);
-        radioPanel.Controls.Add(option3);
+        foreach (var opt in options)
+        {
+            RadioButton rb = new RadioButton
+            {
+                Text = opt,
+                AutoSize = true,
+                Margin = new Padding(0, 15, 0, 15),
+                TextAlign = ContentAlignment.MiddleCenter,
+                Font = radioFont
+            };
+            radioButtons.Add(rb);
+            radioPanel.Controls.Add(rb);
+        }
         
         Button confirmButton = new Button
         {
@@ -186,19 +177,19 @@ public partial class Form : System.Windows.Forms.Form
             confirmButton.Location = new Point((buttonPanel.Width - confirmButton.Width) / 2, (buttonPanel.Height - confirmButton.Height) / 2);
         };
 
-        confirmButton.Click += (sender, e) => ConfirmAnswer(question, option1, option2, option3);
-
+        confirmButton.Click += (sender, e) => ConfirmAnswer(question, radioButtons);
 
         quizPanel.Visible = true;
     }
 
-    private void ConfirmAnswer(Question question, RadioButton option1, RadioButton option2, RadioButton option3)
+    private void ConfirmAnswer(Question question, List<RadioButton> radioButtons)
     {
         var selectedAnswer = "";
 
-        if (option1.Checked) selectedAnswer = option1.Text;
-        if (option2.Checked) selectedAnswer = option2.Text;
-        if (option3.Checked) selectedAnswer = option3.Text;
+        foreach (RadioButton rb in radioButtons)
+        {
+            if (rb.Checked) selectedAnswer = rb.Text;
+        }
 
         if (selectedAnswer == question.CorrectAnswer)
         {
