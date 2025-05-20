@@ -14,6 +14,9 @@ public partial class Form : System.Windows.Forms.Form
     private List<Question> currentQuestions = new();
     private int currentQuestionIndex = 0;
     private const int MaxQuestions = 5;
+    private int score = 0;
+    private Label scoreLabel;
+    private RadioButton selectedOption = null;
     
     public Form()
     {
@@ -65,6 +68,7 @@ public partial class Form : System.Windows.Forms.Form
         DisplayNextQuestion();
 
         panel.Visible = false;
+        scoreLabel.Visible = true;
     }
 
     private void DisplayNextQuestion()
@@ -76,7 +80,7 @@ public partial class Form : System.Windows.Forms.Form
         }
         else
         {
-            MessageBox.Show("Quiz finished! Thanks for playing.");
+            DisplayFinalScorePanel();
             quizPanel.Visible = false;
         }
     }
@@ -102,8 +106,8 @@ public partial class Form : System.Windows.Forms.Form
             Font = new Font("Arial", 14, FontStyle.Bold),
             TextAlign = ContentAlignment.MiddleCenter,
             Dock = DockStyle.Top,
-            Height = 60,
-            Margin = new Padding(0, 20, 0, 20),
+            Height = 100,
+            Margin = new Padding(0, 15, 0, 10),
             AutoSize = false
         };
         quizPanel.Controls.Add(questionLabel);
@@ -177,30 +181,80 @@ public partial class Form : System.Windows.Forms.Form
             confirmButton.Location = new Point((buttonPanel.Width - confirmButton.Width) / 2, (buttonPanel.Height - confirmButton.Height) / 2);
         };
 
-        confirmButton.Click += (sender, e) => ConfirmAnswer(question, radioButtons);
+        confirmButton.Click += (sender, e) => ConfirmAnswer(question, radioButtons, confirmButton);
 
         quizPanel.Visible = true;
     }
 
-    private void ConfirmAnswer(Question question, List<RadioButton> radioButtons)
+    private void ConfirmAnswer(Question question, List<RadioButton> radioButtons, Button confirmButton)
     {
-        var selectedAnswer = "";
-
-        foreach (RadioButton rb in radioButtons)
+        if (confirmButton.Text == "Submit")
         {
-            if (rb.Checked) selectedAnswer = rb.Text;
-        }
-
-        if (selectedAnswer == question.CorrectAnswer)
-        {
-            MessageBox.Show("Correct");
+           var selectedAnswer = ""; 
+           foreach (RadioButton rb in radioButtons)
+           {
+               if (rb.Checked)
+               {
+                   selectedAnswer = rb.Text;
+                   selectedOption = rb;
+               }
+           }
+           
+           foreach (var rb in radioButtons)
+           {
+               if (rb.Text == question.CorrectAnswer)
+               {
+                   rb.ForeColor = Color.Green;
+               }
+               else if (rb.Text != question.CorrectAnswer)
+               {
+                   rb.ForeColor = Color.Red;
+               }
+           }
+           
+           if (selectedAnswer == question.CorrectAnswer)
+           {
+               score++;
+               scoreLabel.Text = $"Score: {score}";
+           }
+           confirmButton.Text = "Next";
+           
+           foreach (var rb in radioButtons)
+           {
+               rb.Click -= DisableClick; // Zajistěte, že nebudou přidány duplicity
+               rb.Click += DisableClick;
+           }
         }
         else
         {
-            MessageBox.Show("Wrong");
+            DisplayNextQuestion();
         }
+    }
+    
+    private void DisableClick(object sender, EventArgs e)
+    {
+        ((RadioButton)sender).Checked = false;
+        selectedOption.Checked = true;
+    }
+    
+    private void DisplayFinalScorePanel()
+    {
+        Panel finalScorePanel = new Panel
+        {
+            Dock = DockStyle.Fill
+        };
 
-        DisplayNextQuestion();
+        Label finalScoreLabel = new Label
+        {
+            Text = $"Your final score: {score}",
+            Font = new Font("Arial", 16, FontStyle.Bold),
+            TextAlign = ContentAlignment.MiddleCenter,
+            Dock = DockStyle.Fill
+        };
+
+        finalScorePanel.Controls.Add(finalScoreLabel);
+        Controls.Clear();
+        Controls.Add(finalScorePanel); 
     }
 
     private void Form_Load(object sender, EventArgs e)

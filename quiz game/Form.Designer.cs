@@ -103,6 +103,18 @@ partial class Form
         Load += Form_Load;
         panel.ResumeLayout(false);
         ResumeLayout(false);
+        
+        scoreLabel = new Label
+        {
+            Text = "Score: 0",
+            Font = new Font("Arial", 12, FontStyle.Bold),
+            TextAlign = ContentAlignment.MiddleRight,
+            Dock = DockStyle.Top,
+            Height = 40,
+            Padding = new Padding(0, 10, 10, 0),
+            Visible = false
+        };
+        Controls.Add(scoreLabel);
     }
 
     private ComboBox difficultyCombo;
