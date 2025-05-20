@@ -26,146 +26,339 @@ insert into Difficulty(nameDifficulty) values ('Easy'),('Medium'),('Hard');
 insert into Category(nameCategory) values ('Geography'), ('History'), ('Biology'), ('Films');
 
 insert into Questions (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id)
-values 
-('What is the capital of Australia?', 'Canberra', 'Canberra', 'Sydney', 'Melbourne', 1, 1),
-('Which river is the longest in the world?', 'Amazon', 'Nile', 'Amazon', 'Yangtze', 2, 1),
-('Which country has the most islands in the world?', 'Sweden', 'Canada', 'Sweden', 'Indonesia', 3, 1),
-
-('Who was the first President of the United States?', 'George Washington', 'George Washington', 'Thomas Jefferson', 'Abraham Lincoln', 1, 2),
-('In what year did World War II end?', '1945', '1945', '1939', '1950', 2, 2),
-('Which empire was ruled by Julius Caesar?', 'Roman Empire', 'Byzantine Empire', 'Roman Empire', 'Ottoman Empire', 3, 2),
-
+values
 ('What is the powerhouse of the cell?', 'Mitochondria', 'Nucleus', 'Mitochondria', 'Ribosome', 1, 3),
-('What is the process by which plants make their food?', 'Photosynthesis', 'Respiration', 'Photosynthesis', 'Osmosis', 2, 3),
-('Which part of the human brain controls balance?', 'Cerebellum', 'Medulla', 'Cerebrum', 'Cerebellum', 3, 3),
+('Which organ is responsible for pumping blood through the body?', 'Heart', 'Heart', 'Lungs', 'Liver', 1, 3),
+('What is the process by which plants make their food?', 'Photosynthesis', 'Respiration', 'Photosynthesis', 'Osmosis', 1, 3),
+('What is the largest organ in the human body?', 'Skin', 'Heart', 'Lungs', 'Skin', 1, 3),
+('How many bones are in the adult human body?', '206', '206', '201', '210', 1, 3),
+('What is the basic unit of life?', 'Cell', 'Tissue', 'Cell', 'Organ', 1, 3),
+('What is the primary gas exchanged in photosynthesis?', 'Carbon dioxide', 'Carbon dioxide', 'Oxygen', 'Nitrogen', 1, 3),
+('Which part of the plant is responsible for reproduction?', 'Flower', 'Leaf', 'Flower', 'Root', 1, 3),
+('Which blood cells help fight infections?', 'White blood cells', 'Red blood cells', 'Platelets', 'White blood cells', 1, 3),
+('What is the function of red blood cells?', 'Transport oxygen', 'Clot blood', 'Transport oxygen', 'Fight infection', 1, 3),
+('What organ filters waste from the blood?', 'Kidney', 'Liver', 'Kidney', 'Lungs', 1, 3),
+('What is the main pigment in plants?', 'Chlorophyll', 'Melanin', 'Hemoglobin', 'Chlorophyll', 1, 3),
+('What is the name of a group of tissues working together?', 'Organ', 'Cell', 'Organ', 'System', 1, 3),
+('What is the role of the stomach?', 'Digestion', 'Circulation', 'Digestion', 'Respiration', 1, 3),
+('What is the name of the process in which water moves through a semi-permeable membrane?', 'Osmosis', 'Diffusion', 'Osmosis', 'Filtration', 1, 3),
+('What is the main function of the lungs?', 'Gas exchange', 'Digestion', 'Gas exchange', 'Filtration', 1, 3),
+('What is the smallest unit of an element?', 'Atom', 'Cell', 'Atom', 'Molecule', 1, 3),
+('What is the term for animals that only eat plants?', 'Herbivores', 'Omnivores', 'Herbivores', 'Carnivores', 1, 3),
+('What is the outer layer of the skin called?', 'Epidermis', 'Dermis', 'Epidermis', 'Hypodermis', 1, 3),
+('What is the process by which the body breaks down food?', 'Digestion', 'Respiration', 'Digestion', 'Excretion', 1, 3),
+('Which organelle is responsible for photosynthesis?', 'Chloroplast', 'Mitochondria', 'Chloroplast', 'Nucleus', 1, 3),
+('What do we call the study of living things?', 'Biology', 'Chemistry', 'Biology', 'Physics', 1, 3),
+('What is the liquid part of blood called?', 'Plasma', 'Platelets', 'Plasma', 'Serum', 1, 3),
+('What is the hardest substance in the human body?', 'Tooth enamel', 'Bone', 'Tooth enamel', 'Cartilage', 1, 3),
+('What organ is responsible for detoxifying the blood?', 'Liver', 'Kidney', 'Liver', 'Pancreas', 1, 3);
 
-('Who directed the movie Inception?', 'Christopher Nolan', 'Christopher Nolan', 'Steven Spielberg', 'James Cameron', 1, 4),
-('Which movie won the Academy Award for Best Picture in 1994?', 'Forrest Gump', 'Forrest Gump', 'Pulp Fiction', 'The Shawshank Redemption', 2, 4),
-('What is the name of the fictional kingdom in Black Panther?', 'Wakanda', 'Wakanda', 'Genovia', 'Zamunda', 3, 4);
+insert into Questions (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id)
+values
+('What is the primary function of the kidneys?', 'Filter blood', 'Filter blood', 'Produce hormones', 'Digest food', 2, 3),
+('Which vitamin is produced by the skin when exposed to sunlight?', 'Vitamin D', 'Vitamin D', 'Vitamin C', 'Vitamin A', 2, 3),
+('What is the primary component of the cell membrane?', 'Phospholipids', 'Proteins', 'Carbohydrates', 'Phospholipids', 2, 3),
+('What type of blood vessel carries blood away from the heart?', 'Arteries', 'Veins', 'Arteries', 'Capillaries', 2, 3),
+('What is the smallest bone in the human body?', 'Stapes', 'Stapes', 'Humerus', 'Femur', 2, 3),
+('Which part of the brain controls balance?', 'Cerebellum', 'Cerebellum', 'Medulla', 'Cerebrum', 2, 3),
+('What is the largest mammal in the world?', 'Blue whale', 'Elephant', 'Blue whale', 'Giraffe', 2, 3),
+('Which organelle is responsible for energy production?', 'Mitochondria', 'Mitochondria', 'Ribosome', 'Nucleus', 2, 3),
+('What is the term for animals that eat both plants and meat?', 'Omnivores', 'Carnivores', 'Herbivores', 'Omnivores', 2, 3),
+('Which blood type is known as the universal donor?', 'O negative', 'A positive', 'B positive', 'O negative', 2, 3),
+('What type of cells are responsible for transmitting nerve impulses?', 'Neurons', 'Neurons', 'Glial cells', 'Muscle cells', 2, 3),
+('What is the main hormone responsible for regulating blood sugar?', 'Insulin', 'Adrenaline', 'Insulin', 'Cortisol', 2, 3),
+('Which organ produces bile?', 'Liver', 'Pancreas', 'Liver', 'Gallbladder', 2, 3),
+('What is the name of the protein that carries oxygen in the blood?', 'Hemoglobin', 'Myoglobin', 'Hemoglobin', 'Keratin', 2, 3),
+('What type of macromolecule are enzymes?', 'Proteins', 'Carbohydrates', 'Proteins', 'Lipids', 2, 3),
+('Which part of the eye controls the amount of light entering?', 'Iris', 'Retina', 'Iris', 'Cornea', 2, 3),
+('What is the term for programmed cell death?', 'Apoptosis', 'Necrosis', 'Apoptosis', 'Mitosis', 2, 3),
+('Which gas do humans exhale?', 'Carbon dioxide', 'Oxygen', 'Nitrogen', 'Carbon dioxide', 2, 3),
+('What is the main structural material in plant cell walls?', 'Cellulose', 'Chitin', 'Cellulose', 'Lignin', 2, 3),
+('What is the name of the process where cells divide to produce gametes?', 'Meiosis', 'Mitosis', 'Meiosis', 'Binary fission', 2, 3),
+('Which system in the body controls hormones?', 'Endocrine system', 'Nervous system', 'Endocrine system', 'Respiratory system', 2, 3),
+('What is the function of ribosomes?', 'Protein synthesis', 'Energy production', 'Protein synthesis', 'Waste removal', 2, 3),
+('Which vitamin is essential for blood clotting?', 'Vitamin K', 'Vitamin C', 'Vitamin K', 'Vitamin A', 2, 3),
+('Which cells are responsible for producing antibodies?', 'B cells', 'T cells', 'B cells', 'Macrophages', 2, 3),
+('What is the name of the disease caused by a deficiency of Vitamin C?', 'Scurvy', 'Rickets', 'Scurvy', 'Anemia', 2, 3);
 
+insert into Questions (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id)
+values
+('What is the name of the process by which DNA is copied?', 'Replication', 'Transcription', 'Replication', 'Translation', 3, 3),
+('What is the main function of the liver?', 'Detoxification', 'Digestion', 'Detoxification', 'Hormone production', 3, 3),
+('What is the term for the study of fungi?', 'Mycology', 'Bacteriology', 'Mycology', 'Virology', 3, 3),
+('What is the powerhouse of the cell?', 'Mitochondria', 'Nucleus', 'Mitochondria', 'Ribosome', 3, 3),
+('Which molecule carries genetic information?', 'DNA', 'RNA', 'DNA', 'Protein', 3, 3),
+('What type of RNA carries amino acids to the ribosome?', 'tRNA', 'mRNA', 'tRNA', 'rRNA', 3, 3),
+('What is the process of converting mRNA into a protein called?', 'Translation', 'Replication', 'Transcription', 'Translation', 3, 3),
+('Which organelle is involved in protein modification and packaging?', 'Golgi apparatus', 'Endoplasmic reticulum', 'Golgi apparatus', 'Lysosome', 3, 3),
+('What is the term for the movement of water across a semipermeable membrane?', 'Osmosis', 'Diffusion', 'Osmosis', 'Active transport', 3, 3),
+('What is the main pigment responsible for photosynthesis?', 'Chlorophyll', 'Carotene', 'Chlorophyll', 'Xanthophyll', 3, 3),
+('Which part of the brain regulates homeostasis and hormone release?', 'Hypothalamus', 'Cerebellum', 'Hypothalamus', 'Medulla', 3, 3),
+('What is the name of the enzyme that unwinds DNA during replication?', 'Helicase', 'Polymerase', 'Helicase', 'Ligase', 3, 3),
+('What are the basic building blocks of proteins?', 'Amino acids', 'Nucleotides', 'Amino acids', 'Monosaccharides', 3, 3),
+('Which blood cells are responsible for clotting?', 'Platelets', 'Red blood cells', 'Platelets', 'White blood cells', 3, 3),
+('What type of bond holds the two strands of DNA together?', 'Hydrogen bond', 'Covalent bond', 'Hydrogen bond', 'Ionic bond', 3, 3),
+('What is the term for a change in the DNA sequence?', 'Mutation', 'Transcription', 'Mutation', 'Replication', 3, 3),
+('Which organelle contains enzymes for breaking down waste?', 'Lysosome', 'Peroxisome', 'Lysosome', 'Mitochondria', 3, 3),
+('What is the name of the cycle plants use to fix carbon dioxide?', 'Calvin cycle', 'Krebs cycle', 'Calvin cycle', 'Glycolysis', 3, 3),
+('What is the name of the pigment responsible for red color in blood?', 'Hemoglobin', 'Myoglobin', 'Hemoglobin', 'Chlorophyll', 3, 3),
+('Which type of RNA is involved in splicing?', 'snRNA', 'mRNA', 'snRNA', 'tRNA', 3, 3),
+('What is the primary role of mitochondria?', 'ATP production', 'Protein synthesis', 'ATP production', 'Cell division', 3, 3),
+('Which disease is caused by the deficiency of insulin?', 'Diabetes mellitus', 'Hypothyroidism', 'Diabetes mellitus', 'Anemia', 3, 3),
+('What is the main function of ribosomes?', 'Protein synthesis', 'Lipid synthesis', 'Protein synthesis', 'Energy production', 3, 3),
+('Which cells in the immune system produce antibodies?', 'B cells', 'T cells', 'B cells', 'Macrophages', 3, 3),
+('What is the name of the DNA sequence that signals the start of transcription?', 'Promoter', 'Enhancer', 'Promoter', 'Operator', 3, 3);
 
--- Insert questions into Questions table
-INSERT INTO Questions (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id)
-VALUES 
-    -- Geography (Easy)
-    ('What is the capital of France?', 'Paris', 'Paris', 'Berlin', 'Madrid', 1, 1),
-    ('Which continent is the Amazon Rainforest located on?', 'South America', 'South America', 'Africa', 'Asia', 1, 1),
-    ('What is the largest ocean in the world?', 'Pacific Ocean', 'Atlantic Ocean', 'Indian Ocean', 'Pacific Ocean', 1, 1),
-    
-    -- Geography (Medium)
-    ('Which country has the highest number of active volcanoes?', 'Indonesia', 'Japan', 'Indonesia', 'Italy', 2, 1),
-    ('What is the longest river in Asia?', 'Yangtze', 'Yangtze', 'Mekong', 'Ganges', 2, 1),
-    ('What is the name of the smallest country in Europe?', 'Vatican City', 'Monaco', 'Vatican City', 'San Marino', 2, 1),
+insert into Questions (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id)
+values
+('Who directed the movie "Jurassic Park"?', 'Steven Spielberg', 'Steven Spielberg', 'James Cameron', 'Martin Scorsese', 1, 4),
+('Which movie features the character "Harry Potter"?', 'Harry Potter and the Sorcerer’s Stone', 'Harry Potter and the Sorcerer’s Stone', 'The Lord of the Rings', 'The Hunger Games', 1, 4),
+('What is the name of the spaceship in "Star Wars"?', 'Millennium Falcon', 'Millennium Falcon', 'Enterprise', 'Serenity', 1, 4),
+('Who played Jack in "Titanic"?', 'Leonardo DiCaprio', 'Leonardo DiCaprio', 'Brad Pitt', 'Tom Cruise', 1, 4),
+('In which movie does the character "Forrest Gump" appear?', 'Forrest Gump', 'Cast Away', 'Forrest Gump', 'Saving Private Ryan', 1, 4),
+('Which animated movie features a talking snowman named Olaf?', 'Frozen', 'Frozen', 'Tangled', 'Moana', 1, 4),
+('What is the name of the wizarding school in Harry Potter?', 'Hogwarts', 'Hogwarts', 'Beauxbatons', 'Durmstrang', 1, 4),
+('Who is the superhero alter ego of Bruce Wayne?', 'Batman', 'Spider-Man', 'Batman', 'Superman', 1, 4),
+('Which movie is about toys coming to life?', 'Toy Story', 'Toy Story', 'The Incredibles', 'Monsters, Inc.', 1, 4),
+('Who directed "E.T. the Extra-Terrestrial"?', 'Steven Spielberg', 'James Cameron', 'Steven Spielberg', 'George Lucas', 1, 4),
+('Which movie features the song "Let It Go"?', 'Frozen', 'Frozen', 'Moana', 'Tangled', 1, 4),
+('Who played Iron Man in the Marvel Cinematic Universe?', 'Robert Downey Jr.', 'Chris Evans', 'Robert Downey Jr.', 'Chris Hemsworth', 1, 4),
+('What is the name of the kingdom in "The Lion King"?', 'Pride Lands', 'Pride Lands', 'Narnia', 'Agrabah', 1, 4),
+('In which movie do dinosaurs escape from a theme park?', 'Jurassic Park', 'Jurassic Park', 'King Kong', 'Godzilla', 1, 4),
+('Who is the main character in the "Pirates of the Caribbean" series?', 'Jack Sparrow', 'Jack Sparrow', 'Will Turner', 'Hector Barbossa', 1, 4),
+('Which movie features a character named "Elsa"?', 'Frozen', 'Tangled', 'Frozen', 'Brave', 1, 4),
+('What is the profession of the main character in "The Devil Wears Prada"?', 'Fashion Editor', 'Fashion Editor', 'Journalist', 'Teacher', 1, 4),
+('Who starred as the lead in "Mission: Impossible"?', 'Tom Cruise', 'Tom Cruise', 'Matt Damon', 'Brad Pitt', 1, 4),
+('Which movie is set in the city of New York and features Spider-Man?', 'Spider-Man', 'Spider-Man', 'Batman', 'Iron Man', 1, 4),
+('What type of creature is Shrek?', 'Ogre', 'Elf', 'Ogre', 'Troll', 1, 4),
+('Who directed the "Lord of the Rings" trilogy?', 'Peter Jackson', 'Steven Spielberg', 'James Cameron', 'Peter Jackson', 1, 4),
+('What is the name of the hobbit played by Elijah Wood?', 'Frodo Baggins', 'Bilbo Baggins', 'Samwise Gamgee', 'Frodo Baggins', 1, 4),
+('Which movie features the quote "May the Force be with you"?', 'Star Wars', 'Star Trek', 'Star Wars', 'Guardians of the Galaxy', 1, 4),
+('What is the color of the superhero costume of Superman?', 'Blue and red', 'Blue and red', 'Green and black', 'Yellow and black', 1, 4),
+('Which animated movie features a fish named Nemo?', 'Finding Nemo', 'Finding Nemo', 'Shark Tale', 'The Little Mermaid', 1, 4);
 
-    -- Geography (Hard)
-    ('What is the capital of Eritrea?', 'Asmara', 'Asmara', 'Kigali', 'Khartoum', 3, 1),
-    ('Which desert is known as the world’s oldest desert?', 'Namib Desert', 'Sahara Desert', 'Namib Desert', 'Gobi Desert', 3, 1),
-    ('Name the mountain range separating Europe and Asia.', 'Ural Mountains', 'Ural Mountains', 'Caucasus Mountains', 'Alps', 3, 1),
+insert into Questions (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id)
+values
+('In "Inception," what is the term used for entering someone’s dreams?', 'Dream sharing', 'Dream sharing', 'Mind reading', 'Time travel', 2, 4),
+('Who played the character "Joker" in "The Dark Knight"?', 'Heath Ledger', 'Joaquin Phoenix', 'Heath Ledger', 'Jared Leto', 2, 4),
+('What is the name of the kingdom in "Game of Thrones"?', 'Westeros', 'Westeros', 'Narnia', 'Middle-earth', 2, 4),
+('Which movie features the song "My Heart Will Go On"?', 'Titanic', 'Titanic', 'Avatar', 'The Bodyguard', 2, 4),
+('In "The Matrix," what color pill does Neo take?', 'Red', 'Blue', 'Red', 'Green', 2, 4),
+('Who directed "Pulp Fiction"?', 'Quentin Tarantino', 'Martin Scorsese', 'Quentin Tarantino', 'Steven Spielberg', 2, 4),
+('What is the name of the hobbit who destroys the One Ring?', 'Frodo Baggins', 'Bilbo Baggins', 'Frodo Baggins', 'Samwise Gamgee', 2, 4),
+('Which actor portrayed the character "Forrest Gump"?', 'Tom Hanks', 'Tom Cruise', 'Tom Hanks', 'Brad Pitt', 2, 4),
+('What is the main setting for the movie "The Shawshank Redemption"?', 'Prison', 'Hospital', 'Prison', 'School', 2, 4),
+('In "Guardians of the Galaxy," what is the real name of Star-Lord?', 'Peter Quill', 'Peter Quill', 'Tony Stark', 'Bruce Wayne', 2, 4),
+('Who composed the score for "Star Wars"?', 'John Williams', 'Hans Zimmer', 'John Williams', 'James Horner', 2, 4),
+('Which actress plays "Black Widow" in the Marvel movies?', 'Scarlett Johansson', 'Scarlett Johansson', 'Emily Blunt', 'Natalie Portman', 2, 4),
+('What is the name of the AI in "2001: A Space Odyssey"?', 'HAL 9000', 'TARS', 'HAL 9000', 'Skynet', 2, 4),
+('In which movie does Tom Hanks play a character stranded on an island?', 'Cast Away', 'Cast Away', 'Saving Private Ryan', 'Forrest Gump', 2, 4),
+('Which film features the character "Tyler Durden"?', 'Fight Club', 'Se7en', 'Fight Club', 'The Matrix', 2, 4),
+('What is the name of the city where "The Dark Knight" is set?', 'Gotham', 'Metropolis', 'Gotham', 'Central City', 2, 4),
+('Which film won the Oscar for Best Picture in 1994?', 'Forrest Gump', 'Pulp Fiction', 'Forrest Gump', 'The Shawshank Redemption', 2, 4),
+('What is the name of the protagonist in the "Die Hard" series?', 'John McClane', 'Jack Bauer', 'John McClane', 'Jason Bourne', 2, 4),
+('Who directed "The Grand Budapest Hotel"?', 'Wes Anderson', 'Wes Anderson', 'Quentin Tarantino', 'Paul Thomas Anderson', 2, 4),
+('Which movie features the line "Ill be back"?', 'The Terminator', 'Predator', 'The Terminator', 'RoboCop', 2, 4),
+('What is the name of the main antagonist in "The Silence of the Lambs"?', 'Hannibal Lecter', 'Norman Bates', 'Hannibal Lecter', 'Freddy Krueger', 2, 4),
+('Which actress stars in "La La Land"?', 'Emma Stone', 'Emma Watson', 'Emma Stone', 'Jennifer Lawrence', 2, 4),
+('What year was "Avatar" released?', '2009', '2009', '2010', '2012', 2, 4),
+('Which movie is about a robot named WALL-E?', 'WALL-E', 'Robots', 'WALL-E', 'Big Hero 6', 2, 4),
+('What is the fictional language spoken by the Na’vi in "Avatar"?', 'Na’vi', 'Elvish', 'Na’vi', 'Klingon', 2, 4);
 
-    -- History (Easy)
-    ('Who discovered America in 1492?', 'Christopher Columbus', 'Christopher Columbus', 'Ferdinand Magellan', 'Vasco da Gama', 1, 2),
-    ('What year marked the start of World War I?', '1914', '1914', '1939', '1929', 1, 2),
-    ('Who was the first female Prime Minister of the UK?', 'Margaret Thatcher', 'Theresa May', 'Margaret Thatcher', 'Angela Merkel', 1, 2),
+insert into Questions (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id)
+values
+('Which film won the first Academy Award for Best Picture?', 'Wings (1927)', 'Wings (1927)', 'The Jazz Singer', 'Sunrise', 3, 4),
+('In "The Godfather," what is the name of Michael Corleone’s wife?', 'Kay Adams', 'Kay Adams', 'Connie Corleone', 'Carla', 3, 4),
+('Who played the role of the lead antagonist in "No Country for Old Men"?', 'Javier Bardem', 'Josh Brolin', 'Javier Bardem', 'Tommy Lee Jones', 3, 4),
+('Which director is known for the use of the “dolly zoom” effect?', 'Alfred Hitchcock', 'Stanley Kubrick', 'Alfred Hitchcock', 'Steven Spielberg', 3, 4),
+('What year was the original "Blade Runner" film released?', '1982', '1982', '1992', '1979', 3, 4),
+('In "Schindler’s List," what is Oskar Schindler’s profession?', 'Industrialist', 'Industrialist', 'Soldier', 'Lawyer', 3, 4),
+('Which film features a character named Anton Chigurh?', 'No Country for Old Men', 'No Country for Old Men', 'The Hurt Locker', 'There Will Be Blood', 3, 4),
+('What is the name of the spacecraft in "2001: A Space Odyssey"?', 'Discovery One', 'Endeavour', 'Discovery One', 'Enterprise', 3, 4),
+('Who composed the music for "The Lord of the Rings" trilogy?', 'Howard Shore', 'John Williams', 'Howard Shore', 'Hans Zimmer', 3, 4),
+('In "The Prestige," what is the profession of the two main characters?', 'Magicians', 'Detectives', 'Magicians', 'Scientists', 3, 4),
+('What is the original language of the film "Pan’s Labyrinth"?', 'Spanish', 'Spanish', 'French', 'Italian', 3, 4),
+('Which 1927 silent film is considered a masterpiece of German Expressionism?', 'Metropolis', 'Nosferatu', 'Metropolis', 'The Cabinet of Dr. Caligari', 3, 4),
+('What is the full name of the character "Indiana Jones"?', 'Dr. Henry Walton Jones Jr.', 'Dr. Henry Walton Jones Jr.', 'Dr. John Watson', 'Dr. Marcus Brody', 3, 4),
+('Who directed "Apocalypse Now"?', 'Francis Ford Coppola', 'Martin Scorsese', 'Francis Ford Coppola', 'Francis Ford Coppola', 3, 4),
+('Which film’s famous line is “Rosebud”?', 'Citizen Kane', 'Casablanca', 'Citizen Kane', 'The Maltese Falcon', 3, 4),
+('In "Se7en," what is the first sin the killer punishes?', 'Gluttony', 'Greed', 'Gluttony', 'Lust', 3, 4),
+('Who starred as the lead in the original "King Kong" (1933)?', 'Fay Wray', 'Merian C. Cooper', 'Fay Wray', 'Naomi Watts', 3, 4),
+('What is the name of the fictional hotel in "The Shining"?', 'The Overlook Hotel', 'The Bates Motel', 'The Overlook Hotel', 'The Continental', 3, 4),
+('Which film was directed by Andrei Tarkovsky?', 'Solaris', 'Solaris', 'Stalker', 'Both', 3, 4),
+('What is the signature weapon of the character Jason Voorhees?', 'Machete', 'Chainsaw', 'Machete', 'Knife', 3, 4),
+('Who played the role of Clarice Starling in "The Silence of the Lambs"?', 'Jodie Foster', 'Julianne Moore', 'Jodie Foster', 'Gillian Anderson', 3, 4),
+('Which movie features a character called "Tyler Durden"?', 'Fight Club', 'Fight Club', 'American Psycho', 'The Social Network', 3, 4),
+('In "Psycho," what is Norman Bates’ mother’s first name?', 'Norma', 'Norma', 'Marion', 'Lila', 3, 4),
+('Which film is set during the Vietnam War and directed by Stanley Kubrick?', 'Full Metal Jacket', 'Platoon', 'Full Metal Jacket', 'Apocalypse Now', 3, 4),
+('Who directed "The Grand Budapest Hotel"?', 'Wes Anderson', 'Wes Anderson', 'Tim Burton', 'David Fincher', 3, 4),
+('Which film features the quote, “Here’s looking at you, kid”?', 'Casablanca', 'Gone with the Wind', 'Casablanca', 'It’s a Wonderful Life', 3, 4);
 
-    -- History (Medium)
-    ('What was the name of the ship on which the Pilgrims traveled to America?', 'Mayflower', 'Mayflower', 'Santa Maria', 'Endeavour', 2, 2),
-    ('In which year did the Berlin Wall fall?', '1989', '1989', '1990', '1985', 2, 2),
-    ('Who was the leader of the Soviet Union during World War II?', 'Joseph Stalin', 'Joseph Stalin', 'Vladimir Lenin', 'Nikita Khrushchev', 2, 2),
+insert into Questions (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id)
+values
+('What is the capital of France?', 'Paris', 'Paris', 'Berlin', 'Madrid', 1, 1),
+('What is the largest ocean in the world?', 'Pacific Ocean', 'Atlantic Ocean', 'Indian Ocean', 'Pacific Ocean', 1, 1),
+('What is the capital of Italy?', 'Rome', 'Rome', 'Venice', 'Milan', 1, 1),
+('Which continent is also a country?', 'Australia', 'Australia', 'Asia', 'Antarctica', 1, 1),
+('What is the capital of Canada?', 'Ottawa', 'Ottawa', 'Toronto', 'Vancouver', 1, 1),
+('What is the capital of Australia?', 'Canberra', 'Canberra', 'Sydney', 'Melbourne', 1, 1),
+('What is the smallest country in the world?', 'Vatican City', 'Vatican City', 'Monaco', 'San Marino', 1, 1),
+('Which desert is located in Africa?', 'Sahara Desert', 'Sahara Desert', 'Kalahari Desert', 'Gobi Desert', 1, 1),
+('What is the name of the tallest mountain in the world?', 'Mount Everest', 'K2', 'Kilimanjaro', 'Mount Everest', 1, 1),
+('Which river flows through Egypt?', 'Nile', 'Amazon', 'Nile', 'Yangtze', 1, 1),
+('What continent is Egypt part of?', 'Africa', 'Asia', 'Africa', 'Europe', 1, 1),
+('Which city is known as the "Big Apple"?', 'New York City', 'New York City', 'Los Angeles', 'Chicago', 1, 1),
+('Which country is famous for the Eiffel Tower?', 'France', 'Italy', 'Germany', 'France', 1, 1),
+('What ocean is on the west coast of the United States?', 'Pacific Ocean', 'Atlantic Ocean', 'Indian Ocean', 'Pacific Ocean', 1, 1),
+('What is the capital city of Japan?', 'Tokyo', 'Kyoto', 'Tokyo', 'Osaka', 1, 1),
+('Which continent has the most countries?', 'Africa', 'Asia', 'Africa', 'Europe', 1, 1),
+('What is the longest river in the world?', 'Nile', 'Amazon', 'Nile', 'Yangtze', 1, 1),
+('Which country is known as the Land of the Rising Sun?', 'Japan', 'China', 'Japan', 'South Korea', 1, 1),
+('Which continent is the Sahara Desert located on?', 'Africa', 'Asia', 'Africa', 'South America', 1, 1),
+('Which U.S. state is famous for Hollywood?', 'California', 'Florida', 'California', 'Nevada', 1, 1),
+('What is the capital of Germany?', 'Berlin', 'Munich', 'Berlin', 'Frankfurt', 1, 1),
+('Which country has the Great Barrier Reef?', 'Australia', 'Australia', 'New Zealand', 'South Africa', 1, 1),
+('Which ocean surrounds the Maldives?', 'Indian Ocean', 'Pacific Ocean', 'Atlantic Ocean', 'Indian Ocean', 1, 1),
+('Which continent is home to the Amazon rainforest?', 'South America', 'Africa', 'South America', 'Asia', 1, 1),
+('What is the capital city of Brazil?', 'Brasília', 'Rio de Janeiro', 'S?o Paulo', 'Brasília', 1, 1);
 
-    -- History (Hard)
-    ('What was the original name of Istanbul?', 'Byzantium', 'Constantinople', 'Byzantium', 'Alexandria', 3, 2),
-    ('Name the treaty that ended the Napoleonic Wars.', 'Treaty of Paris', 'Treaty of Versailles', 'Treaty of Paris', 'Congress of Vienna', 3, 2),
-    ('Which Chinese dynasty was the last to rule China?', 'Qing Dynasty', 'Ming Dynasty', 'Qing Dynasty', 'Han Dynasty', 3, 2),
+insert into Questions (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id)
+values
+('Which country has the most islands in the world?', 'Sweden', 'Canada', 'Sweden', 'Indonesia', 2, 1),
+('Which continent is the Amazon Rainforest located on?', 'South America', 'South America', 'Africa', 'Asia', 2, 1),
+('What is the longest river in Asia?', 'Yangtze', 'Yangtze', 'Mekong', 'Ganges', 2, 1),
+('What is the name of the smallest country in Europe?', 'Vatican City', 'Monaco', 'Vatican City', 'San Marino', 2, 1),
+('Which river flows through Paris?', 'Seine', 'Thames', 'Seine', 'Danube', 2, 1),
+('Which U.S. state has the most coastline?', 'Alaska', 'California', 'Florida', 'Alaska', 2, 1),
+('What is the name of the largest coral reef system in the world?', 'Great Barrier Reef', 'Great Barrier Reef', 'Red Sea Reef', 'Belize Barrier Reef', 2, 1),
+('What is the second-largest country by land area?', 'Canada', 'Russia', 'Canada', 'United States', 2, 1),
+('Which country has the highest number of volcanoes?', 'Indonesia', 'Japan', 'Indonesia', 'Italy', 2, 1),
+('What is the largest lake in the world?', 'Caspian Sea', 'Lake Superior', 'Lake Victoria', 'Caspian Sea', 2, 1),
+('Which mountain range is the longest in the world?', 'Andes', 'Rockies', 'Himalayas', 'Andes', 2, 1),
+('What is the capital of New Zealand?', 'Wellington', 'Auckland', 'Wellington', 'Christchurch', 2, 1),
+('Which country is famous for the fjords?', 'Norway', 'Iceland', 'Sweden', 'Norway', 2, 1),
+('What is the primary language spoken in Brazil?', 'Portuguese', 'Spanish', 'Portuguese', 'French', 2, 1),
+('Which desert covers much of Botswana and Namibia?', 'Kalahari', 'Sahara', 'Kalahari', 'Gobi', 2, 1),
+('What is the capital of Kenya?', 'Nairobi', 'Nairobi', 'Kampala', 'Addis Ababa', 2, 1),
+('Which country has the most pyramids?', 'Sudan', 'Egypt', 'Sudan', 'Mexico', 2, 1),
+('Which city is known as the City of a Hundred Spires?', 'Prague', 'Vienna', 'Prague', 'Budapest', 2, 1),
+('Which U.S. state is known as the “Sunshine State”?', 'Florida', 'California', 'Florida', 'Texas', 2, 1),
+('Which ocean is the Bermuda Triangle located in?', 'Atlantic Ocean', 'Pacific Ocean', 'Indian Ocean', 'Atlantic Ocean', 2, 1),
+('Which country is home to Machu Picchu?', 'Peru', 'Chile', 'Peru', 'Bolivia', 2, 1),
+('Which city is the capital of Canada?', 'Ottawa', 'Toronto', 'Ottawa', 'Montreal', 2, 1),
+('Which continent is Madagascar part of?', 'Africa', 'Asia', 'Africa', 'South America', 2, 1),
+('What is the largest island in the Mediterranean Sea?', 'Sicily', 'Corsica', 'Sicily', 'Crete', 2, 1),
+('Which country shares the longest border with the United States?', 'Canada', 'Mexico', 'Canada', 'Russia', 2, 1);
 
-    -- Biology (Easy)
-    ('What is the basic unit of life?', 'Cell', 'Tissue', 'Organ', 'Cell', 1, 3),
-    ('What is the process by which plants convert sunlight into food?', 'Photosynthesis', 'Respiration', 'Photosynthesis', 'Osmosis', 1, 3),
-    ('What is the powerhouse of the cell?', 'Mitochondria', 'Nucleus', 'Mitochondria', 'Ribosome', 1, 3),
+insert into Questions (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id)
+values
+('What is the capital of Bhutan?', 'Thimphu', 'Thimphu', 'Kathmandu', 'Paro', 3, 1),
+('Which country has the most official languages?', 'Bolivia', 'India', 'South Africa', 'Bolivia', 3, 1),
+('What is the name of the deepest lake in the world?', 'Lake Baikal', 'Lake Tanganyika', 'Lake Baikal', 'Lake Superior', 3, 1),
+('Which desert is the coldest desert in the world?', 'Antarctic Desert', 'Gobi Desert', 'Antarctic Desert', 'Arctic Desert', 3, 1),
+('What is the capital city of Kyrgyzstan?', 'Bishkek', 'Almaty', 'Tashkent', 'Bishkek', 3, 1),
+('Which mountain is the tallest volcano in the world?', 'Ojos del Salado', 'Mount Fuji', 'Ojos del Salado', 'Mauna Loa', 3, 1),
+('Which country is home to the Danakil Depression, one of the hottest places on Earth?', 'Ethiopia', 'Eritrea', 'Ethiopia', 'Djibouti', 3, 1),
+('What is the longest river in Europe?', 'Volga', 'Danube', 'Volga', 'Rhine', 3, 1),
+('Which island nation is the smallest by area in the Caribbean?', 'Saint Kitts and Nevis', 'Dominica', 'Saint Kitts and Nevis', 'Grenada', 3, 1),
+('What is the capital of Turkmenistan?', 'Ashgabat', 'Ashgabat', 'Tashkent', 'Dushanbe', 3, 1),
+('Which country’s territory includes the region of Transylvania?', 'Romania', 'Romania', 'Hungary', 'Bulgaria', 3, 1),
+('What is the capital of Liechtenstein?', 'Vaduz', 'Vaduz', 'Bern', 'Zurich', 3, 1),
+('Which country has the largest proven oil reserves?', 'Venezuela', 'Saudi Arabia', 'Russia', 'Venezuela', 3, 1),
+('What is the capital city of the Maldives?', 'Malé', 'Malé', 'Colombo', 'Male', 3, 1),
+('Which country is the only one to lie entirely above 1,000 meters in elevation?', 'Lesotho', 'Bhutan', 'Nepal', 'Lesotho', 3, 1),
+('What is the largest peninsula in the world?', 'Arabian Peninsula', 'Indian Peninsula', 'Arabian Peninsula', 'Scandinavian Peninsula', 3, 1),
+('Which river forms part of the border between the United States and Mexico?', 'Rio Grande', 'Colorado River', 'Rio Grande', 'Mississippi River', 3, 1),
+('What is the capital city of Madagascar?', 'Antananarivo', 'Antananarivo', 'Nairobi', 'Maputo', 3, 1),
+('Which mountain range separates Europe and Asia?', 'Ural Mountains', 'Caucasus Mountains', 'Ural Mountains', 'Alps', 3, 1),
+('Which country has the highest waterfall in the world?', 'Venezuela', 'Norway', 'Canada', 'Venezuela', 3, 1),
+('Which city is known as the “Venice of the North”?', 'Saint Petersburg', 'Amsterdam', 'Bruges', 'Saint Petersburg', 3, 1),
+('What is the capital of Papua New Guinea?', 'Port Moresby', 'Suva', 'Port Moresby', 'Honiara', 3, 1),
+('Which is the smallest independent country in Asia?', 'Maldives', 'Bhutan', 'Maldives', 'Singapore', 3, 1),
+('What is the name of the strait that separates Spain and Morocco?', 'Strait of Gibraltar', 'Strait of Hormuz', 'Strait of Gibraltar', 'Bosporus Strait', 3, 1),
+('Which country has the largest number of lakes?', 'Canada', 'Finland', 'Canada', 'Russia', 3, 1),
+('What is the capital of Kazakhstan?', 'Nur-Sultan', 'Almaty', 'Nur-Sultan', 'Tashkent', 3, 1);
 
-    -- Biology (Medium)
-    ('What is the largest organ in the human body?', 'Skin', 'Heart', 'Skin', 'Liver', 2, 3),
-    ('Which blood type is known as the universal donor?', 'O negative', 'O positive', 'O negative', 'AB negative', 2, 3),
-    ('What is the primary function of red blood cells?', 'Transport oxygen', 'Fight infection', 'Transport oxygen', 'Produce energy', 2, 3),
+insert into Questions (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id)
+values
+('Who was the first President of the United States?', 'George Washington', 'George Washington', 'Thomas Jefferson', 'Abraham Lincoln', 1, 2),
+('In what year did World War II start?', '1939', '1939', '1945', '1914', 1, 2),
+('What was the name of the ship that carried the Pilgrims to America?', 'Mayflower', 'Mayflower', 'Santa Maria', 'Endeavour', 1, 2),
+('Who was known as the Iron Lady?', 'Margaret Thatcher', 'Margaret Thatcher', 'Angela Merkel', 'Golda Meir', 1, 2),
+('What year did the Titanic sink?', '1912', '1905', '1912', '1918', 1, 2),
+('Who discovered America in 1492?', 'Christopher Columbus', 'Christopher Columbus', 'Leif Erikson', 'Ferdinand Magellan', 1, 2),
+('What was the name of the last Queen of France?', 'Marie Antoinette', 'Catherine the Great', 'Marie Antoinette', 'Elizabeth I', 1, 2),
+('Which war was fought between the North and South regions in the United States?', 'Civil War', 'Revolutionary War', 'Civil War', 'Vietnam War', 1, 2),
+('Who was the first Emperor of Rome?', 'Augustus', 'Julius Caesar', 'Augustus', 'Nero', 1, 2),
+('Which British king had six wives?', 'Henry VIII', 'Henry VII', 'Henry VIII', 'Edward VI', 1, 2),
+('When was the Declaration of Independence signed?', '1776', '1776', '1787', '1791', 1, 2),
+('Who invented the printing press?', 'Johannes Gutenberg', 'Johannes Gutenberg', 'Thomas Edison', 'Isaac Newton', 1, 2),
+('What ancient civilization built the pyramids?', 'Egyptians', 'Romans', 'Greeks', 'Egyptians', 1, 2),
+('Who was the famous nurse during the Crimean War?', 'Florence Nightingale', 'Florence Nightingale', 'Marie Curie', 'Clara Barton', 1, 2),
+('What was the Renaissance?', 'A cultural rebirth in Europe', 'A war', 'A cultural rebirth in Europe', 'A disease', 1, 2),
+('Who was the leader of the Nazi Party?', 'Adolf Hitler', 'Benito Mussolini', 'Joseph Stalin', 'Adolf Hitler', 1, 2),
+('Which explorer is credited with circumnavigating the globe first?', 'Ferdinand Magellan', 'Christopher Columbus', 'Ferdinand Magellan', 'Vasco da Gama', 1, 2),
+('What was the name of the first successful English colony in America?', 'Jamestown', 'Jamestown', 'Roanoke', 'Plymouth', 1, 2),
+('Who was the Egyptian queen famous for her beauty and alliances with Roman leaders?', 'Cleopatra', 'Nefertiti', 'Cleopatra', 'Hatshepsut', 1, 2),
+('Which war was fought between 1914 and 1918?', 'World War I', 'World War I', 'World War II', 'Korean War', 1, 2),
+('What invention is Thomas Edison famous for?', 'The light bulb', 'The telephone', 'The light bulb', 'The airplane', 1, 2),
+('Who wrote the Declaration of Independence?', 'Thomas Jefferson', 'Benjamin Franklin', 'Thomas Jefferson', 'John Adams', 1, 2),
+('What was the name of the wall that separated East and West Berlin?', 'Berlin Wall', 'Berlin Wall', 'Great Wall of China', 'Hadrian’s Wall', 1, 2),
+('Who was the famous civil rights leader known for his "I Have a Dream" speech?', 'Martin Luther King Jr.', 'Malcolm X', 'Martin Luther King Jr.', 'Rosa Parks', 1, 2),
+('Which empire was ruled by Genghis Khan?', 'Mongol Empire', 'Ottoman Empire', 'Mongol Empire', 'Roman Empire', 1, 2);
 
-    -- Biology (Hard)
-    ('What is the name of the process by which DNA is copied?', 'Replication', 'Replication', 'Transcription', 'Translation', 3, 3),
-    ('Which part of the brain regulates heartbeat and breathing?', 'Medulla', 'Cerebellum', 'Medulla', 'Cerebrum', 3, 3),
-    ('What is the scientific name for humans?', 'Homo sapiens', 'Homo erectus', 'Homo sapiens', 'Homo habilis', 3, 3),
+insert into Questions (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id)
+values
+('In what year did World War II end?', '1945', '1945', '1939', '1950', 2, 2),
+('Which empire was ruled by Julius Caesar?', 'Roman Empire', 'Byzantine Empire', 'Roman Empire', 'Ottoman Empire', 2, 2),
+('What was the name of the treaty that ended World War I?', 'Treaty of Versailles', 'Treaty of Paris', 'Treaty of Versailles', 'Treaty of Ghent', 2, 2),
+('Who was the Prime Minister of the UK during most of World War II?', 'Winston Churchill', 'Neville Chamberlain', 'Winston Churchill', 'Clement Attlee', 2, 2),
+('Who led the Russian Revolution in 1917?', 'Vladimir Lenin', 'Joseph Stalin', 'Vladimir Lenin', 'Leon Trotsky', 2, 2),
+('What year did the Berlin Wall fall?', '1989', '1980', '1989', '1991', 2, 2),
+('Who was the longest-reigning British monarch before Queen Elizabeth II?', 'Queen Victoria', 'Queen Victoria', 'George III', 'Edward VII', 2, 2),
+('What was the name of the Spanish Armada’s leader?', 'Duke of Medina Sidonia', 'Francis Drake', 'Duke of Medina Sidonia', 'Philip II', 2, 2),
+('Who was the first President of the Soviet Union?', 'Mikhail Gorbachev', 'Joseph Stalin', 'Mikhail Gorbachev', 'Nikita Khrushchev', 2, 2),
+('What year did the American Civil War end?', '1865', '1863', '1865', '1870', 2, 2),
+('Which French leader declared himself Emperor in 1804?', 'Napoleon Bonaparte', 'Louis XVI', 'Napoleon Bonaparte', 'Charles de Gaulle', 2, 2),
+('What was the main cause of the Cold War?', 'Ideological conflict between US and USSR', 'Religious differences', 'Ideological conflict between US and USSR', 'Trade disputes', 2, 2),
+('Who was the famous British explorer that mapped much of Australia?', 'James Cook', 'James Cook', 'Francis Drake', 'David Livingstone', 2, 2),
+('What was the Boxer Rebellion?', 'Anti-foreigner uprising in China', 'Religious war in Europe', 'Anti-foreigner uprising in China', 'Civil war in Japan', 2, 2),
+('Which country was formerly known as Ceylon?', 'Sri Lanka', 'India', 'Sri Lanka', 'Bangladesh', 2, 2),
+('What was the Renaissance?', 'Cultural rebirth in Europe', 'A war', 'Cultural rebirth in Europe', 'Economic depression', 2, 2),
+('Who was the first female Prime Minister of the UK?', 'Margaret Thatcher', 'Theresa May', 'Margaret Thatcher', 'Angela Merkel', 2, 2),
+('Which battle marked the end of Napoleon’s reign?', 'Battle of Waterloo', 'Battle of Trafalgar', 'Battle of Leipzig', 'Battle of Waterloo', 2, 2),
+('What was the Great Depression?', 'Worldwide economic downturn in 1930s', 'A war', 'Worldwide economic downturn in 1930s', 'A natural disaster', 2, 2),
+('Who was the founder of the Mongol Empire?', 'Genghis Khan', 'Kublai Khan', 'Genghis Khan', 'Attila the Hun', 2, 2),
+('Which event started the American Revolutionary War?', 'Battle of Lexington and Concord', 'Boston Tea Party', 'Battle of Lexington and Concord', 'Signing of the Declaration of Independence', 2, 2),
+('Who was the leader of the Soviet Union during World War II?', 'Joseph Stalin', 'Vladimir Lenin', 'Joseph Stalin', 'Nikita Khrushchev', 2, 2),
+('What was the purpose of the Marshall Plan?', 'Economic aid to rebuild Europe after WWII', 'Military alliance', 'Economic aid to rebuild Europe after WWII', 'Nuclear disarmament', 2, 2),
+('Which empire built Machu Picchu?', 'Inca Empire', 'Aztec Empire', 'Maya Empire', 'Inca Empire', 2, 2),
+('What was the role of the League of Nations?', 'Maintain world peace after WWI', 'Start WWII', 'Maintain world peace after WWI', 'Colonial expansion', 2, 2);
 
-    -- Films (Easy)
-    ('Who directed the movie Titanic?', 'James Cameron', 'James Cameron', 'Steven Spielberg', 'Christopher Nolan', 1, 4),
-    ('What is the name of the wizarding school in Harry Potter?', 'Hogwarts', 'Durmstrang', 'Hogwarts', 'Beauxbatons', 1, 4),
-    ('Who played the role of Iron Man in the Marvel Cinematic Universe?', 'Robert Downey Jr.', 'Chris Evans', 'Robert Downey Jr.', 'Mark Ruffalo', 1, 4),
-
-    -- Films (Medium)
-    ('Which movie won the Academy Award for Best Picture in 2003?', 'The Lord of the Rings: The Return of the King', 'Gladiator', 'The Lord of the Rings: The Return of the King', 'Chicago', 2, 4),
-    ('What is the highest-grossing animated movie of all time?', 'Frozen II', 'Frozen', 'Frozen II', 'The Lion King', 2, 4),
-    ('Which director is known for the films Pulp Fiction and Kill Bill?', 'Quentin Tarantino', 'Quentin Tarantino', 'Martin Scorsese', 'Ridley Scott', 2, 4),
-
-    -- Films (Hard)
-    ('Which film features the character "HAL 9000"?', '2001: A Space Odyssey', 'Blade Runner', '2001: A Space Odyssey', 'The Matrix', 3, 4),
-    ('What is the name of the lead character in Schindler’s List?', 'Oskar Schindler', 'Itzhak Stern', 'Oskar Schindler', 'Amon Göth', 3, 4),
-    ('Who composed the score for Star Wars?', 'John Williams', 'Hans Zimmer', 'John Williams', 'Ennio Morricone', 3, 4);
-
-	-- Insert questions into Questions table
-INSERT INTO Questions (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id)
-VALUES 
-    -- Geography (Easy)
-    ('What is the capital of France?', 'Paris', 'Paris', 'Berlin', 'Madrid', 1, 1),
-    ('Which continent is the Amazon Rainforest located on?', 'South America', 'South America', 'Africa', 'Asia', 1, 1),
-    ('What is the largest ocean in the world?', 'Pacific Ocean', 'Atlantic Ocean', 'Indian Ocean', 'Pacific Ocean', 1, 1),
-    
-    -- Geography (Medium)
-    ('Which country has the highest number of active volcanoes?', 'Indonesia', 'Japan', 'Indonesia', 'Italy', 2, 1),
-    ('What is the longest river in Asia?', 'Yangtze', 'Yangtze', 'Mekong', 'Ganges', 2, 1),
-    ('What is the name of the smallest country in Europe?', 'Vatican City', 'Monaco', 'Vatican City', 'San Marino', 2, 1),
-
-    -- Geography (Hard)
-    ('What is the capital of Eritrea?', 'Asmara', 'Asmara', 'Kigali', 'Khartoum', 3, 1),
-    ('Which desert is known as the world’s oldest desert?', 'Namib Desert', 'Sahara Desert', 'Namib Desert', 'Gobi Desert', 3, 1),
-    ('Name the mountain range separating Europe and Asia.', 'Ural Mountains', 'Ural Mountains', 'Caucasus Mountains', 'Alps', 3, 1),
-
-    -- History (Easy)
-    ('Who discovered America in 1492?', 'Christopher Columbus', 'Christopher Columbus', 'Ferdinand Magellan', 'Vasco da Gama', 1, 2),
-    ('What year marked the start of World War I?', '1914', '1914', '1939', '1929', 1, 2),
-    ('Who was the first female Prime Minister of the UK?', 'Margaret Thatcher', 'Theresa May', 'Margaret Thatcher', 'Angela Merkel', 1, 2),
-
-    -- History (Medium)
-    ('What was the name of the ship on which the Pilgrims traveled to America?', 'Mayflower', 'Mayflower', 'Santa Maria', 'Endeavour', 2, 2),
-    ('In which year did the Berlin Wall fall?', '1989', '1989', '1990', '1985', 2, 2),
-    ('Who was the leader of the Soviet Union during World War II?', 'Joseph Stalin', 'Joseph Stalin', 'Vladimir Lenin', 'Nikita Khrushchev', 2, 2),
-
-    -- History (Hard)
-    ('What was the original name of Istanbul?', 'Byzantium', 'Constantinople', 'Byzantium', 'Alexandria', 3, 2),
-    ('Name the treaty that ended the Napoleonic Wars.', 'Treaty of Paris', 'Treaty of Versailles', 'Treaty of Paris', 'Congress of Vienna', 3, 2),
-    ('Which Chinese dynasty was the last to rule China?', 'Qing Dynasty', 'Ming Dynasty', 'Qing Dynasty', 'Han Dynasty', 3, 2),
-
-    -- Biology (Easy)
-    ('What is the basic unit of life?', 'Cell', 'Tissue', 'Organ', 'Cell', 1, 3),
-    ('What is the process by which plants convert sunlight into food?', 'Photosynthesis', 'Respiration', 'Photosynthesis', 'Osmosis', 1, 3),
-    ('What is the powerhouse of the cell?', 'Mitochondria', 'Nucleus', 'Mitochondria', 'Ribosome', 1, 3),
-
-    -- Biology (Medium)
-    ('What is the largest organ in the human body?', 'Skin', 'Heart', 'Skin', 'Liver', 2, 3),
-    ('Which blood type is known as the universal donor?', 'O negative', 'O positive', 'O negative', 'AB negative', 2, 3),
-    ('What is the primary function of red blood cells?', 'Transport oxygen', 'Fight infection', 'Transport oxygen', 'Produce energy', 2, 3),
-
-    -- Biology (Hard)
-    ('What is the name of the process by which DNA is copied?', 'Replication', 'Replication', 'Transcription', 'Translation', 3, 3),
-    ('Which part of the brain regulates heartbeat and breathing?', 'Medulla', 'Cerebellum', 'Medulla', 'Cerebrum', 3, 3),
-    ('What is the scientific name for humans?', 'Homo sapiens', 'Homo erectus', 'Homo sapiens', 'Homo habilis', 3, 3),
-
-    -- Films (Easy)
-    ('Who directed the movie Titanic?', 'James Cameron', 'James Cameron', 'Steven Spielberg', 'Christopher Nolan', 1, 4),
-    ('What is the name of the wizarding school in Harry Potter?', 'Hogwarts', 'Durmstrang', 'Hogwarts', 'Beauxbatons', 1, 4),
-    ('Who played the role of Iron Man in the Marvel Cinematic Universe?', 'Robert Downey Jr.', 'Chris Evans', 'Robert Downey Jr.', 'Mark Ruffalo', 1, 4),
-
-    -- Films (Medium)
-    ('Which movie won the Academy Award for Best Picture in 2003?', 'The Lord of the Rings: The Return of the King', 'Gladiator', 'The Lord of the Rings: The Return of the King', 'Chicago', 2, 4),
-    ('What is the highest-grossing animated movie of all time?', 'Frozen II', 'Frozen', 'Frozen II', 'The Lion King', 2, 4),
-    ('Which director is known for the films Pulp Fiction and Kill Bill?', 'Quentin Tarantino', 'Quentin Tarantino', 'Martin Scorsese', 'Ridley Scott', 2, 4),
-
-    -- Films (Hard)
-    ('Which film features the character "HAL 9000"?', '2001: A Space Odyssey', 'Blade Runner', '2001: A Space Odyssey', 'The Matrix', 3, 4),
-    ('What is the name of the lead character in Schindler’s List?', 'Oskar Schindler', 'Itzhak Stern', 'Oskar Schindler', 'Amon Göth', 3, 4),
-    ('Who composed the score for Star Wars?', 'John Williams', 'Hans Zimmer', 'John Williams', 'Ennio Morricone', 3, 4);
+insert into Questions (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id)
+values
+('What year did the Great Fire of London occur?', '1666', '1666', '1670', '1650', 3, 2),
+('Who was the first ruler of the Holy Roman Empire?', 'Charlemagne', 'Charlemagne', 'Otto I', 'Frederick Barbarossa', 3, 2),
+('What dynasty ruled China during the 14th century?', 'Ming', 'Tang', 'Ming', 'Qing', 3, 2),
+('What battle ended Napoleon’s rule?', 'Battle of Waterloo', 'Battle of Leipzig', 'Battle of Waterloo', 'Battle of Trafalgar', 3, 2),
+('What year did the French Revolution begin?', '1789', '1799', '1789', '1776', 3, 2),
+('What was the name of the first successful English colony in America?', 'Jamestown', 'Plymouth', 'Jamestown', 'Roanoke', 3, 2),
+('Who was the Ottoman Empire’s longest-reigning Sultan?', 'Suleiman the Magnificent', 'Suleiman the Magnificent', 'Mehmed II', 'Selim I', 3, 2),
+('Which English king signed the Magna Carta?', 'King John', 'King Richard', 'King John', 'King Henry II', 3, 2),
+('Who was the Emperor of Japan during World War II?', 'Hirohito', 'Meiji', 'Hirohito', 'Showa', 3, 2),
+('What was the name of the German air force during World War II?', 'Luftwaffe', 'Wehrmacht', 'Luftwaffe', 'Kriegsmarine', 3, 2),
+('Which treaty ended the Thirty Years’ War?', 'Peace of Westphalia', 'Treaty of Paris', 'Peace of Westphalia', 'Treaty of Utrecht', 3, 2),
+('Who was the leader of the Soviet Union during the Cuban Missile Crisis?', 'Nikita Khrushchev', 'Joseph Stalin', 'Nikita Khrushchev', 'Leonid Brezhnev', 3, 2),
+('Which event marked the start of the Protestant Reformation?', 'Martin Luther’s 95 Theses', 'Council of Trent', 'Martin Luther’s 95 Theses', 'Peace of Augsburg', 3, 2),
+('What was the name of the ship on which the Pilgrims sailed to America?', 'Mayflower', 'Santa Maria', 'Mayflower', 'Endeavour', 3, 2),
+('Which ancient civilization built the city of Petra?', 'Nabateans', 'Romans', 'Nabateans', 'Greeks', 3, 2),
+('Who was the last pharaoh of Ancient Egypt?', 'Cleopatra', 'Nefertiti', 'Cleopatra', 'Hatshepsut', 3, 2),
+('What was the primary cause of the War of the Roses?', 'Dynastic dispute', 'Religious conflict', 'Dynastic dispute', 'Territorial expansion', 3, 2),
+('Which empire was ruled by Emperor Ashoka?', 'Maurya Empire', 'Gupta Empire', 'Maurya Empire', 'Mughal Empire', 3, 2),
+('What was the main outcome of the Congress of Vienna?', 'Restoration of monarchies', 'Start of WWI', 'Restoration of monarchies', 'Establishment of United Nations', 3, 2),
+('Who was the famous female ruler known as the “Virgin Queen”?', 'Elizabeth I', 'Mary Queen of Scots', 'Elizabeth I', 'Catherine the Great', 3, 2),
+('Which battle was the turning point in the American Revolutionary War?', 'Battle of Saratoga', 'Battle of Yorktown', 'Battle of Saratoga', 'Battle of Bunker Hill', 3, 2),
+('Who wrote the “Communist Manifesto”?', 'Karl Marx', 'Adam Smith', 'Karl Marx', 'Friedrich Engels', 3, 2),
+('What was the significance of the Edict of Nantes?', 'Religious tolerance in France', 'Start of French Revolution', 'Religious tolerance in France', 'End of Thirty Years’ War', 3, 2),
+('Who was the leader of the Haitian Revolution?', 'Toussaint Louverture', 'Simón Bolívar', 'Toussaint Louverture', 'Jean-Jacques Dessalines', 3, 2),
+('What year did the Russian Revolution take place?', '1917', '1905', '1917', '1924', 3, 2);

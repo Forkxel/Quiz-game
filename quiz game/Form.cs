@@ -11,6 +11,9 @@ public partial class Form : System.Windows.Forms.Form
 {
     private SqlConnection connection = DatabaseConnection.GetInstance();
     private Panel quizPanel;
+    private List<Question> currentQuestions = new();
+    private int currentQuestionIndex = 0;
+    private const int MaxQuestions = 5;
     
     public Form()
     {
@@ -23,6 +26,8 @@ public partial class Form : System.Windows.Forms.Form
         object selectedCategory = ((dynamic)categoriesCombo.SelectedItem)?.Id;
         string selectedDifficulty = ((dynamic)difficultyCombo.SelectedItem)?.Id?.ToString();
         List<Question> questions = new List<Question>();
+        currentQuestions.Clear();
+        currentQuestionIndex = 0;
 
         string query = "SELECT questionText, correctAnswer, option1, option2, option3, cat_id, diff_id," +
                        " c.nameCategory as category, d.nameDifficulty as difficulty" +
@@ -52,13 +57,29 @@ public partial class Form : System.Windows.Forms.Form
         }
         reader.Close();
         
-        var random = new Random();
-        var randomQuestion = questions[random.Next(0, questions.Count)];
-        DisplayQuestionOnPanel(randomQuestion);
+        currentQuestions = questions
+            .DistinctBy(q => q.QuestionText) 
+            .OrderBy(q => Guid.NewGuid()) 
+            .Take(MaxQuestions)        
+            .ToList();
+        DisplayNextQuestion();
 
         panel.Visible = false;
     }
 
+    private void DisplayNextQuestion()
+    {
+        if (currentQuestionIndex < currentQuestions.Count)
+        {
+            DisplayQuestionOnPanel(currentQuestions[currentQuestionIndex]);
+            currentQuestionIndex++;
+        }
+        else
+        {
+            MessageBox.Show("Quiz finished! Thanks for playing.");
+            quizPanel.Visible = false;
+        }
+    }
     
     private void InitializeQuestionPanel()
     {
@@ -78,56 +99,95 @@ public partial class Form : System.Windows.Forms.Form
         Label questionLabel = new Label
         {
             Text = question.QuestionText,
-            Font = new Font("Arial", 12, FontStyle.Bold),
+            Font = new Font("Arial", 14, FontStyle.Bold),
+            TextAlign = ContentAlignment.MiddleCenter,
             Dock = DockStyle.Top,
-            Padding = new Padding(10),
-            AutoSize = true
+            Height = 60,
+            Margin = new Padding(0, 20, 0, 20),
+            AutoSize = false
         };
         quizPanel.Controls.Add(questionLabel);
-
-        Panel radioPanel = new Panel()
+        
+        FlowLayoutPanel radioPanel = new FlowLayoutPanel()
         {
-            Visible = true,
-            Dock = DockStyle.Fill
+            FlowDirection = FlowDirection.TopDown,
+            WrapContents = false,
+            AutoSize = true,
+            AutoSizeMode = AutoSizeMode.GrowAndShrink,
+            Anchor = AnchorStyles.None,
+            Padding = new Padding(0),
+            Margin = new Padding(0),
         };
         
-        quizPanel.Controls.Add(radioPanel);
+        Panel centerPanel = new Panel()
+        {
+            Dock = DockStyle.Fill,
+        };
+        centerPanel.Controls.Add(radioPanel);
+
+        quizPanel.Controls.Add(centerPanel);
+        
+        Font radioFont = new Font("Arial", 16, FontStyle.Regular);
         
         RadioButton option1 = new RadioButton
         {
             Text = question.Option1,
-            Dock = DockStyle.Bottom,
-            Padding = new Padding(10),
-            AutoSize = true
+            AutoSize = true,
+            Margin = new Padding(0, 10, 0, 10),
+            TextAlign = ContentAlignment.MiddleCenter,
+            Font = radioFont
         };
         RadioButton option2 = new RadioButton
         {
             Text = question.Option2,
-            Dock = DockStyle.Bottom,
-            Padding = new Padding(10),
-            AutoSize = true
+            AutoSize = true,
+            Margin = new Padding(0, 10, 0, 10),
+            TextAlign = ContentAlignment.MiddleCenter,
+            Font = radioFont
         };
         RadioButton option3 = new RadioButton
         {
             Text = question.Option3,
-            Dock = DockStyle.Bottom,
-            Padding = new Padding(10),
-            AutoSize = true
+            AutoSize = true,
+            Margin = new Padding(0, 10, 0, 10),
+            TextAlign = ContentAlignment.MiddleCenter,
+            Font = radioFont
         };
 
-        radioPanel.Controls.Add(option3);
-        radioPanel.Controls.Add(option2);
         radioPanel.Controls.Add(option1);
-
+        radioPanel.Controls.Add(option2);
+        radioPanel.Controls.Add(option3);
+        
         Button confirmButton = new Button
         {
             Text = "Submit",
-            Dock = DockStyle.Bottom,
+            AutoSize = true,
+            Anchor = AnchorStyles.Bottom,
             Padding = new Padding(10),
-            AutoSize = true
+            Margin = new Padding(0, 10, 0, 20),
+            Width = 160,
+            Height = 60,
+            TextAlign = ContentAlignment.MiddleCenter,
+            Font = new Font("Arial", 16, FontStyle.Bold),
         };
+        
+        Panel buttonPanel = new Panel
+        {
+            Dock = DockStyle.Bottom,
+            Height = 90
+        };
+        buttonPanel.Controls.Add(confirmButton);
+        confirmButton.Location = new Point((buttonPanel.Width - confirmButton.Width) / 2, (buttonPanel.Height - confirmButton.Height) / 2);
+
+        quizPanel.Controls.Add(buttonPanel);
+        
+        buttonPanel.Resize += (s, e) =>
+        {
+            confirmButton.Location = new Point((buttonPanel.Width - confirmButton.Width) / 2, (buttonPanel.Height - confirmButton.Height) / 2);
+        };
+
         confirmButton.Click += (sender, e) => ConfirmAnswer(question, option1, option2, option3);
-        quizPanel.Controls.Add(confirmButton);
+
 
         quizPanel.Visible = true;
     }
@@ -149,13 +209,13 @@ public partial class Form : System.Windows.Forms.Form
             MessageBox.Show("Wrong");
         }
 
-        quizPanel.Visible = false;
+        DisplayNextQuestion();
     }
 
     private void Form_Load(object sender, EventArgs e)
     {
-        var querryCat = "select id, nameCategory from category";
-        using (SqlCommand command = new SqlCommand(querryCat, connection))
+        var queryCat = "select id, nameCategory from category";
+        using (SqlCommand command = new SqlCommand(queryCat, connection))
         {
             SqlDataReader readerCat = command.ExecuteReader();
 
@@ -166,8 +226,8 @@ public partial class Form : System.Windows.Forms.Form
             readerCat.Close();
         }
             
-        var querryDiff = "select id, nameDifficulty from difficulty";
-        using (SqlCommand command = new SqlCommand(querryDiff, connection))
+        var queryDiff = "select id, nameDifficulty from difficulty";
+        using (SqlCommand command = new SqlCommand(queryDiff, connection))
         {
             SqlDataReader readerDif = command.ExecuteReader();
 
