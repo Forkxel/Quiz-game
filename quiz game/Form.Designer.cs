@@ -85,7 +85,6 @@ partial class Form
         title.TabIndex = 0;
         title.Text = "Quiz game";
         title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        title.Click += label1_Click;
         // 
         // Form
         // 

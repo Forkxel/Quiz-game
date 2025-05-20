@@ -1,3 +1,6 @@
+using System;
+using System.Windows.Forms;
+
 namespace quiz_game;
 
 static class Program

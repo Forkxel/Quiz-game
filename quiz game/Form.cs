@@ -1,4 +1,8 @@
+using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 using quiz_game.Tables;
 
 namespace quiz_game;
@@ -12,11 +16,6 @@ public partial class Form : System.Windows.Forms.Form
     {
         InitializeComponent();
         InitializeQuestionPanel();
-    }
-
-    private void label1_Click(object sender, EventArgs e)
-    {
-        throw new System.NotImplementedException();
     }
 
     private void startButton_Click(object sender, EventArgs e)
@@ -51,8 +50,12 @@ public partial class Form : System.Windows.Forms.Form
             Console.WriteLine(questions[0]);
         }
         reader.Close();
+        
+        var random = new Random();
+        
+        var randomQuestion = questions[random.Next(0, questions.Count)];
 
-        DisplayQuestionOnPanel(questions[0]);
+        DisplayQuestionOnPanel(randomQuestion);
 
         panel.Visible = false;
     }
