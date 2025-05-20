@@ -1,11 +1,15 @@
-﻿namespace quiz_game;
+﻿using System.Windows.Forms;
+using System.Drawing;
+using System.ComponentModel;
+
+namespace quiz_game;
 
 partial class Form
 {
     /// <summary>
     ///  Required designer variable.
     /// </summary>
-    private System.ComponentModel.IContainer components = null;
+    private IContainer components = null;
 
     /// <summary>
     ///  Clean up any resources being used.
@@ -29,11 +33,11 @@ partial class Form
     /// </summary>
     private void InitializeComponent()
     {
-        panel = new System.Windows.Forms.Panel();
-        startButton = new System.Windows.Forms.Button();
-        difficultyCombo = new System.Windows.Forms.ComboBox();
-        categoriesCombo = new System.Windows.Forms.ComboBox();
-        title = new System.Windows.Forms.Label();
+        panel = new Panel();
+        startButton = new Button();
+        difficultyCombo = new ComboBox();
+        categoriesCombo = new ComboBox();
+        title = new Label();
         panel.SuspendLayout();
         SuspendLayout();
         // 
@@ -43,17 +47,17 @@ partial class Form
         panel.Controls.Add(difficultyCombo);
         panel.Controls.Add(categoriesCombo);
         panel.Controls.Add(title);
-        panel.Dock = System.Windows.Forms.DockStyle.Fill;
-        panel.Location = new System.Drawing.Point(0, 0);
+        panel.Dock = DockStyle.Fill;
+        panel.Location = new Point(0, 0);
         panel.Name = "panel";
-        panel.Size = new System.Drawing.Size(800, 450);
+        panel.Size = new Size(800, 450);
         panel.TabIndex = 0;
         // 
         // startButton
         // 
-        startButton.Location = new System.Drawing.Point(285, 283);
+        startButton.Location = new Point(285, 283);
         startButton.Name = "startButton";
-        startButton.Size = new System.Drawing.Size(231, 56);
+        startButton.Size = new Size(231, 56);
         startButton.TabIndex = 3;
         startButton.Text = "Start";
         startButton.UseVisualStyleBackColor = true;
@@ -61,52 +65,54 @@ partial class Form
         // 
         // difficultyCombo
         // 
+        difficultyCombo.DropDownStyle = ComboBoxStyle.DropDownList;
         difficultyCombo.FormattingEnabled = true;
-        difficultyCombo.Location = new System.Drawing.Point(285, 166);
+        difficultyCombo.Location = new Point(285, 166);
         difficultyCombo.Name = "difficultyCombo";
-        difficultyCombo.Size = new System.Drawing.Size(231, 23);
+        difficultyCombo.Size = new Size(231, 23);
         difficultyCombo.TabIndex = 2;
         // 
         // categoriesCombo
         // 
+        categoriesCombo.DropDownStyle = ComboBoxStyle.DropDownList;
         categoriesCombo.FormattingEnabled = true;
-        categoriesCombo.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-        categoriesCombo.Location = new System.Drawing.Point(285, 84);
+        categoriesCombo.ImeMode = ImeMode.NoControl;
+        categoriesCombo.Location = new Point(285, 84);
         categoriesCombo.Name = "categoriesCombo";
-        categoriesCombo.Size = new System.Drawing.Size(231, 23);
+        categoriesCombo.Size = new Size(231, 23);
         categoriesCombo.TabIndex = 1;
         // 
         // title
         // 
-        title.Dock = System.Windows.Forms.DockStyle.Top;
-        title.Location = new System.Drawing.Point(0, 0);
+        title.Dock = DockStyle.Top;
+        title.Location = new Point(0, 0);
         title.Name = "title";
-        title.Size = new System.Drawing.Size(800, 81);
+        title.Size = new Size(800, 81);
         title.TabIndex = 0;
         title.Text = "Quiz game";
-        title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        title.TextAlign = ContentAlignment.MiddleCenter;
         // 
         // Form
         // 
-        AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-        AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        ClientSize = new System.Drawing.Size(800, 450);
+        AutoScaleDimensions = new SizeF(7F, 15F);
+        AutoScaleMode = AutoScaleMode.Font;
+        ClientSize = new Size(800, 450);
         Controls.Add(panel);
-        Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-        StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+        Margin = new Padding(3, 2, 3, 2);
+        StartPosition = FormStartPosition.CenterScreen;
         Load += Form_Load;
         panel.ResumeLayout(false);
         ResumeLayout(false);
     }
 
-    private System.Windows.Forms.ComboBox difficultyCombo;
-    private System.Windows.Forms.Button startButton;
+    private ComboBox difficultyCombo;
+    private Button startButton;
 
-    private System.Windows.Forms.ComboBox categoriesCombo;
+    private ComboBox categoriesCombo;
 
-    private System.Windows.Forms.Label title;
+    private Label title;
 
-    private System.Windows.Forms.Panel panel;
+    private Panel panel;
 
     #endregion
 }
