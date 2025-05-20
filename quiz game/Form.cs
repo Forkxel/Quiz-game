@@ -20,19 +20,22 @@ public partial class Form : System.Windows.Forms.Form
 
     private void startButton_Click(object sender, EventArgs e)
     {
-        string selectedCategory = ((dynamic)categoriesCombo.SelectedItem)?.Id?.ToString();
+        object selectedCategory = ((dynamic)categoriesCombo.SelectedItem)?.Id;
         string selectedDifficulty = ((dynamic)difficultyCombo.SelectedItem)?.Id?.ToString();
         List<Question> questions = new List<Question>();
+
         string query = "SELECT questionText, correctAnswer, option1, option2, option3, cat_id, diff_id," +
                        " c.nameCategory as category, d.nameDifficulty as difficulty" +
                        " FROM Questions " +
-                       "inner join Category c on cat_id = c.id " +
-                       "inner join Difficulty d on diff_id = d.id " +
-                       "where cat_id = @CategoryId and diff_id = @DifficultyId";
+                       "INNER JOIN Category c ON cat_id = c.id " +
+                       "INNER JOIN Difficulty d ON diff_id = d.id " +
+                       "WHERE (@CategoryId IS NULL OR cat_id = @CategoryId) " +
+                       "AND diff_id = @DifficultyId";
+
         SqlCommand command = new SqlCommand(query, connection);
-        command.Parameters.AddWithValue("@CategoryId", selectedCategory);
+        command.Parameters.AddWithValue("@CategoryId", selectedCategory ?? DBNull.Value);
         command.Parameters.AddWithValue("@DifficultyId", selectedDifficulty);
-            
+
         SqlDataReader reader = command.ExecuteReader();
         while (reader.Read())
         {
@@ -46,19 +49,16 @@ public partial class Form : System.Windows.Forms.Form
                 Category = reader["category"].ToString(),
                 Difficulty = reader["difficulty"].ToString()
             });
-            
-            Console.WriteLine(questions[0]);
         }
         reader.Close();
         
         var random = new Random();
-        
         var randomQuestion = questions[random.Next(0, questions.Count)];
-
         DisplayQuestionOnPanel(randomQuestion);
 
         panel.Visible = false;
     }
+
     
     private void InitializeQuestionPanel()
     {
@@ -180,5 +180,6 @@ public partial class Form : System.Windows.Forms.Form
             
         categoriesCombo.DisplayMember = "Name";
         difficultyCombo.DisplayMember = "Name";
+        categoriesCombo.Items.Add(new { Id = (object)null, Name = "Mixed" });
     }
 }   
