@@ -8,22 +8,22 @@ using Timer = System.Windows.Forms.Timer;
 
 namespace quiz_game;
 
-public partial class Form : System.Windows.Forms.Form
+public partial class MyForm : System.Windows.Forms.Form
 {
     private SqlConnection connection = DatabaseConnection.GetInstance();
     private Panel quizPanel;
     private List<Question> currentQuestions = new();
     public static int CurrentQuestionIndex { get; set; }
-    private const int MaxQuestions = 8;
+    private const int MaxQuestions = 5;
     private int score = 0;
     private Label scoreLabel;
     private Label timerLabel;
     private RadioButton selectedOption = null;
-    private Timer questionTimer;
+    public Timer QuestionTimer { get; set; }
     private int timeLeft;
     private Panel infoPanel;
     
-    public Form()
+    public MyForm()
     {
         InitializeComponent();
         InitializeLayout();
@@ -128,16 +128,15 @@ public partial class Form : System.Windows.Forms.Form
     {
         if (CurrentQuestionIndex < currentQuestions.Count)
         {
-            timeLeft = 30;
+            timeLeft = 10;
             timerLabel.Text = $"Time: {timeLeft}";
-            questionTimer.Start();
+            QuestionTimer.Start();
             
             var currentQuestion = currentQuestions[CurrentQuestionIndex];
             currentQuestion.Display(quizPanel, isCorrect =>
             {
-                questionTimer.Stop();
                 if (isCorrect)
-                {
+                {   
                     score++;
                     scoreLabel.Text = $"Score: {score}";
                 }
@@ -147,7 +146,7 @@ public partial class Form : System.Windows.Forms.Form
         }
         else
         {
-            questionTimer.Stop();
+            QuestionTimer.Stop();
             DisplayFinalScorePanel();
             quizPanel.Visible = false;
         }
@@ -182,26 +181,23 @@ public partial class Form : System.Windows.Forms.Form
         {
             timeLeft = 0;
             timerLabel.Text = "Time: 0";
-            questionTimer.Stop();
-            foreach (var control in quizPanel.Controls)
+            QuestionTimer.Stop();
+
+            if (CurrentQuestionIndex < currentQuestions.Count)
             {
-                if (control is RadioButton rb)
-                {
-                    rb.ForeColor = Color.Red;
-                }
+                var question = currentQuestions[CurrentQuestionIndex] as SingleChoiceQuestion;
+                question.TimeOut(DisplayNextQuestion);
             }
-            CurrentQuestionIndex++;
-            DisplayNextQuestion();
         }
     }
 
     private void Form_Load(object sender, EventArgs e)
     {
-        questionTimer = new Timer
+        QuestionTimer = new Timer
         {
             Interval = 1000
         };
-        questionTimer.Tick += QuestionTimer_Tick;
+        QuestionTimer.Tick += QuestionTimer_Tick;
         
         var queryCat = "select id, nameCategory from category";
         using (SqlCommand command = new SqlCommand(queryCat, connection))

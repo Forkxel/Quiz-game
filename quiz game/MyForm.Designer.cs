@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace quiz_game;
 
-partial class Form
+partial class MyForm
 {
     /// <summary>
     ///  Required designer variable.

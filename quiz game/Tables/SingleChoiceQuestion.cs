@@ -9,9 +9,11 @@ public class SingleChoiceQuestion : Question
     public string Option3 { get; set; }
     public string CorrectAnswer { get; set; }
     private RadioButton selectedAnswer;
+    public Panel QuizPanel { get; set; }
 
     public override void Display(Panel panel, Action<bool> onAnswerSelected)
     {
+        QuizPanel = panel;
         panel.Controls.Clear();
         
         Label questionLabel = new Label
@@ -45,6 +47,20 @@ public class SingleChoiceQuestion : Question
 
         panel.Controls.Add(centerPanel);
         
+        Button confirmButton = new Button
+        {
+            Text = "Submit",
+            AutoSize = true,
+            Anchor = AnchorStyles.Bottom,
+            Padding = new Padding(10),
+            Margin = new Padding(0, 10, 0, 20),
+            Width = 160,
+            Height = 60,
+            TextAlign = ContentAlignment.MiddleCenter,
+            Font = new Font("Arial", 16, FontStyle.Bold),
+            Enabled = false
+        };
+        
         Font radioFont = new Font("Arial", 16, FontStyle.Regular);
         List<string> options = new List<string> { Option1, Option2, Option3 };
         
@@ -63,22 +79,17 @@ public class SingleChoiceQuestion : Question
                 TextAlign = ContentAlignment.MiddleCenter,
                 Font = radioFont
             };
+            
+            rb.CheckedChanged += (sender, e) =>
+            {
+                if (confirmButton.Text != "Next")
+                {
+                    confirmButton.Enabled = radioButtons.Any(r => r.Checked);
+                }
+            };
             radioButtons.Add(rb);
             radioPanel.Controls.Add(rb);
         }
-        
-        Button confirmButton = new Button
-        {
-            Text = "Submit",
-            AutoSize = true,
-            Anchor = AnchorStyles.Bottom,
-            Padding = new Padding(10),
-            Margin = new Padding(0, 10, 0, 20),
-            Width = 160,
-            Height = 60,
-            TextAlign = ContentAlignment.MiddleCenter,
-            Font = new Font("Arial", 16, FontStyle.Bold),
-        };
         
         Panel buttonPanel = new Panel
         {
@@ -127,31 +138,79 @@ public class SingleChoiceQuestion : Question
             }
             
             confirmButton.Text = "Next";
+            confirmButton.Enabled = true;
 
             foreach (var rb in radioButtons)
             {
-                rb.Click -= DisableClick;
-                rb.Click += DisableClick;
+                rb.Click -= (sender, e) => 
+                { 
+                    ((RadioButton)sender).Checked = false;
+                    selectedAnswer.Checked = false; 
+                };
+                rb.Click += (sender, e) =>
+                {
+                    ((RadioButton)sender).Checked = false;
+                    selectedAnswer.Checked = false;
+                };
             }
            
             bool isCorrect = selectedText == CorrectAnswer;
+
+            if (isCorrect)
+            {
+                var form = (MyForm)confirmButton.FindForm();
+                form.QuestionTimer.Stop();
+            }
             
             confirmButton.Click -= (sender, e) => ConfirmAnswer(radioButtons, confirmButton, onAnswerConfirmed);
             confirmButton.Click += (sender, e) =>
             {
-                onAnswerConfirmed?.Invoke(isCorrect);
+                onAnswerConfirmed.Invoke(isCorrect);
             };
         }
-        else
+        else if(confirmButton.Text == "Next")
         {
-            Form.CurrentQuestionIndex--;
-            onAnswerConfirmed?.Invoke(false);
+            MyForm.CurrentQuestionIndex--;
+            onAnswerConfirmed.Invoke(false);
         }
     }
-    
-    private void DisableClick(object sender, EventArgs e)
+
+    public void TimeOut(Action onNextQuestion)
     {
-        ((RadioButton)sender).Checked = false;
-        selectedAnswer.Checked = true;
+        foreach (var control in QuizPanel.Controls)
+        {
+            if (control is Panel centerPanel)
+            {
+                foreach (var subControl in centerPanel.Controls)
+                {
+                    if (subControl is FlowLayoutPanel flowPanel)
+                    {
+                        foreach (var rb in flowPanel.Controls.OfType<RadioButton>())
+                        {
+                            rb.ForeColor = Color.Red;
+                            rb.Click -= (sender, e) =>
+                            {
+                                ((RadioButton)sender).Checked = false;
+                            };
+                            rb.Click += (sender, e) =>
+                            {
+                                ((RadioButton)sender).Checked = false;
+                            };
+                        }
+                    }
+                }
+            }
+        }
+        
+        var confirmButton = QuizPanel.Controls
+            .OfType<Panel>()
+            .SelectMany(p => p.Controls.OfType<Button>())
+            .FirstOrDefault();
+
+        confirmButton.Text = "Next";
+        confirmButton.Enabled = true;
+        MyForm.CurrentQuestionIndex++;
+        confirmButton.Click -= ((sender, e) => onNextQuestion());
+        confirmButton.Click += (sender, e) => onNextQuestion();
     }
 }
