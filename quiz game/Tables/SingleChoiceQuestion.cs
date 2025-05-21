@@ -1,4 +1,6 @@
-﻿namespace quiz_game.Tables;
+﻿using Timer = System.Windows.Forms.Timer;
+
+namespace quiz_game.Tables;
 
 public class SingleChoiceQuestion : Question  
 {
@@ -19,7 +21,7 @@ public class SingleChoiceQuestion : Question
             TextAlign = ContentAlignment.MiddleCenter,
             Dock = DockStyle.Top,
             Height = 100,
-            Margin = new Padding(0, 20, 0, 10),
+            Margin = new Padding(0, 25, 5, 10),
             AutoSize = false
         };
         panel.Controls.Add(questionLabel);
@@ -87,7 +89,7 @@ public class SingleChoiceQuestion : Question
         confirmButton.Location = new Point((buttonPanel.Width - confirmButton.Width) / 2, (buttonPanel.Height - confirmButton.Height) / 2);
 
         panel.Controls.Add(buttonPanel);
-        
+
         buttonPanel.Resize += (sender, e) =>
         {
             confirmButton.Location = new Point((buttonPanel.Width - confirmButton.Width) / 2, (buttonPanel.Height - confirmButton.Height) / 2);
