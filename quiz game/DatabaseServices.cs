@@ -118,7 +118,40 @@ public class DatabaseServices
                 }
             }
         }
-
         return difficulties;
+    }
+    
+    public bool UserExists(string username)
+    {
+        var query = "SELECT COUNT(*) FROM Player WHERE username = @username";
+        using (SqlCommand command = new SqlCommand(query, connection))
+        {
+            command.Parameters.AddWithValue("@username", username);
+            int count = (int)command.ExecuteScalar();
+            return count > 0;
+        }
+    }
+    
+    public bool AddUser(string username, string password)
+    {
+        var query = "INSERT INTO Player (username, userPassword, score) VALUES (@username, @password, 0)";
+        using (SqlCommand command = new SqlCommand(query, connection))
+        {
+            command.Parameters.AddWithValue("@username", username);
+            command.Parameters.AddWithValue("@password", password);
+            int rowsAffected = command.ExecuteNonQuery();
+            return rowsAffected > 0;
+        }
+    }
+    
+    public string GetPasswordForUser(string username)
+    {
+        var query = "SELECT userPassword FROM Player WHERE username = @username";
+        using (SqlCommand command = new SqlCommand(query, connection))
+        {
+            command.Parameters.AddWithValue("@username", username);
+            object result = command.ExecuteScalar();
+            return result != null ? result.ToString() : null;
+        }
     }
 }

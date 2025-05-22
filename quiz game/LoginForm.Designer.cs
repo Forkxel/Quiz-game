@@ -62,6 +62,7 @@ partial class LoginForm
         loginButton.TabIndex = 2;
         loginButton.Text = "login";
         loginButton.UseVisualStyleBackColor = true;
+        loginButton.Click += loginButton_Click;
         // 
         // signUpButton
         // 
@@ -71,6 +72,7 @@ partial class LoginForm
         signUpButton.TabIndex = 3;
         signUpButton.Text = "sign up";
         signUpButton.UseVisualStyleBackColor = true;
+        signUpButton.Click += signUpButton_Click;
         // 
         // LoginForm
         // 
@@ -86,8 +88,8 @@ partial class LoginForm
 
     private System.Windows.Forms.TextBox usernameTextBox;
     private System.Windows.Forms.TextBox passwordTextBox;
-    private Button loginButton;
-    private Button signUpButton;
+    private System.Windows.Forms.Button loginButton;
+    private System.Windows.Forms.Button signUpButton;
 
     #endregion
 }

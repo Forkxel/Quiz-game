@@ -29,6 +29,13 @@ create table WrittenQuestions(
 	cat_id int foreign key(cat_id) references Category(id)
 );
 
+create table Player(
+	id int primary key identity(1,1),
+	username varchar(50),
+	userPassword varchar(50),
+	score int
+);
+
 insert into Difficulty(nameDifficulty) values ('Easy'),('Medium'),('Hard');
 
 insert into Category(nameCategory) values ('Geography'), ('History'), ('Biology'), ('Films');
