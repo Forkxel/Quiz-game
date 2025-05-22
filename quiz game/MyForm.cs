@@ -23,6 +23,7 @@ public partial class MyForm : Form
     private Panel infoPanel;
     private DatabaseServices services;
     private int currentTime;
+    private bool mixedCategorySelected;
     
     public MyForm()
     {
@@ -81,6 +82,12 @@ public partial class MyForm : Form
         object selectedCategory = ((dynamic)categoriesCombo.SelectedItem)?.Id;
         string selectedDifficulty = ((dynamic)difficultyCombo.SelectedItem)?.Id?.ToString();
         
+        
+        if (selectedCategory == null && !IsMixedCategorySelected())
+        {
+            MessageBox.Show("Please select a valid category.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
         if (string.IsNullOrEmpty(selectedDifficulty))
         {
             MessageBox.Show("Please select a difficulty level.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -264,5 +271,11 @@ public partial class MyForm : Form
         difficultyCombo.DisplayMember = "Name";
 
         categoriesCombo.Items.Add(new { Id = (object)null, Name = "Mixed" });
+    }
+    
+    private bool IsMixedCategorySelected()
+    {
+        return categoriesCombo.SelectedItem != null &&
+               ((dynamic)categoriesCombo.SelectedItem).Name == "Mixed";
     }
 }   
