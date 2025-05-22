@@ -22,7 +22,7 @@ public partial class MyForm : Form
     private int timeLeft;
     private Panel infoPanel;
     private DatabaseServices services;
-    private int currentTime = 0;
+    private int currentTime;
     
     public MyForm()
     {
@@ -188,5 +188,11 @@ public partial class MyForm : Form
         categoriesCombo.DisplayMember = "Name";
         difficultyCombo.DisplayMember = "Name";
         categoriesCombo.Items.Add(new { Id = (object)null, Name = "Mixed" });
+    }
+
+    private void loginButton_Click(object sender, EventArgs e)
+    {
+        var loginForm = new LoginForm();
+        loginForm.ShowDialog();
     }
 }   
