@@ -6,6 +6,14 @@ namespace quiz_game;
 public class DatabaseServices
 {
     private SqlConnection connection = DatabaseConnection.GetInstance();
+
+    public DatabaseServices()
+    {
+        if (connection.State != System.Data.ConnectionState.Open)
+        {
+            connection.Open();
+        }
+    }
     
     public List<Question> GetSingleQuestions(object selectedCategory, string selectedDifficulty)
     {

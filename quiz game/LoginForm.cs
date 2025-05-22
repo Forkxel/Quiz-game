@@ -62,6 +62,7 @@ public partial class LoginForm : Form
         string encryptedPassword = PasswordEncryption.Encrypt(password);
         if (services.AddUser(username, encryptedPassword))
         {
+            LoggedInUser = username;
             MessageBox.Show("User registered successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
         }

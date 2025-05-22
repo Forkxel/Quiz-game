@@ -80,6 +80,13 @@ public partial class MyForm : Form
     {
         object selectedCategory = ((dynamic)categoriesCombo.SelectedItem)?.Id;
         string selectedDifficulty = ((dynamic)difficultyCombo.SelectedItem)?.Id?.ToString();
+        
+        if (string.IsNullOrEmpty(selectedDifficulty))
+        {
+            MessageBox.Show("Please select a difficulty level.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+        
         currentQuestions.Clear();
         CurrentQuestionIndex = 0;
         
@@ -133,6 +140,8 @@ public partial class MyForm : Form
     
     private void DisplayFinalScorePanel()
     {
+        Controls.Clear();
+        
         Panel finalScorePanel = new Panel
         {
             Dock = DockStyle.Fill
@@ -172,10 +181,37 @@ public partial class MyForm : Form
             highScoreLabel.ForeColor = Color.Blue;
         }
         
+        Button playAgainButton = new Button
+        {
+            Text = "Play Again",
+            Font = new Font("Arial", 12, FontStyle.Bold),
+            Dock = DockStyle.Bottom,
+            Height = 50
+        };
+        playAgainButton.Click += PlayAgainButton_Click;
+        finalScorePanel.Controls.Add(playAgainButton);
+        
         Controls.Clear();
         Controls.Add(finalScorePanel); 
     }
-    
+
+    private void PlayAgainButton_Click(object? sender, EventArgs e)
+    {
+        score = 0;
+        CurrentQuestionIndex = 0;
+
+        Controls.Clear();
+        InitializeComponent();
+        InitializeLayout();
+        LoadComboBoxes();
+
+        panel.Visible = true;
+        quizPanel.Visible = false;
+        infoPanel.Visible = false;
+        timerLabel.Visible = false;
+        scoreLabel.Visible = false;
+    }
+
     private void QuestionTimer_Tick(object sender, EventArgs e)
     {
         timeLeft--;
@@ -204,20 +240,29 @@ public partial class MyForm : Form
         };
         QuestionTimer.Tick += QuestionTimer_Tick;
         
-        var categories = services.GetCategories();
-        var difficulties = services.GetDifficulties();
-
-        categoriesCombo.Items.AddRange(categories.ToArray());
-        difficultyCombo.Items.AddRange(difficulties.ToArray());
-
-        categoriesCombo.DisplayMember = "Name";
-        difficultyCombo.DisplayMember = "Name";
-        categoriesCombo.Items.Add(new { Id = (object)null, Name = "Mixed" });
+        LoadComboBoxes();
     }
 
     private void loginButton_Click(object sender, EventArgs e)
     {
         var loginForm = new LoginForm();
         loginForm.ShowDialog();
+    }
+    
+    private void LoadComboBoxes()
+    {
+        var categories = services.GetCategories();
+        var difficulties = services.GetDifficulties();
+
+        categoriesCombo.Items.Clear();
+        difficultyCombo.Items.Clear();
+
+        categoriesCombo.Items.AddRange(categories.ToArray());
+        difficultyCombo.Items.AddRange(difficulties.ToArray());
+
+        categoriesCombo.DisplayMember = "Name";
+        difficultyCombo.DisplayMember = "Name";
+
+        categoriesCombo.Items.Add(new { Id = (object)null, Name = "Mixed" });
     }
 }   
