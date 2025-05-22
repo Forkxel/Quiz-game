@@ -9,11 +9,11 @@ public class SingleChoiceQuestion : Question
     public string Option3 { get; set; }
     public string CorrectAnswer { get; set; }
     private RadioButton selectedAnswer;
-    public Panel QuizPanel { get; set; }
+    private Panel quizPanel;
 
     public override void Display(Panel panel, Action<bool> onAnswerSelected)
     {
-        QuizPanel = panel;
+        quizPanel = panel;
         panel.Controls.Clear();
         
         Label questionLabel = new Label
@@ -153,8 +153,17 @@ public class SingleChoiceQuestion : Question
                     selectedAnswer.Checked = false;
                 };
             }
-           
-            bool isCorrect = selectedText == CorrectAnswer;
+
+            bool isCorrect;
+
+            if (selectedText == CorrectAnswer)
+            {
+                isCorrect = true;
+            }
+            else
+            {
+                isCorrect = false;
+            }
 
             var form = (MyForm)confirmButton.FindForm();
             form.QuestionTimer.Stop();
@@ -172,9 +181,9 @@ public class SingleChoiceQuestion : Question
         }
     }
 
-    public void TimeOut(Action onNextQuestion)
+    public override void TimeOut(Action onNextQuestion)
     {
-        foreach (var control in QuizPanel.Controls)
+        foreach (var control in quizPanel.Controls)
         {
             if (control is Panel centerPanel)
             {
@@ -199,7 +208,7 @@ public class SingleChoiceQuestion : Question
             }
         }
         
-        var confirmButton = QuizPanel.Controls
+        var confirmButton = quizPanel.Controls
             .OfType<Panel>()
             .SelectMany(p => p.Controls.OfType<Button>())
             .FirstOrDefault();

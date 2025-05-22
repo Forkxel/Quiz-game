@@ -83,7 +83,10 @@ public partial class MyForm : Form
         currentQuestions.Clear();
         CurrentQuestionIndex = 0;
         
-        var questions = services.GetSingleQuestions(selectedCategory, selectedDifficulty);
+        var singleQuestions = services.GetSingleQuestions(selectedCategory, selectedDifficulty);
+        var writtenAnswer = services.GetWrittenQuestions(selectedCategory, selectedDifficulty);
+        
+        List<Question> questions = singleQuestions.Concat(writtenAnswer).ToList();
         
         var random = new Random();
         currentQuestions = questions
@@ -162,7 +165,7 @@ public partial class MyForm : Form
 
             if (CurrentQuestionIndex < currentQuestions.Count)
             {
-                var question = currentQuestions[CurrentQuestionIndex] as SingleChoiceQuestion;
+                var question = currentQuestions[CurrentQuestionIndex];
                 question.TimeOut(DisplayNextQuestion);
             }
         }

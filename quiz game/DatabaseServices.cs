@@ -43,6 +43,39 @@ public class DatabaseServices
         }
         return questions;
     }
+    
+    public List<Question> GetWrittenQuestions(object selectedCategory, string selectedDifficulty)
+    {
+        List<Question> questions = new List<Question>();
+        var query = "select questionText, correctAnswer, cat_id, diff_id, " +
+                    "c.nameCategory as category, d.nameDifficulty as difficulty " +
+                    "from WrittenQuestions " +
+                    "inner join Category c on cat_id = c.id " +
+                    "inner join Difficulty d on diff_id = d.id " +
+                    "where (@CategoryId is null or cat_id = @CategoryId) " +
+                    "and diff_id = @DifficultyId";
+
+        using (SqlCommand command = new SqlCommand(query, connection))
+        {
+            command.Parameters.AddWithValue("@CategoryId", selectedCategory ?? DBNull.Value);
+            command.Parameters.AddWithValue("@DifficultyId", selectedDifficulty);
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    questions.Add(new WrittenAnswer
+                    {
+                        QuestionText = reader["questionText"].ToString(),
+                        CorrectAnswer = reader["correctAnswer"].ToString(),
+                        Category = reader["category"].ToString(),
+                        Difficulty = reader["difficulty"].ToString()
+                    });
+                }
+            }
+        }
+        return questions;
+    }
 
     public List<dynamic> GetCategories()
     {
