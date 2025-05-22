@@ -156,11 +156,8 @@ public class SingleChoiceQuestion : Question
            
             bool isCorrect = selectedText == CorrectAnswer;
 
-            if (isCorrect)
-            {
-                var form = (MyForm)confirmButton.FindForm();
-                form.QuestionTimer.Stop();
-            }
+            var form = (MyForm)confirmButton.FindForm();
+            form.QuestionTimer.Stop();
             
             confirmButton.Click -= (sender, e) => ConfirmAnswer(radioButtons, confirmButton, onAnswerConfirmed);
             confirmButton.Click += (sender, e) =>

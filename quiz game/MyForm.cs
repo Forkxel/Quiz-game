@@ -8,25 +8,27 @@ using Timer = System.Windows.Forms.Timer;
 
 namespace quiz_game;
 
-public partial class MyForm : System.Windows.Forms.Form
+public partial class MyForm : Form
 {
-    private SqlConnection connection = DatabaseConnection.GetInstance();
     private Panel quizPanel;
     private List<Question> currentQuestions = new();
     public static int CurrentQuestionIndex { get; set; }
     private const int MaxQuestions = 5;
-    private int score = 0;
+    private int score;
     private Label scoreLabel;
     private Label timerLabel;
     private RadioButton selectedOption = null;
     public Timer QuestionTimer { get; set; }
     private int timeLeft;
     private Panel infoPanel;
+    private DatabaseServices services;
+    private int currentTime = 0;
     
     public MyForm()
     {
         InitializeComponent();
         InitializeLayout();
+        services = new DatabaseServices();
     }
     
     private void InitializeLayout()
@@ -78,37 +80,10 @@ public partial class MyForm : System.Windows.Forms.Form
     {
         object selectedCategory = ((dynamic)categoriesCombo.SelectedItem)?.Id;
         string selectedDifficulty = ((dynamic)difficultyCombo.SelectedItem)?.Id?.ToString();
-        List<Question> questions = new List<Question>();
         currentQuestions.Clear();
         CurrentQuestionIndex = 0;
-
-        string query = "SELECT questionText, correctAnswer, option1, option2, option3, cat_id, diff_id," +
-                       " c.nameCategory as category, d.nameDifficulty as difficulty" +
-                       " FROM Questions " +
-                       "INNER JOIN Category c ON cat_id = c.id " +
-                       "INNER JOIN Difficulty d ON diff_id = d.id " +
-                       "WHERE (@CategoryId IS NULL OR cat_id = @CategoryId) " +
-                       "AND diff_id = @DifficultyId";
-
-        SqlCommand command = new SqlCommand(query, connection);
-        command.Parameters.AddWithValue("@CategoryId", selectedCategory ?? DBNull.Value);
-        command.Parameters.AddWithValue("@DifficultyId", selectedDifficulty);
-
-        SqlDataReader reader = command.ExecuteReader();
-        while (reader.Read())
-        {
-            questions.Add(new SingleChoiceQuestion
-            {
-                QuestionText = reader["questionText"].ToString(),
-                CorrectAnswer = reader["correctAnswer"].ToString(),
-                Option1 = reader["option1"].ToString(),
-                Option2 = reader["option2"].ToString(),
-                Option3 = reader["option3"].ToString(),
-                Category = reader["category"].ToString(),
-                Difficulty = reader["difficulty"].ToString()
-            });
-        }
-        reader.Close();
+        
+        var questions = services.GetSingleQuestions(selectedCategory, selectedDifficulty);
         
         var random = new Random();
         currentQuestions = questions
@@ -116,6 +91,7 @@ public partial class MyForm : System.Windows.Forms.Form
             .OrderBy(q => random.Next()) 
             .Take(MaxQuestions)        
             .ToList();
+        
         DisplayNextQuestion();
 
         panel.Visible = false;
@@ -137,7 +113,7 @@ public partial class MyForm : System.Windows.Forms.Form
             {
                 if (isCorrect)
                 {   
-                    score++;
+                    score += currentTime / 2;
                     scoreLabel.Text = $"Score: {score}";
                 }
                 CurrentQuestionIndex++;
@@ -176,6 +152,7 @@ public partial class MyForm : System.Windows.Forms.Form
     {
         timeLeft--;
         timerLabel.Text = $"Time: {timeLeft}";
+        currentTime = timeLeft;
 
         if (timeLeft <= 0)
         {
@@ -199,30 +176,12 @@ public partial class MyForm : System.Windows.Forms.Form
         };
         QuestionTimer.Tick += QuestionTimer_Tick;
         
-        var queryCat = "select id, nameCategory from category";
-        using (SqlCommand command = new SqlCommand(queryCat, connection))
-        {
-            SqlDataReader readerCat = command.ExecuteReader();
+        var categories = services.GetCategories();
+        var difficulties = services.GetDifficulties();
 
-            while (readerCat.Read())
-            {
-                categoriesCombo.Items.Add(new { Id = readerCat["id"], Name = readerCat["nameCategory"] });
-            }
-            readerCat.Close();
-        }
-            
-        var queryDiff = "select id, nameDifficulty from difficulty";
-        using (SqlCommand command = new SqlCommand(queryDiff, connection))
-        {
-            SqlDataReader readerDif = command.ExecuteReader();
+        categoriesCombo.Items.AddRange(categories.ToArray());
+        difficultyCombo.Items.AddRange(difficulties.ToArray());
 
-             while (readerDif.Read())
-            {
-                difficultyCombo.Items.Add(new { Id = readerDif["id"], Name = readerDif["nameDifficulty"] });
-            }
-            readerDif.Close();
-        }
-            
         categoriesCombo.DisplayMember = "Name";
         difficultyCombo.DisplayMember = "Name";
         categoriesCombo.Items.Add(new { Id = (object)null, Name = "Mixed" });
