@@ -147,6 +147,31 @@ public partial class MyForm : Form
         };
 
         finalScorePanel.Controls.Add(finalScoreLabel);
+        
+        Label highScoreLabel = new Label
+        {
+            Text = string.Empty,
+            Font = new Font("Arial", 14, FontStyle.Italic),
+            TextAlign = ContentAlignment.MiddleCenter,
+            Dock = DockStyle.Top,
+            Height = 50
+        };
+        finalScorePanel.Controls.Add(highScoreLabel);
+
+        if (!string.IsNullOrEmpty(LoginForm.LoggedInUser))
+        {
+            bool isNewScore = services.UpdateScore(LoginForm.LoggedInUser, score);
+            if (isNewScore)
+            {
+                highScoreLabel.Text = "Congratulations! You've set a new high score!";
+            }
+        }
+        else
+        {
+            highScoreLabel.Text = "Log in to save your high score.";
+            highScoreLabel.ForeColor = Color.Blue;
+        }
+        
         Controls.Clear();
         Controls.Add(finalScorePanel); 
     }

@@ -3,7 +3,7 @@
 public partial class LoginForm : Form
 {
     private DatabaseServices services;
-    public string LoggedInUser { get; set; }
+    public static string LoggedInUser { get; set; }
     
     public LoginForm()
     {

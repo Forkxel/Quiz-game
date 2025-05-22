@@ -123,7 +123,7 @@ public class DatabaseServices
     
     public bool UserExists(string username)
     {
-        var query = "SELECT COUNT(*) FROM Player WHERE username = @username";
+        var query = "select count(*) from Player where username = @username";
         using (SqlCommand command = new SqlCommand(query, connection))
         {
             command.Parameters.AddWithValue("@username", username);
@@ -134,7 +134,7 @@ public class DatabaseServices
     
     public bool AddUser(string username, string password)
     {
-        var query = "INSERT INTO Player (username, userPassword, score) VALUES (@username, @password, 0)";
+        var query = "insert into Player (username, userPassword, score) values (@username, @password, 0)";
         using (SqlCommand command = new SqlCommand(query, connection))
         {
             command.Parameters.AddWithValue("@username", username);
@@ -146,12 +146,26 @@ public class DatabaseServices
     
     public string GetPasswordForUser(string username)
     {
-        var query = "SELECT userPassword FROM Player WHERE username = @username";
+        var query = "select userPassword from Player where username = @username";
         using (SqlCommand command = new SqlCommand(query, connection))
         {
             command.Parameters.AddWithValue("@username", username);
             object result = command.ExecuteScalar();
             return result != null ? result.ToString() : null;
+        }
+    }
+
+    public bool UpdateScore(string username, int score)
+    {
+        var query = "update Player set score = @score where username = @username" +
+                    " and (score is null or @score > score)";
+
+        using (SqlCommand command = new SqlCommand(query, connection))
+        {
+            command.Parameters.AddWithValue("@username", username);
+            command.Parameters.AddWithValue("@score", score);
+            
+            return command.ExecuteNonQuery() > 0;
         }
     }
 }
