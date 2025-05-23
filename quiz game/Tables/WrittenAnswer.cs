@@ -113,7 +113,7 @@ public class WrittenAnswer : Question
         confirmButton.Click += (sender, e) => onNextQuestion();
     }
 
-    private void ConfirmAnswer(Button confirmButton, Action<bool> onAnswerConfirmed)
+    protected override void ConfirmAnswer(Button confirmButton, Action<bool> onAnswerConfirmed)
     {
         if (confirmButton.Text == "Submit")
         {

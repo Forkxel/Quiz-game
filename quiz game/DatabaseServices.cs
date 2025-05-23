@@ -84,6 +84,41 @@ public class DatabaseServices
         }
         return questions;
     }
+    
+    public List<Question> GetMultipleQuestions(object selectedCategory, string selectedDifficulty)
+    {
+        List<Question> questions = new();
+        var query = "SELECT questionText, option1, option2, option3, correctAnswer, cat_id, diff_id, " +
+                    "c.nameCategory as category, d.nameDifficulty as difficulty " +
+                    "FROM MultipleChoiceQuestion " +
+                    "INNER JOIN Category c ON cat_id = c.id " +
+                    "INNER JOIN Difficulty d ON diff_id = d.id " +
+                    "WHERE (@CategoryId IS NULL OR cat_id = @CategoryId) AND diff_id = @DifficultyId";
+
+        using (SqlCommand command = new SqlCommand(query, connection))
+        {
+            command.Parameters.AddWithValue("@CategoryId", selectedCategory ?? DBNull.Value);
+            command.Parameters.AddWithValue("@DifficultyId", selectedDifficulty);
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    questions.Add(new MultipleChoiceQuestion
+                    {
+                        QuestionText = reader["questionText"].ToString(),
+                        Option1 = reader["option1"].ToString(),
+                        Option2 = reader["option2"].ToString(),
+                        Option3 = reader["option3"].ToString(),
+                        CorrectAnswers = reader["correctAnswer"].ToString().Split(';').ToList(),
+                        Category = reader["category"].ToString(),
+                        Difficulty = reader["difficulty"].ToString()
+                    });
+                }
+            }
+        }
+        return questions;
+    }
 
     public List<dynamic> GetCategories()
     {

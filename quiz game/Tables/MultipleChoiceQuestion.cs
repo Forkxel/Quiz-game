@@ -1,22 +1,19 @@
-﻿using Timer = System.Windows.Forms.Timer;
+﻿namespace quiz_game.Tables;
 
-namespace quiz_game.Tables;
-
-public class SingleChoiceQuestion : Question  
+public class MultipleChoiceQuestion : Question
 {
     public string Option1 { get; set; }
     public string Option2 { get; set; }
     public string Option3 { get; set; }
-    public string CorrectAnswer { get; set; }
-    private RadioButton selectedAnswer;
+    public List<string> CorrectAnswers { get; set; }
     private Panel quizPanel;
-    private List<RadioButton> answers;
-
+    private List<CheckBox> selectedAnswers;
+    
     public override void Display(Panel panel, Action<bool> onAnswerSelected)
     {
         quizPanel = panel;
         panel.Controls.Clear();
-        
+
         Label questionLabel = new Label
         {
             Text = QuestionText,
@@ -28,8 +25,8 @@ public class SingleChoiceQuestion : Question
             AutoSize = false
         };
         panel.Controls.Add(questionLabel);
-        
-        FlowLayoutPanel radioPanel = new FlowLayoutPanel()
+
+        FlowLayoutPanel checkBoxPanel = new FlowLayoutPanel
         {
             FlowDirection = FlowDirection.TopDown,
             WrapContents = false,
@@ -37,17 +34,17 @@ public class SingleChoiceQuestion : Question
             AutoSizeMode = AutoSizeMode.GrowAndShrink,
             Anchor = AnchorStyles.None,
             Padding = new Padding(0),
-            Margin = new Padding(0),
+            Margin = new Padding(0)
         };
-        
-        Panel centerPanel = new Panel()
+
+        Panel centerPanel = new Panel
         {
-            Dock = DockStyle.Fill,
+            Dock = DockStyle.Fill
         };
-        centerPanel.Controls.Add(radioPanel);
+        centerPanel.Controls.Add(checkBoxPanel);
 
         panel.Controls.Add(centerPanel);
-        
+
         Button confirmButton = new Button
         {
             Text = "Submit",
@@ -62,36 +59,38 @@ public class SingleChoiceQuestion : Question
             Enabled = false
         };
         
-        Font radioFont = new Font("Arial", 16, FontStyle.Regular);
-        List<string> options = new List<string> { Option1, Option2, Option3 };
+        List<string> options = new List<string> { Option1, Option2, Option3 }
+            .Where(option => !string.IsNullOrEmpty(option))
+            .ToList();
         
         var rnd = new Random();
         options = options.OrderBy(x => rnd.Next()).ToList();
-        
-        answers = new List<RadioButton>();
 
-        foreach (var opt in options)
+        selectedAnswers = new List<CheckBox>();
+
+        foreach (var option in options)
         {
-            RadioButton rb = new RadioButton
+            CheckBox checkBox = new CheckBox
             {
-                Text = opt,
+                Text = option,
                 AutoSize = true,
+                Font = new Font("Arial", 16, FontStyle.Regular),
                 Margin = new Padding(0, 15, 0, 15),
-                TextAlign = ContentAlignment.MiddleCenter,
-                Font = radioFont
+                TextAlign = ContentAlignment.MiddleLeft
             };
-            
-            rb.CheckedChanged += (sender, e) =>
+
+            checkBox.CheckedChanged += (sender, e) =>
             {
                 if (confirmButton.Text != "Next")
                 {
-                    confirmButton.Enabled = answers.Any(r => r.Checked);
+                   confirmButton.Enabled = selectedAnswers.Any(cb => cb.Checked); 
                 }
             };
-            answers.Add(rb);
-            radioPanel.Controls.Add(rb);
+
+            selectedAnswers.Add(checkBox);
+            checkBoxPanel.Controls.Add(checkBox);
         }
-        
+
         Panel buttonPanel = new Panel
         {
             Dock = DockStyle.Bottom,
@@ -111,53 +110,53 @@ public class SingleChoiceQuestion : Question
 
         panel.Visible = true;
     }
-
+    
     protected override void ConfirmAnswer(Button confirmButton, Action<bool> onAnswerConfirmed)
     {
         if (confirmButton.Text == "Submit")
         {
-            string selectedText = "";
-            foreach (RadioButton rb in answers)
+            var selectedTexts = selectedAnswers
+                .Where(cb => cb.Checked)
+                .Select(cb => cb.Text)
+                .ToList();
+
+            foreach (var checkBox in selectedAnswers)
             {
-                if (rb.Checked)
+                if (CorrectAnswers.Contains(checkBox.Text))
                 {
-                    selectedText = rb.Text;
-                    selectedAnswer = rb;
+                    checkBox.ForeColor = Color.Green;
+                }
+                else
+                {
+                    checkBox.ForeColor = Color.Red;
                 }
             }
 
-            foreach (var rb in answers)
-            {
-                if (rb.Text == CorrectAnswer)
-                {
-                    rb.ForeColor = Color.Green;
-                }
-                else if (rb.Text != CorrectAnswer)
-                {
-                    rb.ForeColor = Color.Red;
-                }
-            }
-            
             confirmButton.Text = "Next";
             confirmButton.Enabled = true;
 
-            foreach (var rb in answers)
+            foreach (var checkBox in selectedAnswers)
             {
-                rb.Click -= (sender, e) => 
-                { 
-                    ((RadioButton)sender).Checked = false;
-                    selectedAnswer.Checked = false; 
-                };
-                rb.Click += (sender, e) =>
+                checkBox.Click -= (sender, e) =>
                 {
-                    ((RadioButton)sender).Checked = false;
-                    selectedAnswer.Checked = false;
+                    ((CheckBox)sender).Checked = false;
+                    if (CorrectAnswers.Contains(checkBox.Text))
+                    {
+                        checkBox.Checked = true;
+                    }
+                };
+                checkBox.Click += (sender, e) =>
+                {
+                    ((CheckBox)sender).Checked = false;
+                    if (CorrectAnswers.Contains(checkBox.Text))
+                    {
+                        checkBox.Checked = true;
+                    }
                 };
             }
 
             bool isCorrect;
-
-            if (selectedText == CorrectAnswer)
+            if (selectedTexts.Count == CorrectAnswers.Count && selectedTexts.All(CorrectAnswers.Contains))
             {
                 isCorrect = true;
             }
@@ -168,14 +167,14 @@ public class SingleChoiceQuestion : Question
 
             var form = (MyForm)confirmButton.FindForm();
             form.QuestionTimer.Stop();
-            
+
             confirmButton.Click -= (sender, e) => ConfirmAnswer(confirmButton, onAnswerConfirmed);
             confirmButton.Click += (sender, e) =>
             {
                 onAnswerConfirmed.Invoke(isCorrect);
             };
         }
-        else if(confirmButton.Text == "Next")
+        else if (confirmButton.Text == "Next")
         {
             MyForm.CurrentQuestionIndex--;
             onAnswerConfirmed.Invoke(false);
@@ -184,38 +183,26 @@ public class SingleChoiceQuestion : Question
 
     public override void TimeOut(Action onNextQuestion)
     {
-        foreach (var control in quizPanel.Controls)
+        foreach (var checkBox in selectedAnswers)
         {
-            if (control is Panel centerPanel)
+            if (CorrectAnswers.Contains(checkBox.Text))
             {
-                foreach (var subControl in centerPanel.Controls)
-                {
-                    if (subControl is FlowLayoutPanel flowPanel)
-                    {
-                        foreach (var rb in flowPanel.Controls.OfType<RadioButton>())
-                        {
-                            if (rb.Text == CorrectAnswer)
-                            {
-                                rb.ForeColor = Color.Green;
-                            }
-                            else
-                            {
-                                rb.ForeColor = Color.Red;
-                            }
-                            rb.Click -= (sender, e) =>
-                            {
-                                ((RadioButton)sender).Checked = false;
-                            };
-                            rb.Click += (sender, e) =>
-                            {
-                                ((RadioButton)sender).Checked = false;
-                            };
-                        }
-                    }
-                }
+                checkBox.ForeColor = Color.Green;
             }
+            else
+            {
+                checkBox.ForeColor = Color.Red;
+            }
+            checkBox.Click -= (sender, e) =>
+            {
+                ((CheckBox)sender).Checked = false;
+            };
+            checkBox.Click += (sender, e) =>
+            {
+                ((CheckBox)sender).Checked = false;
+            };
         }
-        
+
         var confirmButton = quizPanel.Controls
             .OfType<Panel>()
             .SelectMany(p => p.Controls.OfType<Button>())

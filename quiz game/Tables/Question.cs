@@ -9,4 +9,6 @@ public abstract class Question
     public abstract void Display(Panel panel, Action<bool> onAnswerSelected);
 
     public abstract void TimeOut(Action onNextQuestion);
+    
+    protected abstract void ConfirmAnswer(Button confirmButton, Action<bool> onAnswerConfirmed);
 }

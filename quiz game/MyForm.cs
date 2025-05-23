@@ -99,8 +99,12 @@ public partial class MyForm : Form
         
         var singleQuestions = services.GetSingleQuestions(selectedCategory, selectedDifficulty);
         var writtenAnswer = services.GetWrittenQuestions(selectedCategory, selectedDifficulty);
+        var multipleQuestions = services.GetMultipleQuestions(selectedCategory, selectedDifficulty);
         
-        List<Question> questions = singleQuestions.Concat(writtenAnswer).ToList();
+        List<Question> questions = singleQuestions
+            .Concat(writtenAnswer)
+            .Concat(multipleQuestions)
+            .ToList();
         
         var random = new Random();
         currentQuestions = questions
@@ -130,7 +134,7 @@ public partial class MyForm : Form
             {
                 if (isCorrect)
                 {   
-                    score += currentTime / 2;
+                    score += (currentTime / 2) + 1;
                     scoreLabel.Text = $"Score: {score}";
                 }
                 CurrentQuestionIndex++;
@@ -275,7 +279,11 @@ public partial class MyForm : Form
     
     private bool IsMixedCategorySelected()
     {
-        return categoriesCombo.SelectedItem != null && ((dynamic)categoriesCombo.SelectedItem).Name == "Mixed";
+        if (categoriesCombo.SelectedItem != null && ((dynamic)categoriesCombo.SelectedItem).Name == "Mixed")
+        {
+            return true;
+        }
+        return false;
     }
 
     private void scoreBoardButton_Click(object sender, EventArgs e)
