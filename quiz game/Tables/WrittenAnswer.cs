@@ -5,6 +5,8 @@ public class WrittenAnswer : Question
     public string CorrectAnswer { get; set; }
     private TextBox answerTextBox;
     private Button confirmButton;
+    private Label correctAnswerLabel;
+    
     public override void Display(Panel panel, Action<bool> onAnswerSelected)
     {
         panel.Controls.Clear();
@@ -63,6 +65,18 @@ public class WrittenAnswer : Question
             Font = new Font("Arial", 16, FontStyle.Bold),
             Enabled = true
         };
+        
+        correctAnswerLabel = new Label
+        {
+            Text = $"Correct Answer: {CorrectAnswer}",
+            Font = new Font("Arial", 12, FontStyle.Italic),
+            ForeColor = Color.Blue,
+            AutoSize = false,
+            TextAlign = ContentAlignment.MiddleCenter,
+            Dock = DockStyle.Bottom,
+            Height = 50,
+            Visible = false
+        };
 
         Panel buttonPanel = new Panel
         {
@@ -86,6 +100,10 @@ public class WrittenAnswer : Question
     {
         answerTextBox.ReadOnly = true;
         answerTextBox.BackColor = Color.Red;
+        
+        Panel parentPanel = (Panel)answerTextBox.Parent;
+        parentPanel.Controls.Add(correctAnswerLabel);
+        correctAnswerLabel.Visible = true;
 
         confirmButton.Text = "Next";
         confirmButton.Enabled = true;
@@ -109,6 +127,9 @@ public class WrittenAnswer : Question
             else
             {
                 isCorrect = false;
+                Panel parentPanel = (Panel)answerTextBox.Parent;
+                parentPanel.Controls.Add(correctAnswerLabel);
+                correctAnswerLabel.Visible = true;
             }
 
             answerTextBox.ReadOnly = true;

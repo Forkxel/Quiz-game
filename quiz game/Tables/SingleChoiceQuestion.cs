@@ -193,7 +193,14 @@ public class SingleChoiceQuestion : Question
                     {
                         foreach (var rb in flowPanel.Controls.OfType<RadioButton>())
                         {
-                            rb.ForeColor = Color.Red;
+                            if (rb.Text == CorrectAnswer)
+                            {
+                                rb.ForeColor = Color.Green;
+                            }
+                            else
+                            {
+                                rb.ForeColor = Color.Red;
+                            }
                             rb.Click -= (sender, e) =>
                             {
                                 ((RadioButton)sender).Checked = false;
