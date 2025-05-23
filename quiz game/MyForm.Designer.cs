@@ -34,6 +34,7 @@ partial class MyForm
     private void InitializeComponent()
     {
         panel = new System.Windows.Forms.Panel();
+        scoreBoardButton = new System.Windows.Forms.Button();
         loginButton = new System.Windows.Forms.Button();
         startButton = new System.Windows.Forms.Button();
         difficultyCombo = new System.Windows.Forms.ComboBox();
@@ -44,6 +45,7 @@ partial class MyForm
         // 
         // panel
         // 
+        panel.Controls.Add(scoreBoardButton);
         panel.Controls.Add(loginButton);
         panel.Controls.Add(startButton);
         panel.Controls.Add(difficultyCombo);
@@ -55,11 +57,21 @@ partial class MyForm
         panel.Size = new System.Drawing.Size(800, 450);
         panel.TabIndex = 0;
         // 
+        // scoreBoardButton
+        // 
+        scoreBoardButton.Location = new System.Drawing.Point(666, 79);
+        scoreBoardButton.Name = "scoreBoardButton";
+        scoreBoardButton.Size = new System.Drawing.Size(112, 36);
+        scoreBoardButton.TabIndex = 6;
+        scoreBoardButton.Text = "score board";
+        scoreBoardButton.UseVisualStyleBackColor = true;
+        scoreBoardButton.Click += scoreBoardButton_Click;
+        // 
         // loginButton
         // 
-        loginButton.Location = new System.Drawing.Point(693, 29);
+        loginButton.Location = new System.Drawing.Point(666, 29);
         loginButton.Name = "loginButton";
-        loginButton.Size = new System.Drawing.Size(85, 29);
+        loginButton.Size = new System.Drawing.Size(112, 36);
         loginButton.TabIndex = 4;
         loginButton.Text = "profile";
         loginButton.UseVisualStyleBackColor = true;
@@ -116,6 +128,8 @@ partial class MyForm
         panel.ResumeLayout(false);
         ResumeLayout(false);
     }
+
+    private System.Windows.Forms.Button scoreBoardButton;
 
     private System.Windows.Forms.Button loginButton;
 

@@ -176,4 +176,25 @@ public class DatabaseServices
             return command.ExecuteNonQuery() > 0;
         }
     }
+
+    public Dictionary<string, int> GetTopScores()
+    {
+        Dictionary<string, int> topScores = new();
+        var query = "SELECT TOP (5) username, score FROM Player WHERE score IS NOT NULL ORDER BY score DESC";
+
+        using (SqlCommand command = new SqlCommand(query, connection))
+        {
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    string username = reader["username"].ToString();
+                    int score = (int)reader["score"];
+                    topScores.Add(username, score);
+                }
+            }
+        }
+
+        return topScores;
+    }
 }

@@ -275,7 +275,12 @@ public partial class MyForm : Form
     
     private bool IsMixedCategorySelected()
     {
-        return categoriesCombo.SelectedItem != null &&
-               ((dynamic)categoriesCombo.SelectedItem).Name == "Mixed";
+        return categoriesCombo.SelectedItem != null && ((dynamic)categoriesCombo.SelectedItem).Name == "Mixed";
+    }
+
+    private void scoreBoardButton_Click(object sender, EventArgs e)
+    {
+        var scoreBoardForm = new ScoreBoardForm();
+        scoreBoardForm.ShowDialog();
     }
 }   
