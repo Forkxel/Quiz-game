@@ -29,11 +29,24 @@ create table WrittenQuestions(
 	cat_id int foreign key(cat_id) references Category(id)
 );
 
+create table MultipleChoiceQuestion(
+	id int primary key identity(1,1),
+	questionText varchar(max),
+	correctAnswer varchar(max),
+	option1 varchar(max),
+	option2 varchar(max),
+	option3 varchar(max),
+	diff_id int foreign key(diff_id) references Difficulty(id),
+	cat_id int foreign key(cat_id) references Category(id)
+);
+
 create table Player(
 	id int primary key identity(1,1),
 	username varchar(50),
 	userPassword varchar(50),
-	score int
+	score int,
+	diff_id int foreign key(diff_id) references Difficulty(id),
+	cat_id int foreign key(cat_id) references Category(id)
 );
 
 insert into Difficulty(nameDifficulty) values ('Easy'),('Medium'),('Hard');
@@ -716,3 +729,159 @@ INSERT INTO WrittenQuestions (questionText, correctAnswer, diff_id, cat_id) VALU
 ('What is the name of the prison in "Cool Hand Luke"?', 'Road Prison 36', 3, 4),
 ('Who directed the film "12 Angry Men"?', 'Sidney Lumet', 3, 4),
 ('Which film is known for the quote "You can’t handle the truth!"?', 'A Few Good Men', 3, 4);
+
+-- Geography (cat_id=1), Easy (diff_id=1)
+INSERT INTO MultipleChoiceQuestion (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id) VALUES
+('Which countries are known for their coral reefs?', 'Australia;Maldives', 'Australia', 'Maldives', 'Sweden', 1, 1),
+('Which cities are capitals of Asian nations?', 'Tokyo;Seoul', 'Tokyo', 'Seoul', 'Dubai', 1, 1),
+('Which oceans border Africa?', 'Atlantic Ocean;Indian Ocean', 'Atlantic Ocean', 'Indian Ocean', 'Arctic Ocean', 1, 1),
+('Which animals are native to South America?', 'Capybara;Andean Condor', 'Capybara', 'Andean Condor', 'Panda', 1, 1),
+('Which rivers flow through European capitals?', 'Thames;Tiber', 'Thames', 'Tiber', 'Ganges', 1, 1),
+('Which countries are famous for their ancient temples?', 'Cambodia;India', 'Cambodia', 'India', 'Norway', 1, 1),
+('Which continents have major deserts?', 'Africa;Asia', 'Africa', 'Asia', 'Europe', 1, 1),
+('Which cities are known for their bridges?', 'Lisbon;San Francisco', 'Lisbon', 'San Francisco', 'Phoenix', 1, 1),
+('Which countries are in the Baltic region?', 'Estonia;Latvia', 'Estonia', 'Latvia', 'Greece', 1, 1),
+('Which mountain ranges are in South America?', 'Andes;Patagonian', 'Andes', 'Patagonian', 'Himalayas', 1, 1);
+
+-- Geography (cat_id=1), Medium (diff_id=2)
+INSERT INTO MultipleChoiceQuestion (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id) VALUES
+('Which countries share the Tigris River?', 'Iraq;Turkey', 'Iraq', 'Turkey', 'Iran', 1, 1),
+('Which islands are in Polynesia?', 'Tonga;Samoa', 'Tonga', 'Samoa', 'Iceland', 2, 1),
+('Which cities are capitals of Central American nations?', 'San José;Panama City', 'San José', 'Panama City', 'Havana', 2, 1),
+('Which lakes are in North America?', 'Huron;Ontario', 'Huron', 'Ontario', 'Titicaca', 2, 1),
+('Which countries have tundra ecosystems?', 'Canada;Russia', 'Canada', 'Russia', 'Brazil', 2, 1),
+('Which rivers flow through Southeast Asia?', 'Mekong;Irrawaddy', 'Mekong', 'Irrawaddy', 'Nile', 2, 1),
+('Which countries are known for their wetlands?', 'Botswana;Vietnam', 'Botswana', 'Vietnam', 'Germany', 2, 1),
+('Which mountain ranges are in Africa?', 'Atlas;Drakensberg', 'Atlas', 'Drakensberg', 'Rockies', 2, 1),
+('Which straits connect oceans?', 'Bosporus;Dardanelles', 'Bosporus', 'Dardanelles', 'Panama Canal', 2, 1),
+('Which countries are in the Andes region?', 'Ecuador;Bolivia', 'Ecuador', 'Bolivia', 'Chile', 2, 1);
+
+-- Geography (cat_id=1), Hard (diff_id=3)
+INSERT INTO MultipleChoiceQuestion (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id) VALUES
+('Which countries have subarctic climates?', 'Finland;Alaska', 'Finland', 'Alaska', 'India', 3, 1),
+('Which rivers are in East Africa?', 'Nile;Zambezi', 'Nile', 'Zambezi', 'Amazon', 3, 1),
+('Which islands are in the Indian Ocean?', 'Andaman;Zanzibar', 'Andaman', 'Zanzibar', 'Falklands', 3, 1),
+('Which countries share the Karakum Desert?', 'Turkmenistan;Uzbekistan', 'Turkmenistan', 'Uzbekistan', 'Kazakhstan', 3, 1),
+('Which peaks are the highest in Europe?', 'Elbrus;Mont Blanc', 'Elbrus', 'Mont Blanc', 'Kilimanjaro', 3, 1),
+('Which countries have salt lakes?', 'Iran;Turkey', 'Iran', 'Turkey', 'Japan', 3, 1),
+('Which lakes are in Asia?', 'Caspian Sea;Aral Sea', 'Caspian Sea', 'Aral Sea', 'Baikal', 3, 1),
+('Which countries have limestone caves?', 'Slovenia;Vietnam', 'Slovenia', 'Vietnam', 'Canada', 3, 1),
+('Which oceanic currents influence climate?', 'Gulf Stream;Kuroshio', 'Gulf Stream', 'Kuroshio', 'El Ni?o', 3, 1),
+('Which regions have permafrost?', 'Siberia;Nunavut', 'Siberia', 'Nunavut', 'Sahara', 3, 1);
+
+-- History (cat_id=2), Easy (diff_id=1)
+INSERT INTO MultipleChoiceQuestion (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id) VALUES
+('Which explorers discovered new routes?', 'Ferdinand Magellan;Zheng He', 'Ferdinand Magellan', 'Zheng He', 'Napoleon', 1, 2),
+('Which monarchs ruled France?', 'Louis XIV;Napoleon I', 'Louis XIV', 'Napoleon I', 'Cleopatra', 1, 2),
+('Which wars involved France?', 'Napoleonic Wars;Franco-Prussian War', 'Napoleonic Wars', 'Franco-Prussian War', 'Trojan War', 1, 2),
+('Which figures led abolition movements?', 'Frederick Douglass;Harriet Tubman', 'Frederick Douglass', 'Harriet Tubman', 'Joan of Arc', 1, 2),
+('Which treaties ended wars?', 'Treaty of Ghent;Treaty of Tordesillas', 'Treaty of Ghent', 'Treaty of Tordesillas', 'Edict of Milan', 1, 2),
+('Which inventors created machines?', 'Eli Whitney;Thomas Edison', 'Eli Whitney', 'Thomas Edison', 'Galileo', 1, 2),
+('Which empires ruled Europe?', 'Habsburg Empire;Holy Roman Empire', 'Habsburg Empire', 'Holy Roman Empire', 'Maya Empire', 1, 2),
+('Which events marked exploration?', 'Columbus’ Voyage;Cook’s Expeditions', 'Columbus’ Voyage', 'Cook’s Expeditions', 'Fall of Rome', 1, 2),
+('Which leaders fought for equality?', 'Sojourner Truth;Malcolm X', 'Sojourner Truth', 'Malcolm X', 'Hannibal', 1, 2),
+('Which years saw major reforms?', '1865;1948', '1865', '1948', '1400', 1, 2);
+
+-- History (cat_id=2), Medium (diff_id=2)
+INSERT INTO MultipleChoiceQuestion (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id) VALUES
+('Which leaders shaped modern Europe?', 'Cavour;Mazzini', 'Cavour', 'Mazzini', 'Aristotle', 2, 2),
+('Which treaties ended revolutions?', 'Congress of Vienna;Treaty of Nanjing', 'Congress of Vienna', 'Treaty of Nanjing', 'Magna Carta', 2, 2),
+('Which figures led anti-colonial movements?', 'Ho Chi Minh;Kwame Nkrumah', 'Ho Chi Minh', 'Kwame Nkrumah', 'Nero', 2, 2),
+('Which wars involved Asia?', 'Sino-Japanese War;Russo-Japanese War', 'Sino-Japanese War', 'Russo-Japanese War', 'Punic Wars', 2, 2),
+('Which scientists studied chemistry?', 'Dmitri Mendeleev;Marie Curie', 'Dmitri Mendeleev', 'Marie Curie', 'Drake', 2, 2),
+('Which events involved rebellions?', 'Taiping Rebellion;Indian Mutiny', 'Taiping Rebellion', 'Indian Mutiny', 'Battle of Waterloo', 2, 2),
+('Which monarchs ruled during transitions?', 'Queen Isabella;Franz Joseph', 'Queen Isabella', 'Franz Joseph', 'Ramses II', 2, 2),
+('Which years marked global conflicts?', '1939;1950', '1939', '1950', '1300', 2, 2),
+('Which thinkers influenced democracy?', 'Montesquieu;Mill', 'Montesquieu', 'Mill', 'Vercingetorix', 2, 2),
+('Which countries were in the Warsaw Pact?', 'Poland;Hungary', 'Poland', 'Hungary', 'Brazil', 2, 2);
+
+-- History (cat_id=2), Hard (diff_id=3)
+INSERT INTO MultipleChoiceQuestion (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id) VALUES
+('Which battles shaped ancient history?', 'Thermopylae;Gaugamela', 'Thermopylae', 'Gaugamela', 'Stalingrad', 3, 2),
+('Which treaties ended feudal conflicts?', 'Peace of Lodi;Treaty of Constance', 'Peace of Lodi', 'Treaty of Constance', 'Treaty of Paris', 3, 2),
+('Which rulers centralized power?', 'Ivan III;Kublai Khan', 'Ivan III', 'Kublai Khan', 'Socrates', 3, 2),
+('Which events marked intellectual shifts?', 'Islamic Golden Age;Song Dynasty', 'Islamic Golden Age', 'Song Dynasty', 'French Revolution', 3, 2),
+('Which figures led schisms?', 'Zwingli;Erasmus', 'Zwingli', 'Erasmus', 'Caligula', 3, 2),
+('Which civilizations built observatories?', 'Chavín;Chacoan', 'Chavín', 'Chacoan', 'Mongols', 3, 2),
+('Which scientists studied mechanics?', 'Archimedes;Bernoulli', 'Archimedes', 'Bernoulli', 'Einstein', 3, 2),
+('Which years saw artifact discoveries?', '1799;1974', '1799', '1974', '1000', 3, 2),
+('Which empires controlled Southeast Asia?', 'Khmer Empire;Srivijaya', 'Khmer Empire', 'Srivijaya', 'Inca Empire', 3, 2),
+('Which leaders enacted land reforms?', 'Cleisthenes;Stein', 'Cleisthenes', 'Stein', 'Gandhi', 3, 2);
+
+-- Biology (cat_id=3), Easy (diff_id=1)
+INSERT INTO MultipleChoiceQuestion (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id) VALUES
+('Which organs process nutrients?', 'Intestines;Stomach', 'Intestines', 'Stomach', 'Lungs', 1, 3),
+('Which animals are reptiles?', 'Turtles;Lizards', 'Turtles', 'Lizards', 'Bats', 1, 3),
+('Which plant parts store energy?', 'Roots;Bulbs', 'Roots', 'Bulbs', 'Leaves', 1, 3),
+('Which nutrients support immunity?', 'Zinc;Vitamin D', 'Zinc', 'Vitamin D', 'Sodium', 1, 3),
+('Which organs regulate temperature?', 'Skin;Hypothalamus', 'Skin', 'Hypothalamus', 'Kidneys', 1, 3),
+('Which bones form joints?', 'Femur;Humerus', 'Femur', 'Humerus', 'Heart', 1, 3),
+('Which molecules form membranes?', 'Phospholipids;Cholesterol', 'Phospholipids', 'Cholesterol', 'Sugar', 1, 3),
+('Which plant parts produce pollen?', 'Anthers;Stamens', 'Anthers', 'Stamens', 'Pistil', 1, 3),
+('Which organs produce urine?', 'Kidneys;Bladder', 'Kidneys', 'Bladder', 'Liver', 1, 3),
+('Which vitamins aid bone health?', 'Vitamin D;Vitamin K', 'Vitamin D', 'Vitamin K', 'Vitamin B6', 1, 3);
+
+-- Biology (cat_id=3), Medium (diff_id=2)
+INSERT INTO MultipleChoiceQuestion (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id) VALUES
+('Which hormones regulate sleep?', 'Melatonin;Cortisol', 'Melatonin', 'Cortisol', 'Insulin', 2, 3),
+('Which structures protect plants?', 'Cuticle;Epidermis', 'Cuticle', 'Epidermis', 'Phloem', 2, 3),
+('Which animals use camouflage?', 'Cuttlefish;Stick Insects', 'Cuttlefish', 'Stick Insects', 'Tigers', 2, 3),
+('Which proteins bind oxygen?', 'Hemoglobin;Myoglobin', 'Hemoglobin', 'Myoglobin', 'Actin', 2, 3),
+('Which organelles store materials?', 'Vacuoles;Vesicles', 'Vacuoles', 'Vesicles', 'Nucleus', 2, 3),
+('Which vitamins aid nerve function?', 'Vitamin B1;Vitamin B6', 'Vitamin B1', 'Vitamin B6', 'Vitamin C', 2, 3),
+('Which processes repair tissues?', 'Mitosis;Regeneration', 'Mitosis', 'Regeneration', 'Respiration', 2, 3),
+('Which cells produce hormones?', 'Endocrine Cells;Pituitary Cells', 'Endocrine Cells', 'Pituitary Cells', 'Red Blood Cells', 2, 3),
+('Which enzymes digest starches?', 'Amylase;Maltase', 'Amylase', 'Maltase', 'Lipase', 2, 3),
+('Which molecules signal immunity?', 'Antibodies;Cytokines', 'Antibodies', 'Cytokines', 'Glucose', 2, 3);
+
+-- Biology (cat_id=3), Hard (diff_id=3)
+INSERT INTO MultipleChoiceQuestion (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id) VALUES
+('Which enzymes regulate metabolism?', 'Kinases;Phosphatases', 'Kinases', 'Phosphatases', 'Protease', 3, 3),
+('Which organelles synthesize lipids?', 'Smooth ER;Golgi Apparatus', 'Smooth ER', 'Golgi Apparatus', 'Lysosome', 3, 3),
+('Which molecules control development?', 'Hox Genes;Growth Factors', 'Hox Genes', 'Growth Factors', 'Salt', 3, 3),
+('Which processes maintain diversity?', 'Recombination;Mutation', 'Recombination', 'Mutation', 'Weathering', 3, 3),
+('Which cells mediate allergies?', 'Mast Cells;Basophils', 'Mast Cells', 'Basophils', 'Platelets', 3, 3),
+('Which hormones regulate sodium?', 'Aldosterone;ADH', 'Aldosterone', 'ADH', 'Estrogen', 3, 3),
+('Which pathways produce ATP?', 'ETC;Fermentation', 'ETC', 'Fermentation', 'Glycolysis', 3, 3),
+('Which structures regulate turgor?', 'Tonoplast;Cell Wall', 'Tonoplast', 'Cell Wall', 'Stomata', 3, 3),
+('Which processes cycle phosphorus?', 'Runoff;Sedimentation', 'Runoff', 'Sedimentation', 'Nitrification', 3, 3),
+('Which molecules fight viruses?', 'Interferons;Complement Proteins', 'Interferons', 'Complement Proteins', 'Lipids', 3, 3);
+
+-- Movies (cat_id=4), Easy (diff_id=1)
+INSERT INTO MultipleChoiceQuestion (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id) VALUES
+('Which animated films feature families?', 'Coco;Onward', 'Coco', 'Onward', 'Inception', 1, 4),
+('Which superheroes are in DC films?', 'Aquaman;Flash', 'Aquaman', 'Flash', 'Iron Man', 1, 4),
+('Which directors made family films?', 'Chris Buck;Jennifer Lee', 'Chris Buck', 'Jennifer Lee', 'Tarantino', 1, 4),
+('Which characters are Pixar heroes?', 'Woody;Remy', 'Woody', 'Remy', 'Voldemort', 1, 4),
+('Which movies involve adventures?', 'Up;Toy Story', 'Up', 'Toy Story', 'Titanic', 1, 4),
+('Which songs are in animated films?', 'Colors of the Wind;Be Our Guest', 'Colors of the Wind', 'Be Our Guest', 'My Heart Will Go On', 1, 4),
+('Which actors played princesses?', 'Emma Watson;Lily James', 'Emma Watson', 'Lily James', 'Tom Cruise', 1, 4),
+('Which films feature animals?', 'Bambi;Dumbo', 'Bambi', 'Dumbo', 'The Matrix', 1, 4),
+('Which villains are in Disney films?', 'Jafar;Gaston', 'Jafar', 'Gaston', 'Loki', 1, 4),
+('Which movies are set in cities?', 'Zootopia;Big Hero 6', 'Zootopia', 'Big Hero 6', 'The Godfather', 1, 4);
+
+-- Movies (cat_id=4), Medium (diff_id=2)
+INSERT INTO MultipleChoiceQuestion (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id) VALUES
+('Which directors made dramas?', 'Ang Lee;Alfonso Cuarón', 'Ang Lee', 'Alfonso Cuarón', 'John Ford', 2, 4),
+('Which movies feature quests?', 'The Green Knight;Willow', 'The Green Knight', 'Willow', 'Coco', 2, 4),
+('Which actors played rebels?', 'Christian Bale;Heath Ledger', 'Christian Bale', 'Heath Ledger', 'Chris Pratt', 2, 4),
+('Which films involve mysteries?', 'Knives Out;Gone Girl', 'Knives Out', 'Gone Girl', 'Moana', 2, 4),
+('Which characters are in comedies?', 'Dory;Olaf', 'Dory', 'Olaf', 'Darth Vader', 2, 4),
+('Which movies are set in deserts?', 'Mad Max;Lawrence of Arabia', 'Mad Max', 'Lawrence of Arabia', 'Zootopia', 2, 4),
+('Which villains are in fantasy films?', 'Sauron;Voldemort', 'Sauron', 'Voldemort', 'Maleficent', 2, 4),
+('Which songs are in film soundtracks?', 'Shallow;Skyfall', 'Shallow', 'Skyfall', 'Let It Go', 2, 4),
+('Which animated films explore emotions?', 'Turning Red;Inside Out', 'Turning Red', 'Inside Out', 'Fight Club', 2, 4),
+('Which movies involve betrayals?', 'Gladiator;The Departed', 'Gladiator', 'The Departed', 'Toy Story', 2, 4);
+
+-- Movies (cat_id=4), Hard (diff_id=3)
+INSERT INTO MultipleChoiceQuestion (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id) VALUES
+('Which directors made art films?', 'Wong Kar-wai;Apichatpong Weerasethakul', 'Wong Kar-wai', 'Apichatpong Weerasethakul', 'Disney', 3, 4),
+('Which movies feature surrealism?', 'Mulholland Drive;Eternal Sunshine', 'Mulholland Drive', 'Eternal Sunshine', 'Titanic', 3, 4),
+('Which actors played antiheroes?', 'Daniel Day-Lewis;Joaquin Phoenix', 'Daniel Day-Lewis', 'Joaquin Phoenix', 'Tom Holland', 3, 4),
+('Which films involve paradoxes?', 'Predestination;Donnie Darko', 'Predestination', 'Donnie Darko', 'Coco', 3, 4),
+('Which composers scored epics?', 'Max Richter;Alexandre Desplat', 'Max Richter', 'Alexandre Desplat', 'Paul McCartney', 3, 4),
+('Which movies are dystopian?', 'Children of Men;Brazil', 'Children of Men', 'Brazil', 'Finding Nemo', 3, 4),
+('Which characters are in indie films?', 'Clementine;Joel', 'Clementine', 'Joel', 'Buzz Lightyear', 3, 4),
+('Which animated films have dark themes?', 'Perfect Blue;Spirited Away', 'Perfect Blue', 'Spirited Away', 'The Incredibles', 3, 4),
+('Which movies feature moral dilemmas?', 'A Separation;Leviathan', 'A Separation', 'Leviathan', 'Shrek', 3, 4),
+('Which films involve historical tragedies?', 'The Pianist;Schindler’s List', 'The Pianist', 'Schindler’s List', 'Up', 3, 4);
