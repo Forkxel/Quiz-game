@@ -1,7 +1,7 @@
 ﻿using System.Data.SqlClient;
 using quiz_game.Tables;
 
-namespace quiz_game;
+namespace quiz_game.Database;
 
 public class DatabaseServices
 {

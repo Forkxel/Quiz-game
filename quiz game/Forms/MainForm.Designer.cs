@@ -1,8 +1,6 @@
-﻿using System.Windows.Forms;
-using System.Drawing;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
-namespace quiz_game;
+namespace quiz_game.Forms;
 
 partial class MainForm
 {

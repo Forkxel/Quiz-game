@@ -1,4 +1,6 @@
-﻿namespace quiz_game.Tables;
+﻿using quiz_game.Forms;
+
+namespace quiz_game.Tables;
 
 public class WrittenAnswer : Question
 {

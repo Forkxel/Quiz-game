@@ -1,4 +1,6 @@
-﻿namespace quiz_game;
+﻿using quiz_game.Database;
+
+namespace quiz_game.Forms;
 
 public partial class ScoreBoardForm : Form
 {

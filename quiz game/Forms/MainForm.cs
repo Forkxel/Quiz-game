@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Windows.Forms;
+using quiz_game.Database;
 using quiz_game.Tables;
 using Timer = System.Windows.Forms.Timer;
 
-namespace quiz_game;
+namespace quiz_game.Forms;
 
 public partial class MainForm : Form
 {

@@ -1,4 +1,5 @@
-﻿using Timer = System.Windows.Forms.Timer;
+﻿using quiz_game.Forms;
+using Timer = System.Windows.Forms.Timer;
 
 namespace quiz_game.Tables;
 
@@ -137,23 +138,35 @@ public class SingleChoiceQuestion : Question
                     rb.ForeColor = Color.Red;
                 }
             }
-            
-            confirmButton.Text = "Next";
-            confirmButton.Enabled = true;
 
             foreach (var rb in answers)
             {
-                rb.Click -= (sender, e) => 
-                { 
-                    ((RadioButton)sender).Checked = false;
-                    selectedAnswer.Checked = false; 
-                };
-                rb.Click += (sender, e) =>
+                rb.Click -= (sender, e) => { };
+                rb.CheckedChanged -= (sender, e) => { };
+                
+                rb.CheckedChanged += (sender, e) =>
                 {
-                    ((RadioButton)sender).Checked = false;
-                    selectedAnswer.Checked = false;
+                    var radio = (RadioButton)sender;
+                    if (selectedAnswer != null)
+                    {
+                        if (radio != selectedAnswer && radio.Checked)
+                        {
+                            radio.Checked = false;
+                            selectedAnswer.Checked = true;
+                        }
+                    }
+                    else
+                    {
+                        if (radio.Checked)
+                        {
+                            radio.Checked = false;
+                        }
+                    }
                 };
             }
+            
+            confirmButton.Text = "Next";
+            confirmButton.Enabled = true;
 
             bool isCorrect;
 
@@ -184,36 +197,39 @@ public class SingleChoiceQuestion : Question
 
     public override void TimeOut(Action onNextQuestion)
     {
-        foreach (var control in quizPanel.Controls)
+        foreach (var rb in answers)
         {
-            if (control is Panel centerPanel)
+            if (rb.Text == CorrectAnswer)
             {
-                foreach (var subControl in centerPanel.Controls)
+                rb.ForeColor = Color.Green;
+            }
+            else
+            {
+                rb.ForeColor = Color.Red;
+            }
+
+            rb.Click -= (sender, e) => { };
+            rb.CheckedChanged -= (sender, e) => { };
+
+            rb.CheckedChanged += (sender, e) =>
+            {
+                var radio = (RadioButton)sender;
+                if (selectedAnswer != null)
                 {
-                    if (subControl is FlowLayoutPanel flowPanel)
+                    if (radio != selectedAnswer && radio.Checked)
                     {
-                        foreach (var rb in flowPanel.Controls.OfType<RadioButton>())
-                        {
-                            if (rb.Text == CorrectAnswer)
-                            {
-                                rb.ForeColor = Color.Green;
-                            }
-                            else
-                            {
-                                rb.ForeColor = Color.Red;
-                            }
-                            rb.Click -= (sender, e) =>
-                            {
-                                ((RadioButton)sender).Checked = false;
-                            };
-                            rb.Click += (sender, e) =>
-                            {
-                                ((RadioButton)sender).Checked = false;
-                            };
-                        }
+                        radio.Checked = false;
+                        selectedAnswer.Checked = true;
                     }
                 }
-            }
+                else
+                {
+                    if (radio.Checked)
+                    {
+                        radio.Checked = false;
+                    }
+                }
+            };
         }
         
         var confirmButton = quizPanel.Controls
