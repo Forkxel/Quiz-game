@@ -121,6 +121,10 @@ public class MultipleChoiceQuestion : Question
                 .Where(cb => cb.Checked)
                 .Select(cb => cb.Text)
                 .ToList();
+            
+            var selectedCheckBoxes = selectedAnswers
+                .Where(cb => cb.Checked)
+                .ToList();
 
             foreach (var checkBox in selectedAnswers)
             {
@@ -139,20 +143,16 @@ public class MultipleChoiceQuestion : Question
 
             foreach (var checkBox in selectedAnswers)
             {
-                checkBox.Click -= (sender, e) =>
+                checkBox.Click -= (sender, e) => { };
+                checkBox.CheckedChanged -= (sender, e) => { };
+                
+                checkBox.CheckedChanged += (sender, e) =>
                 {
-                    ((CheckBox)sender).Checked = false;
-                    if (CorrectAnswers.Contains(checkBox.Text))
+                    var cb = (CheckBox)sender;
+                    bool shouldBeChecked = selectedCheckBoxes.Contains(cb);
+                    if (cb.Checked != shouldBeChecked)
                     {
-                        checkBox.Checked = true;
-                    }
-                };
-                checkBox.Click += (sender, e) =>
-                {
-                    ((CheckBox)sender).Checked = false;
-                    if (CorrectAnswers.Contains(checkBox.Text))
-                    {
-                        checkBox.Checked = true;
+                        cb.Checked = shouldBeChecked;
                     }
                 };
             }
@@ -185,23 +185,23 @@ public class MultipleChoiceQuestion : Question
 
     public override void TimeOut(Action onNextQuestion)
     {
+        var selectedCheckBoxes = selectedAnswers
+            .Where(cb => cb.Checked)
+            .ToList();
+        
         foreach (var checkBox in selectedAnswers)
         {
-            if (CorrectAnswers.Contains(checkBox.Text))
+            checkBox.ForeColor = CorrectAnswers.Contains(checkBox.Text) ? Color.Green : Color.Red;
+            checkBox.Click -= (sender, e) => { };
+            checkBox.CheckedChanged -= (sender, e) => { };
+            checkBox.CheckedChanged += (sender, e) =>
             {
-                checkBox.ForeColor = Color.Green;
-            }
-            else
-            {
-                checkBox.ForeColor = Color.Red;
-            }
-            checkBox.Click -= (sender, e) =>
-            {
-                ((CheckBox)sender).Checked = false;
-            };
-            checkBox.Click += (sender, e) =>
-            {
-                ((CheckBox)sender).Checked = false;
+                var cb = (CheckBox)sender;
+                bool shouldBeChecked = selectedCheckBoxes.Contains(cb);
+                if (cb.Checked != shouldBeChecked)
+                {
+                    cb.Checked = shouldBeChecked;
+                }
             };
         }
 
