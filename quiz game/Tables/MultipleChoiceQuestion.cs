@@ -165,7 +165,7 @@ public class MultipleChoiceQuestion : Question
                 isCorrect = false;
             }
 
-            var form = (MyForm)confirmButton.FindForm();
+            var form = (MainForm)confirmButton.FindForm();
             form.QuestionTimer.Stop();
 
             confirmButton.Click -= (sender, e) => ConfirmAnswer(confirmButton, onAnswerConfirmed);
@@ -176,7 +176,7 @@ public class MultipleChoiceQuestion : Question
         }
         else if (confirmButton.Text == "Next")
         {
-            MyForm.CurrentQuestionIndex--;
+            MainForm.CurrentQuestionIndex--;
             onAnswerConfirmed.Invoke(false);
         }
     }
@@ -210,7 +210,7 @@ public class MultipleChoiceQuestion : Question
 
         confirmButton.Text = "Next";
         confirmButton.Enabled = true;
-        MyForm.CurrentQuestionIndex++;
+        MainForm.CurrentQuestionIndex++;
         confirmButton.Click -= (sender, e) => onNextQuestion();
         confirmButton.Click += (sender, e) => onNextQuestion();
     }

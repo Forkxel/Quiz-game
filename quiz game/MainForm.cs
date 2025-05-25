@@ -8,7 +8,7 @@ using Timer = System.Windows.Forms.Timer;
 
 namespace quiz_game;
 
-public partial class MyForm : Form
+public partial class MainForm : Form
 {
     private Panel quizPanel;
     private List<Question> currentQuestions = new();
@@ -25,7 +25,7 @@ public partial class MyForm : Form
     private int currentTime;
     private bool mixedCategorySelected;
     
-    public MyForm()
+    public MainForm()
     {
         InitializeComponent();
         InitializeLayout();

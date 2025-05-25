@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace quiz_game;
 
-partial class MyForm
+partial class MainForm
 {
     /// <summary>
     ///  Required designer variable.
@@ -54,32 +54,33 @@ partial class MyForm
         panel.Dock = System.Windows.Forms.DockStyle.Fill;
         panel.Location = new System.Drawing.Point(0, 0);
         panel.Name = "panel";
-        panel.Size = new System.Drawing.Size(800, 450);
+        panel.Size = new System.Drawing.Size(1000, 650);
         panel.TabIndex = 0;
         // 
         // scoreBoardButton
         // 
-        scoreBoardButton.Location = new System.Drawing.Point(666, 79);
+        scoreBoardButton.BackColor = System.Drawing.Color.Transparent;
+        scoreBoardButton.Location = new System.Drawing.Point(862, 93);
         scoreBoardButton.Name = "scoreBoardButton";
         scoreBoardButton.Size = new System.Drawing.Size(112, 36);
         scoreBoardButton.TabIndex = 6;
-        scoreBoardButton.Text = "score board";
-        scoreBoardButton.UseVisualStyleBackColor = true;
+        scoreBoardButton.Text = "Score board";
+        scoreBoardButton.UseVisualStyleBackColor = false;
         scoreBoardButton.Click += scoreBoardButton_Click;
         // 
         // loginButton
         // 
-        loginButton.Location = new System.Drawing.Point(666, 29);
+        loginButton.Location = new System.Drawing.Point(862, 31);
         loginButton.Name = "loginButton";
         loginButton.Size = new System.Drawing.Size(112, 36);
         loginButton.TabIndex = 4;
-        loginButton.Text = "profile";
+        loginButton.Text = "Profile";
         loginButton.UseVisualStyleBackColor = true;
         loginButton.Click += loginButton_Click;
         // 
         // startButton
         // 
-        startButton.Location = new System.Drawing.Point(285, 283);
+        startButton.Location = new System.Drawing.Point(383, 517);
         startButton.Name = "startButton";
         startButton.Size = new System.Drawing.Size(231, 56);
         startButton.TabIndex = 3;
@@ -91,9 +92,9 @@ partial class MyForm
         // 
         difficultyCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
         difficultyCombo.FormattingEnabled = true;
-        difficultyCombo.Location = new System.Drawing.Point(285, 166);
+        difficultyCombo.Location = new System.Drawing.Point(383, 327);
         difficultyCombo.Name = "difficultyCombo";
-        difficultyCombo.Size = new System.Drawing.Size(231, 28);
+        difficultyCombo.Size = new System.Drawing.Size(231, 23);
         difficultyCombo.TabIndex = 2;
         // 
         // categoriesCombo
@@ -101,26 +102,28 @@ partial class MyForm
         categoriesCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
         categoriesCombo.FormattingEnabled = true;
         categoriesCombo.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-        categoriesCombo.Location = new System.Drawing.Point(285, 84);
+        categoriesCombo.Location = new System.Drawing.Point(383, 179);
         categoriesCombo.Name = "categoriesCombo";
-        categoriesCombo.Size = new System.Drawing.Size(231, 28);
+        categoriesCombo.Size = new System.Drawing.Size(231, 23);
         categoriesCombo.TabIndex = 1;
         // 
         // title
         // 
+        title.BackColor = System.Drawing.Color.LightGray;
         title.Dock = System.Windows.Forms.DockStyle.Top;
+        title.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
         title.Location = new System.Drawing.Point(0, 0);
         title.Name = "title";
-        title.Size = new System.Drawing.Size(800, 81);
+        title.Size = new System.Drawing.Size(1000, 146);
         title.TabIndex = 0;
         title.Text = "Quiz game";
         title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         // 
-        // MyForm
+        // MainForm
         // 
-        AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+        AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        ClientSize = new System.Drawing.Size(800, 450);
+        ClientSize = new System.Drawing.Size(1000, 650);
         Controls.Add(panel);
         Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
         StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -133,12 +136,12 @@ partial class MyForm
 
     private System.Windows.Forms.Button loginButton;
 
-    private ComboBox difficultyCombo;
-    private Button startButton;
+    private System.Windows.Forms.ComboBox difficultyCombo;
+    private System.Windows.Forms.Button startButton;
 
-    private ComboBox categoriesCombo;
+    private System.Windows.Forms.ComboBox categoriesCombo;
 
-    private Label title;
+    private System.Windows.Forms.Label title;
 
     private System.Windows.Forms.Panel panel;
 

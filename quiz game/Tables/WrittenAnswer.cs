@@ -107,7 +107,7 @@ public class WrittenAnswer : Question
 
         confirmButton.Text = "Next";
         confirmButton.Enabled = true;
-        MyForm.CurrentQuestionIndex++;
+        MainForm.CurrentQuestionIndex++;
 
         confirmButton.Click -= (sender, e) => ConfirmAnswer(confirmButton, _ => { });
         confirmButton.Click += (sender, e) => onNextQuestion();
@@ -145,7 +145,7 @@ public class WrittenAnswer : Question
             confirmButton.Text = "Next";
             confirmButton.Enabled = true;
             
-            var form = (MyForm)confirmButton.FindForm();
+            var form = (MainForm)confirmButton.FindForm();
             form.QuestionTimer.Stop();
             
             confirmButton.Click -= (sender, e) => ConfirmAnswer(confirmButton, onAnswerConfirmed);
@@ -156,7 +156,7 @@ public class WrittenAnswer : Question
         }
         else if (confirmButton.Text == "Next")
         {
-            MyForm.CurrentQuestionIndex--;
+            MainForm.CurrentQuestionIndex--;
             onAnswerConfirmed(false);
         }
     }

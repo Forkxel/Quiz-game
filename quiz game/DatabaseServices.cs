@@ -177,7 +177,7 @@ public class DatabaseServices
     
     public bool AddUser(string username, string password)
     {
-        var query = "insert into Player (username, userPassword, score, diff_id, cat_id) values (@username, @password, 0, null, null)";
+        var query = "insert into Player (username, userPassword) values (@username, @password)";
         using (SqlCommand command = new SqlCommand(query, connection))
         {
             command.Parameters.AddWithValue("@username", username);
@@ -211,7 +211,7 @@ public class DatabaseServices
             return command.ExecuteNonQuery() > 0;
         }
     }
-
+    
     public Dictionary<string, int> GetTopScores()
     {
         Dictionary<string, int> topScores = new();
@@ -232,34 +232,31 @@ public class DatabaseServices
 
         return topScores;
     }
-    
-    public Dictionary<string, int> GetScoresByCategoryAndDifficulty(int? categoryId, string difficulty)
+
+
+/*
+    public Dictionary<string, int> GetTopScores(int category, int difficulty)
     {
-        Dictionary<string, int> filteredScores = new();
-        var query = @"
-            SELECT username, score
-            FROM Player
-            WHERE (cat_id = @CategoryId OR @CategoryId IS NULL)
-              AND (diff_id = (SELECT id FROM Difficulty WHERE nameDifficulty = @Difficulty) OR @Difficulty IS NULL)
-              AND score IS NOT NULL
-            ORDER BY score DESC";
+        Dictionary<string, int> topScores = new();
+
+        var query = "select top (5) p.username, score from Score"
+            + " inner join Player p on p.id = player_id"
+            + " where cat_id = @category and diff_id = @difficulty";
 
         using (SqlCommand command = new SqlCommand(query, connection))
         {
-            command.Parameters.AddWithValue("@CategoryId", categoryId.HasValue ? (object)categoryId.Value : DBNull.Value);
-            command.Parameters.AddWithValue("@Difficulty", string.IsNullOrEmpty(difficulty) ? DBNull.Value : difficulty);
+            command.Parameters.AddWithValue("@category", category);
+            command.Parameters.AddWithValue("@difficulty", difficulty);
 
             using (SqlDataReader reader = command.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    string username = reader["username"].ToString();
-                    int score = (int)reader["score"];
-                    filteredScores.Add(username, score);
+                    topScores.Add(reader["username"].ToString(), (int)reader["score"]);
                 }
             }
         }
-
-        return filteredScores;
+        return topScores;
     }
+    */
 }
