@@ -105,11 +105,19 @@ public partial class MainForm : Form
             .ToList();
         
         var random = new Random();
-        currentQuestions = questions
-            .DistinctBy(q => q.QuestionText) 
-            .OrderBy(q => random.Next()) 
-            .Take(MaxQuestions)        
-            .ToList();
+        var firstQuestion = singleQuestions.OrderBy(q => random.Next()).FirstOrDefault();
+        questions.Remove(firstQuestion);
+        
+        var remainingQuestions = questions.OrderBy(q => random.Next()).Take(MaxQuestions - 1).ToList();
+        
+        if (firstQuestion != null)
+        {
+            currentQuestions = new List<Question> { firstQuestion }.Concat(remainingQuestions).ToList();
+        }
+        else
+        {
+            currentQuestions = remainingQuestions;
+        }
         
         DisplayNextQuestion();
 
@@ -123,7 +131,7 @@ public partial class MainForm : Form
     {
         if (CurrentQuestionIndex < currentQuestions.Count)
         {
-            timeLeft = 10;
+            timeLeft = 30;
             timerLabel.Text = $"Time: {timeLeft}";
             QuestionTimer.Start();
             

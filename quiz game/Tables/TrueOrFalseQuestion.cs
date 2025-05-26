@@ -7,12 +7,11 @@ public class TrueFalseQuestion : Question
     public bool CorrectAnswer { get; set; }
     private RadioButton trueOption;
     private RadioButton falseOption;
-    private Panel quizPanel;
     private RadioButton selectedOption;
+    private Button confirmButton;
 
     public override void Display(Panel panel, Action<bool> onAnswerSelected)
     {
-        quizPanel = panel;
         panel.Controls.Clear();
 
         Label questionLabel = new Label
@@ -35,7 +34,7 @@ public class TrueFalseQuestion : Question
             AutoSizeMode = AutoSizeMode.GrowAndShrink,
             Anchor = AnchorStyles.None,
             Padding = new Padding(0),
-            Margin = new Padding(0),
+            Margin = new Padding(0)
         };
 
         trueOption = new RadioButton
@@ -43,7 +42,7 @@ public class TrueFalseQuestion : Question
             Text = "True",
             Font = new Font("Arial", 14),
             AutoSize = true,
-            Margin = new Padding(0, 15, 0, 15),
+            Margin = new Padding(0, 15, 0, 15)
         };
 
         falseOption = new RadioButton
@@ -51,7 +50,7 @@ public class TrueFalseQuestion : Question
             Text = "False",
             Font = new Font("Arial", 14),
             AutoSize = true,
-            Margin = new Padding(0, 15, 0, 15),
+            Margin = new Padding(0, 15, 0, 15)
         };
 
         optionsPanel.Controls.Add(trueOption);
@@ -59,13 +58,13 @@ public class TrueFalseQuestion : Question
 
         Panel centerPanel = new Panel
         {
-            Dock = DockStyle.Fill,
+            Dock = DockStyle.Fill
         };
         centerPanel.Controls.Add(optionsPanel);
 
         panel.Controls.Add(centerPanel);
 
-        Button confirmButton = new Button
+        confirmButton = new Button
         {
             Text = "Submit",
             AutoSize = true,
@@ -78,32 +77,66 @@ public class TrueFalseQuestion : Question
             Font = new Font("Arial", 16, FontStyle.Bold),
             Enabled = false
         };
-        
+
         trueOption.CheckedChanged += (sender, e) =>
         {
             if (trueOption.Checked)
             {
                 selectedOption = trueOption;
             }
-            confirmButton.Enabled = trueOption.Checked || falseOption.Checked;
+            else if (falseOption.Checked)
+            {
+                selectedOption = falseOption;
+            }
+            else
+            {
+                selectedOption = null;
+            }
+
+            if (selectedOption != null)
+            {
+                confirmButton.Enabled = true;
+            }
+            else
+            {
+                confirmButton.Enabled = false;
+            }
+
         };
 
         falseOption.CheckedChanged += (sender, e) =>
         {
-            if (falseOption.Checked)
+            if (trueOption.Checked)
+            {
+                selectedOption = trueOption;
+            }
+            else if (falseOption.Checked)
             {
                 selectedOption = falseOption;
             }
-            confirmButton.Enabled = trueOption.Checked || falseOption.Checked;
+            else
+            {
+                selectedOption = null;
+            }
+
+            if (selectedOption != null)
+            {
+                confirmButton.Enabled = true;
+            }
+            else
+            {
+                confirmButton.Enabled = false;
+            }
+
         };
-        
+
         Panel buttonPanel = new Panel
         {
             Dock = DockStyle.Bottom,
             Height = 90
         };
         buttonPanel.Controls.Add(confirmButton);
-        
+
         confirmButton.Location = new Point((buttonPanel.Width - confirmButton.Width) / 2, (buttonPanel.Height - confirmButton.Height) / 2);
 
         buttonPanel.Resize += (sender, e) =>
@@ -112,7 +145,7 @@ public class TrueFalseQuestion : Question
         };
 
         panel.Controls.Add(buttonPanel);
-        
+
         confirmButton.Click += (sender, e) => ConfirmAnswer(confirmButton, onAnswerSelected);
     }
 
@@ -120,54 +153,48 @@ public class TrueFalseQuestion : Question
     {
         if (confirmButton.Text == "Submit")
         {
-            foreach (var option in new[] { trueOption, falseOption })
-                    {
-                        option.CheckedChanged -= (sender, e) => { }; // Odstraníme původní event
-                        option.CheckedChanged += (sender, e) =>
-                        {
-                            if (selectedOption != null && option != selectedOption)
-                            {
-                                option.Checked = false;
-                                selectedOption.Checked = true; // Vynutíme návrat na původní stav
-                            }
-                        };
-                    }
-            /*
-                    if (trueOption.Checked)
-                    {
-                        //trueOption.ForeColor = CorrectAnswer ? Color.Green : Color.Red;
-                        //falseOption.ForeColor = CorrectAnswer ? Color.Gray : Color.Green;
-                    }
-                    else if (falseOption.Checked)
-                    {
-                        falseOption.ForeColor = !CorrectAnswer ? Color.Green : Color.Red;
-                        trueOption.ForeColor = !CorrectAnswer ? Color.Gray : Color.Green;
-                    }
-            */
-                    trueOption.ForeColor = Color.Green;
-                    falseOption.ForeColor = Color.Red;
-                    
-                    bool isCorrect;
-                    
-                    if ((trueOption.Checked && CorrectAnswer) || (falseOption.Checked && !CorrectAnswer))
-                    {
-                        isCorrect = true;
-                    }
-                    else
-                    {
-                        isCorrect = false;
-                    }
-                    
-                    var form = (MainForm)confirmButton.FindForm();
-                    form.QuestionTimer.Stop();
-                    
-                    confirmButton.Text = "Next";
-                    confirmButton.Click -= (sender, e) => ConfirmAnswer(confirmButton, onAnswerConfirmed);
-                    confirmButton.Click += (sender, e) =>
-                    {
-                        onAnswerConfirmed.Invoke(isCorrect);
-                    };
-        } 
+            trueOption.ForeColor = Color.Green;
+            falseOption.ForeColor = Color.Red;
+            
+            bool trueChecked = trueOption.Checked;
+            bool falseChecked = falseOption.Checked;
+            
+            trueOption.CheckedChanged -= (sender, e) => { };
+            falseOption.CheckedChanged -= (sender, e) => { };
+            
+            trueOption.CheckedChanged += (sender, e) =>
+            {
+                trueOption.Checked = trueChecked;
+                falseOption.Checked = falseChecked;
+            };
+            falseOption.CheckedChanged += (sender, e) =>
+            {
+                trueOption.Checked = trueChecked;
+                falseOption.Checked = falseChecked;
+            };
+
+            bool isCorrect;
+
+            if (trueOption.Checked && CorrectAnswer)
+            {
+                isCorrect = true;
+            }
+            else if (falseOption.Checked && !CorrectAnswer)
+            {
+                isCorrect = true;
+            }
+            else
+            {
+                isCorrect = false;
+            }
+
+            var form = (MainForm)confirmButton.FindForm();
+            form.QuestionTimer.Stop();
+
+            confirmButton.Text = "Next";
+            confirmButton.Click -= (sender, e) => ConfirmAnswer(confirmButton, onAnswerConfirmed);
+            confirmButton.Click += (sender, e) => onAnswerConfirmed.Invoke(isCorrect);
+        }
         else if (confirmButton.Text == "Next")
         {
             MainForm.CurrentQuestionIndex--;
@@ -177,27 +204,28 @@ public class TrueFalseQuestion : Question
 
     public override void TimeOut(Action onNextQuestion)
     {
-        foreach (var option in new[] { trueOption, falseOption })
+        trueOption.ForeColor = Color.Green;
+        falseOption.ForeColor = Color.Red;
+        
+        bool trueChecked = trueOption.Checked;
+        bool falseChecked = falseOption.Checked;
+        
+        trueOption.CheckedChanged -= (sender, e) => { };
+        falseOption.CheckedChanged -= (sender, e) => { };
+        
+        trueOption.CheckedChanged += (sender, e) =>
         {
-            option.CheckedChanged -= (sender, e) => { }; // Odstraníme původní event
-            option.CheckedChanged += (sender, e) =>
-            {
-                if (selectedOption != null && option != selectedOption)
-                {
-                    option.Checked = false;
-                    selectedOption.Checked = true; // Vynutíme návrat na původní stav
-                }
-            };
-        }
-        
-        trueOption.ForeColor = CorrectAnswer ? Color.Green : Color.Red;
-        falseOption.ForeColor = !CorrectAnswer ? Color.Green : Color.Red;
-        
-        var confirmButton = quizPanel.Controls
-            .OfType<Button>()
-            .SelectMany(p => p.Controls.OfType<Button>())
-            .FirstOrDefault();
-        
+            trueOption.Checked = trueChecked;
+            falseOption.Checked = falseChecked;
+            confirmButton.Enabled = true; 
+        };
+        falseOption.CheckedChanged += (sender, e) =>
+        {
+            trueOption.Checked = trueChecked;
+            falseOption.Checked = falseChecked;
+            confirmButton.Enabled = true;
+        };
+
         confirmButton.Text = "Next";
         confirmButton.Enabled = true;
         MainForm.CurrentQuestionIndex++;
