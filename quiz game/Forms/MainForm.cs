@@ -26,6 +26,7 @@ public partial class MainForm : Form
         InitializeComponent();
         InitializeLayout();
         services = new DatabaseServices();
+        MaximizeBox = false;
     }
     
     private void InitializeLayout()
@@ -110,14 +111,7 @@ public partial class MainForm : Form
         
         var remainingQuestions = questions.OrderBy(q => random.Next()).Take(MaxQuestions - 1).ToList();
         
-        if (firstQuestion != null)
-        {
-            currentQuestions = new List<Question> { firstQuestion }.Concat(remainingQuestions).ToList();
-        }
-        else
-        {
-            currentQuestions = remainingQuestions;
-        }
+        currentQuestions = new List<Question> { firstQuestion }.Concat(remainingQuestions).ToList();
         
         DisplayNextQuestion();
 

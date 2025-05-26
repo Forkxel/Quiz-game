@@ -11,6 +11,7 @@ public partial class LoginForm : Form
     {
         InitializeComponent();
         services = new DatabaseServices();
+        MaximizeBox = false;
     }
 
     private void loginButton_Click(object sender, EventArgs e)

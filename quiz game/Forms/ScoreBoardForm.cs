@@ -14,6 +14,7 @@ public partial class ScoreBoardForm : Form
         services = new DatabaseServices();
         scoreLabels = new List<Label> { label1, label2, label3, label4, label5 };
         AddScores();
+        MaximizeBox = false;
     }
 
     private void AddScores()

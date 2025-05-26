@@ -92,7 +92,7 @@ partial class MainForm
         difficultyCombo.FormattingEnabled = true;
         difficultyCombo.Location = new System.Drawing.Point(383, 327);
         difficultyCombo.Name = "difficultyCombo";
-        difficultyCombo.Size = new System.Drawing.Size(231, 23);
+        difficultyCombo.Size = new System.Drawing.Size(231, 28);
         difficultyCombo.TabIndex = 2;
         // 
         // categoriesCombo
@@ -102,7 +102,7 @@ partial class MainForm
         categoriesCombo.ImeMode = System.Windows.Forms.ImeMode.NoControl;
         categoriesCombo.Location = new System.Drawing.Point(383, 179);
         categoriesCombo.Name = "categoriesCombo";
-        categoriesCombo.Size = new System.Drawing.Size(231, 23);
+        categoriesCombo.Size = new System.Drawing.Size(231, 28);
         categoriesCombo.TabIndex = 1;
         // 
         // title
@@ -119,10 +119,11 @@ partial class MainForm
         // 
         // MainForm
         // 
-        AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+        AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         ClientSize = new System.Drawing.Size(1000, 650);
         Controls.Add(panel);
+        FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
         Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
         StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
         Load += Form_Load;

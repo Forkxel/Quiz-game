@@ -81,6 +81,7 @@ partial class LoginForm
         Controls.Add(loginButton);
         Controls.Add(passwordTextBox);
         Controls.Add(usernameTextBox);
+        FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
         StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
         ResumeLayout(false);
         PerformLayout();
