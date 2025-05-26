@@ -29,6 +29,27 @@ create table WrittenQuestions(
 	cat_id int foreign key(cat_id) references Category(id)
 );
 
+create table MultipleChoiceQuestion(
+	id int primary key identity(1,1),
+	questionText varchar(max),
+	correctAnswer varchar(max),
+	option1 varchar(max),
+	option2 varchar(max),
+	option3 varchar(max),
+	option4 varchar(max),
+	diff_id int foreign key(diff_id) references Difficulty(id),
+	cat_id int foreign key(cat_id) references Category(id)
+);
+
+create table TrueFalseQuestions (
+    id int primary key identity,
+    questionText varchar(MAX),
+    correctAnswer bit,
+    diff_id int foreign key(diff_id) references Difficulty(id),
+	cat_id int foreign key(cat_id) references Category(id)
+);
+
+
 create table Player(
 	id int primary key identity(1,1),
 	username varchar(50),
@@ -725,3 +746,495 @@ INSERT INTO WrittenQuestions (questionText, correctAnswer, diff_id, cat_id) VALU
 ('What is the name of the prison in "Cool Hand Luke"?', 'Road Prison 36', 3, 4),
 ('Who directed the film "12 Angry Men"?', 'Sidney Lumet', 3, 4),
 ('Which film is known for the quote "You can’t handle the truth!"?', 'A Few Good Men', 3, 4);
+
+-- Geography (cat_id=1), Easy (diff_id=1)
+INSERT INTO MultipleChoiceQuestion (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id) VALUES
+('Which countries are known for their coral reefs?', 'Australia;Maldives', 'Australia', 'Maldives', 'Sweden', 1, 1),
+('Which cities are capitals of Asian nations?', 'Tokyo;Seoul', 'Tokyo', 'Seoul', 'Dubai', 1, 1),
+('Which oceans border Africa?', 'Atlantic Ocean;Indian Ocean', 'Atlantic Ocean', 'Indian Ocean', 'Arctic Ocean', 1, 1),
+('Which animals are native to South America?', 'Capybara;Andean Condor', 'Capybara', 'Andean Condor', 'Panda', 1, 1),
+('Which rivers flow through European capitals?', 'Thames;Tiber', 'Thames', 'Tiber', 'Ganges', 1, 1),
+('Which countries are famous for their ancient temples?', 'Cambodia;India', 'Cambodia', 'India', 'Norway', 1, 1),
+('Which continents have major deserts?', 'Africa;Asia', 'Africa', 'Asia', 'Europe', 1, 1),
+('Which cities are known for their bridges?', 'Lisbon;San Francisco', 'Lisbon', 'San Francisco', 'Phoenix', 1, 1),
+('Which countries are in the Baltic region?', 'Estonia;Latvia', 'Estonia', 'Latvia', 'Greece', 1, 1),
+('Which mountain ranges are in South America?', 'Andes;Patagonian', 'Andes', 'Patagonian', 'Himalayas', 1, 1);
+
+-- Geography (cat_id=1), Medium (diff_id=2)
+INSERT INTO MultipleChoiceQuestion (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id) VALUES
+('Which countries share the Tigris River?', 'Iraq;Turkey', 'Iraq', 'Turkey', 'Iran', 1, 1),
+('Which islands are in Polynesia?', 'Tonga;Samoa', 'Tonga', 'Samoa', 'Iceland', 2, 1),
+('Which cities are capitals of Central American nations?', 'San José;Panama City', 'San José', 'Panama City', 'Havana', 2, 1),
+('Which lakes are in North America?', 'Huron;Ontario', 'Huron', 'Ontario', 'Titicaca', 2, 1),
+('Which countries have tundra ecosystems?', 'Canada;Russia', 'Canada', 'Russia', 'Brazil', 2, 1),
+('Which rivers flow through Southeast Asia?', 'Mekong;Irrawaddy', 'Mekong', 'Irrawaddy', 'Nile', 2, 1),
+('Which countries are known for their wetlands?', 'Botswana;Vietnam', 'Botswana', 'Vietnam', 'Germany', 2, 1),
+('Which mountain ranges are in Africa?', 'Atlas;Drakensberg', 'Atlas', 'Drakensberg', 'Rockies', 2, 1),
+('Which straits connect oceans?', 'Bosporus;Dardanelles', 'Bosporus', 'Dardanelles', 'Panama Canal', 2, 1),
+('Which countries are in the Andes region?', 'Ecuador;Bolivia', 'Ecuador', 'Bolivia', 'Chile', 2, 1);
+
+-- Geography (cat_id=1), Hard (diff_id=3)
+INSERT INTO MultipleChoiceQuestion (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id) VALUES
+('Which countries have subarctic climates?', 'Finland;Alaska', 'Finland', 'Alaska', 'India', 3, 1),
+('Which rivers are in East Africa?', 'Nile;Zambezi', 'Nile', 'Zambezi', 'Amazon', 3, 1),
+('Which islands are in the Indian Ocean?', 'Andaman;Zanzibar', 'Andaman', 'Zanzibar', 'Falklands', 3, 1),
+('Which countries share the Karakum Desert?', 'Turkmenistan;Uzbekistan', 'Turkmenistan', 'Uzbekistan', 'Kazakhstan', 3, 1),
+('Which peaks are the highest in Europe?', 'Elbrus;Mont Blanc', 'Elbrus', 'Mont Blanc', 'Kilimanjaro', 3, 1),
+('Which countries have salt lakes?', 'Iran;Turkey', 'Iran', 'Turkey', 'Japan', 3, 1),
+('Which lakes are in Asia?', 'Caspian Sea;Aral Sea', 'Caspian Sea', 'Aral Sea', 'Baikal', 3, 1),
+('Which countries have limestone caves?', 'Slovenia;Vietnam', 'Slovenia', 'Vietnam', 'Canada', 3, 1),
+('Which oceanic currents influence climate?', 'Gulf Stream;Kuroshio', 'Gulf Stream', 'Kuroshio', 'El Ni?o', 3, 1),
+('Which regions have permafrost?', 'Siberia;Nunavut', 'Siberia', 'Nunavut', 'Sahara', 3, 1);
+
+-- History (cat_id=2), Easy (diff_id=1)
+INSERT INTO MultipleChoiceQuestion (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id) VALUES
+('Which explorers discovered new routes?', 'Ferdinand Magellan;Zheng He', 'Ferdinand Magellan', 'Zheng He', 'Napoleon', 1, 2),
+('Which monarchs ruled France?', 'Louis XIV;Napoleon I', 'Louis XIV', 'Napoleon I', 'Cleopatra', 1, 2),
+('Which wars involved France?', 'Napoleonic Wars;Franco-Prussian War', 'Napoleonic Wars', 'Franco-Prussian War', 'Trojan War', 1, 2),
+('Which figures led abolition movements?', 'Frederick Douglass;Harriet Tubman', 'Frederick Douglass', 'Harriet Tubman', 'Joan of Arc', 1, 2),
+('Which treaties ended wars?', 'Treaty of Ghent;Treaty of Tordesillas', 'Treaty of Ghent', 'Treaty of Tordesillas', 'Edict of Milan', 1, 2),
+('Which inventors created machines?', 'Eli Whitney;Thomas Edison', 'Eli Whitney', 'Thomas Edison', 'Galileo', 1, 2),
+('Which empires ruled Europe?', 'Habsburg Empire;Holy Roman Empire', 'Habsburg Empire', 'Holy Roman Empire', 'Maya Empire', 1, 2),
+('Which events marked exploration?', 'Columbus’ Voyage;Cook’s Expeditions', 'Columbus’ Voyage', 'Cook’s Expeditions', 'Fall of Rome', 1, 2),
+('Which leaders fought for equality?', 'Sojourner Truth;Malcolm X', 'Sojourner Truth', 'Malcolm X', 'Hannibal', 1, 2),
+('Which years saw major reforms?', '1865;1948', '1865', '1948', '1400', 1, 2);
+
+-- History (cat_id=2), Medium (diff_id=2)
+INSERT INTO MultipleChoiceQuestion (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id) VALUES
+('Which leaders shaped modern Europe?', 'Cavour;Mazzini', 'Cavour', 'Mazzini', 'Aristotle', 2, 2),
+('Which treaties ended revolutions?', 'Congress of Vienna;Treaty of Nanjing', 'Congress of Vienna', 'Treaty of Nanjing', 'Magna Carta', 2, 2),
+('Which figures led anti-colonial movements?', 'Ho Chi Minh;Kwame Nkrumah', 'Ho Chi Minh', 'Kwame Nkrumah', 'Nero', 2, 2),
+('Which wars involved Asia?', 'Sino-Japanese War;Russo-Japanese War', 'Sino-Japanese War', 'Russo-Japanese War', 'Punic Wars', 2, 2),
+('Which scientists studied chemistry?', 'Dmitri Mendeleev;Marie Curie', 'Dmitri Mendeleev', 'Marie Curie', 'Drake', 2, 2),
+('Which events involved rebellions?', 'Taiping Rebellion;Indian Mutiny', 'Taiping Rebellion', 'Indian Mutiny', 'Battle of Waterloo', 2, 2),
+('Which monarchs ruled during transitions?', 'Queen Isabella;Franz Joseph', 'Queen Isabella', 'Franz Joseph', 'Ramses II', 2, 2),
+('Which years marked global conflicts?', '1939;1950', '1939', '1950', '1300', 2, 2),
+('Which thinkers influenced democracy?', 'Montesquieu;Mill', 'Montesquieu', 'Mill', 'Vercingetorix', 2, 2),
+('Which countries were in the Warsaw Pact?', 'Poland;Hungary', 'Poland', 'Hungary', 'Brazil', 2, 2);
+
+-- History (cat_id=2), Hard (diff_id=3)
+INSERT INTO MultipleChoiceQuestion (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id) VALUES
+('Which battles shaped ancient history?', 'Thermopylae;Gaugamela', 'Thermopylae', 'Gaugamela', 'Stalingrad', 3, 2),
+('Which treaties ended feudal conflicts?', 'Peace of Lodi;Treaty of Constance', 'Peace of Lodi', 'Treaty of Constance', 'Treaty of Paris', 3, 2),
+('Which rulers centralized power?', 'Ivan III;Kublai Khan', 'Ivan III', 'Kublai Khan', 'Socrates', 3, 2),
+('Which events marked intellectual shifts?', 'Islamic Golden Age;Song Dynasty', 'Islamic Golden Age', 'Song Dynasty', 'French Revolution', 3, 2),
+('Which figures led schisms?', 'Zwingli;Erasmus', 'Zwingli', 'Erasmus', 'Caligula', 3, 2),
+('Which civilizations built observatories?', 'Chavín;Chacoan', 'Chavín', 'Chacoan', 'Mongols', 3, 2),
+('Which scientists studied mechanics?', 'Archimedes;Bernoulli', 'Archimedes', 'Bernoulli', 'Einstein', 3, 2),
+('Which years saw artifact discoveries?', '1799;1974', '1799', '1974', '1000', 3, 2),
+('Which empires controlled Southeast Asia?', 'Khmer Empire;Srivijaya', 'Khmer Empire', 'Srivijaya', 'Inca Empire', 3, 2),
+('Which leaders enacted land reforms?', 'Cleisthenes;Stein', 'Cleisthenes', 'Stein', 'Gandhi', 3, 2);
+
+-- Biology (cat_id=3), Easy (diff_id=1)
+INSERT INTO MultipleChoiceQuestion (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id) VALUES
+('Which organs process nutrients?', 'Intestines;Stomach', 'Intestines', 'Stomach', 'Lungs', 1, 3),
+('Which animals are reptiles?', 'Turtles;Lizards', 'Turtles', 'Lizards', 'Bats', 1, 3),
+('Which plant parts store energy?', 'Roots;Bulbs', 'Roots', 'Bulbs', 'Leaves', 1, 3),
+('Which nutrients support immunity?', 'Zinc;Vitamin D', 'Zinc', 'Vitamin D', 'Sodium', 1, 3),
+('Which organs regulate temperature?', 'Skin;Hypothalamus', 'Skin', 'Hypothalamus', 'Kidneys', 1, 3),
+('Which bones form joints?', 'Femur;Humerus', 'Femur', 'Humerus', 'Heart', 1, 3),
+('Which molecules form membranes?', 'Phospholipids;Cholesterol', 'Phospholipids', 'Cholesterol', 'Sugar', 1, 3),
+('Which plant parts produce pollen?', 'Anthers;Stamens', 'Anthers', 'Stamens', 'Pistil', 1, 3),
+('Which organs produce urine?', 'Kidneys;Bladder', 'Kidneys', 'Bladder', 'Liver', 1, 3),
+('Which vitamins aid bone health?', 'Vitamin D;Vitamin K', 'Vitamin D', 'Vitamin K', 'Vitamin B6', 1, 3);
+
+-- Biology (cat_id=3), Medium (diff_id=2)
+INSERT INTO MultipleChoiceQuestion (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id) VALUES
+('Which hormones regulate sleep?', 'Melatonin;Cortisol', 'Melatonin', 'Cortisol', 'Insulin', 2, 3),
+('Which structures protect plants?', 'Cuticle;Epidermis', 'Cuticle', 'Epidermis', 'Phloem', 2, 3),
+('Which animals use camouflage?', 'Cuttlefish;Stick Insects', 'Cuttlefish', 'Stick Insects', 'Tigers', 2, 3),
+('Which proteins bind oxygen?', 'Hemoglobin;Myoglobin', 'Hemoglobin', 'Myoglobin', 'Actin', 2, 3),
+('Which organelles store materials?', 'Vacuoles;Vesicles', 'Vacuoles', 'Vesicles', 'Nucleus', 2, 3),
+('Which vitamins aid nerve function?', 'Vitamin B1;Vitamin B6', 'Vitamin B1', 'Vitamin B6', 'Vitamin C', 2, 3),
+('Which processes repair tissues?', 'Mitosis;Regeneration', 'Mitosis', 'Regeneration', 'Respiration', 2, 3),
+('Which cells produce hormones?', 'Endocrine Cells;Pituitary Cells', 'Endocrine Cells', 'Pituitary Cells', 'Red Blood Cells', 2, 3),
+('Which enzymes digest starches?', 'Amylase;Maltase', 'Amylase', 'Maltase', 'Lipase', 2, 3),
+('Which molecules signal immunity?', 'Antibodies;Cytokines', 'Antibodies', 'Cytokines', 'Glucose', 2, 3);
+
+-- Biology (cat_id=3), Hard (diff_id=3)
+INSERT INTO MultipleChoiceQuestion (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id) VALUES
+('Which enzymes regulate metabolism?', 'Kinases;Phosphatases', 'Kinases', 'Phosphatases', 'Protease', 3, 3),
+('Which organelles synthesize lipids?', 'Smooth ER;Golgi Apparatus', 'Smooth ER', 'Golgi Apparatus', 'Lysosome', 3, 3),
+('Which molecules control development?', 'Hox Genes;Growth Factors', 'Hox Genes', 'Growth Factors', 'Salt', 3, 3),
+('Which processes maintain diversity?', 'Recombination;Mutation', 'Recombination', 'Mutation', 'Weathering', 3, 3),
+('Which cells mediate allergies?', 'Mast Cells;Basophils', 'Mast Cells', 'Basophils', 'Platelets', 3, 3),
+('Which hormones regulate sodium?', 'Aldosterone;ADH', 'Aldosterone', 'ADH', 'Estrogen', 3, 3),
+('Which pathways produce ATP?', 'ETC;Fermentation', 'ETC', 'Fermentation', 'Glycolysis', 3, 3),
+('Which structures regulate turgor?', 'Tonoplast;Cell Wall', 'Tonoplast', 'Cell Wall', 'Stomata', 3, 3),
+('Which processes cycle phosphorus?', 'Runoff;Sedimentation', 'Runoff', 'Sedimentation', 'Nitrification', 3, 3),
+('Which molecules fight viruses?', 'Interferons;Complement Proteins', 'Interferons', 'Complement Proteins', 'Lipids', 3, 3);
+
+-- Movies (cat_id=4), Easy (diff_id=1)
+INSERT INTO MultipleChoiceQuestion (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id) VALUES
+('Which animated films feature families?', 'Coco;Onward', 'Coco', 'Onward', 'Inception', 1, 4),
+('Which superheroes are in DC films?', 'Aquaman;Flash', 'Aquaman', 'Flash', 'Iron Man', 1, 4),
+('Which directors made family films?', 'Chris Buck;Jennifer Lee', 'Chris Buck', 'Jennifer Lee', 'Tarantino', 1, 4),
+('Which characters are Pixar heroes?', 'Woody;Remy', 'Woody', 'Remy', 'Voldemort', 1, 4),
+('Which movies involve adventures?', 'Up;Toy Story', 'Up', 'Toy Story', 'Titanic', 1, 4),
+('Which songs are in animated films?', 'Colors of the Wind;Be Our Guest', 'Colors of the Wind', 'Be Our Guest', 'My Heart Will Go On', 1, 4),
+('Which actors played princesses?', 'Emma Watson;Lily James', 'Emma Watson', 'Lily James', 'Tom Cruise', 1, 4),
+('Which films feature animals?', 'Bambi;Dumbo', 'Bambi', 'Dumbo', 'The Matrix', 1, 4),
+('Which villains are in Disney films?', 'Jafar;Gaston', 'Jafar', 'Gaston', 'Loki', 1, 4),
+('Which movies are set in cities?', 'Zootopia;Big Hero 6', 'Zootopia', 'Big Hero 6', 'The Godfather', 1, 4);
+
+-- Movies (cat_id=4), Medium (diff_id=2)
+INSERT INTO MultipleChoiceQuestion (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id) VALUES
+('Which directors made dramas?', 'Ang Lee;Alfonso Cuarón', 'Ang Lee', 'Alfonso Cuarón', 'John Ford', 2, 4),
+('Which movies feature quests?', 'The Green Knight;Willow', 'The Green Knight', 'Willow', 'Coco', 2, 4),
+('Which actors played rebels?', 'Christian Bale;Heath Ledger', 'Christian Bale', 'Heath Ledger', 'Chris Pratt', 2, 4),
+('Which films involve mysteries?', 'Knives Out;Gone Girl', 'Knives Out', 'Gone Girl', 'Moana', 2, 4),
+('Which characters are in comedies?', 'Dory;Olaf', 'Dory', 'Olaf', 'Darth Vader', 2, 4),
+('Which movies are set in deserts?', 'Mad Max;Lawrence of Arabia', 'Mad Max', 'Lawrence of Arabia', 'Zootopia', 2, 4),
+('Which villains are in fantasy films?', 'Sauron;Voldemort', 'Sauron', 'Voldemort', 'Maleficent', 2, 4),
+('Which songs are in film soundtracks?', 'Shallow;Skyfall', 'Shallow', 'Skyfall', 'Let It Go', 2, 4),
+('Which animated films explore emotions?', 'Turning Red;Inside Out', 'Turning Red', 'Inside Out', 'Fight Club', 2, 4),
+('Which movies involve betrayals?', 'Gladiator;The Departed', 'Gladiator', 'The Departed', 'Toy Story', 2, 4);
+
+-- Movies (cat_id=4), Hard (diff_id=3)
+INSERT INTO MultipleChoiceQuestion (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id) VALUES
+('Which directors made art films?', 'Wong Kar-wai;Apichatpong Weerasethakul', 'Wong Kar-wai', 'Apichatpong Weerasethakul', 'Disney', 3, 4),
+('Which movies feature surrealism?', 'Mulholland Drive;Eternal Sunshine', 'Mulholland Drive', 'Eternal Sunshine', 'Titanic', 3, 4),
+('Which actors played antiheroes?', 'Daniel Day-Lewis;Joaquin Phoenix', 'Daniel Day-Lewis', 'Joaquin Phoenix', 'Tom Holland', 3, 4),
+('Which films involve paradoxes?', 'Predestination;Donnie Darko', 'Predestination', 'Donnie Darko', 'Coco', 3, 4),
+('Which composers scored epics?', 'Max Richter;Alexandre Desplat', 'Max Richter', 'Alexandre Desplat', 'Paul McCartney', 3, 4),
+('Which movies are dystopian?', 'Children of Men;Brazil', 'Children of Men', 'Brazil', 'Finding Nemo', 3, 4),
+('Which characters are in indie films?', 'Clementine;Joel', 'Clementine', 'Joel', 'Buzz Lightyear', 3, 4),
+('Which animated films have dark themes?', 'Perfect Blue;Spirited Away', 'Perfect Blue', 'Spirited Away', 'The Incredibles', 3, 4),
+('Which movies feature moral dilemmas?', 'A Separation;Leviathan', 'A Separation', 'Leviathan', 'Shrek', 3, 4),
+('Which films involve historical tragedies?', 'The Pianist;Schindler’s List', 'The Pianist', 'Schindler’s List', 'Up', 3, 4);
+
+-- Geography (cat_id=1), Easy (diff_id=1)
+INSERT INTO TrueFalseQuestions (questionText, correctAnswer, diff_id, cat_id) VALUES
+('The capital of Portugal is Lisbon.', 1, 1, 1),
+('The Black Sea is located in South America.', 0, 1, 1),
+('Sweden is a Nordic country.', 1, 1, 1),
+('The Alps are in Africa.', 0, 1, 1),
+('The island of Bali is part of Indonesia.', 1, 1, 1),
+('The equator passes through France.', 0, 1, 1),
+('The Caribbean Sea is near Jamaica.', 1, 1, 1),
+('Alaska is a country in North America.', 0, 1, 1),
+('The city of Dubai is in the United Arab Emirates.', 1, 1, 1),
+('Greenland is larger than Australia.', 0, 1, 1),
+('The capital of Greece is Athens.', 1, 1, 1),
+('The Red Sea is west of India.', 0, 1, 1),
+('Fiji is an island nation in the Pacific Ocean.', 1, 1, 1),
+('The capital of Turkey is Istanbul.', 0, 1, 1),
+('The Pyrenees Mountains separate Spain and France.', 1, 1, 1),
+('The continent of Australia is also a country.', 1, 1, 1),
+('The capital of South Korea is Seoul.', 1, 1, 1),
+('The Arctic Circle is in the Southern Hemisphere.', 0, 1, 1),
+('The island of Madagascar is off the coast of Africa.', 1, 1, 1),
+('The capital of Denmark is Oslo.', 0, 1, 1),
+('The Dead Sea is between Israel and Jordan.', 1, 1, 1),
+('The Pacific Ocean is the smallest ocean.', 0, 1, 1),
+('The capital of Poland is Warsaw.', 1, 1, 1),
+('The Bahamas are in the Atlantic Ocean.', 1, 1, 1),
+('The capital of Morocco is Casablanca.', 0, 1, 1);
+
+-- Geography (cat_id=1), Medium (diff_id=2)
+INSERT INTO TrueFalseQuestions (questionText, correctAnswer, diff_id, cat_id) VALUES
+('The capital of Ghana is Accra.', 1, 2, 1),
+('The Ural Mountains are in South America.', 0, 2, 1),
+('The island of Tasmania is part of Australia.', 1, 2, 1),
+('The capital of Mongolia is Ulan Bator.', 1, 2, 1),
+('The Yucatán Peninsula is in Mexico.', 1, 2, 1),
+('The capital of Algeria is Tunis.', 0, 2, 1),
+('The Coral Sea is near Papua New Guinea.', 1, 2, 1),
+('The capital of Sri Lanka is Colombo.', 1, 2, 1),
+('The Gobi Desert is in Europe.', 0, 2, 1),
+('The capital of Ecuador is Quito.', 1, 2, 1),
+('The Bering Strait separates Russia and Alaska.', 1, 2, 1),
+('The capital of Latvia is Tallinn.', 0, 2, 1),
+('The island of Sumatra is part of Indonesia.', 1, 2, 1),
+('The capital of Uruguay is Montevideo.', 1, 2, 1),
+('The Bay of Bengal is west of India.', 0, 2, 1),
+('The capital of Oman is Muscat.', 1, 2, 1),
+('The Kamchatka Peninsula is in Russia.', 1, 2, 1),
+('The capital of Finland is Stockholm.', 0, 2, 1),
+('The island of Mauritius is in the Indian Ocean.', 1, 2, 1),
+('The capital of Costa Rica is San José.', 1, 2, 1),
+('The Sonoran Desert is in Asia.', 0, 2, 1),
+('The capital of Jamaica is Kingston.', 1, 2, 1),
+('The Tibetan Plateau is in China.', 1, 2, 1),
+('The capital of Paraguay is Asunción.', 1, 2, 1),
+('The Gulf of Mexico is east of California.', 0, 2, 1);
+
+-- Geography (cat_id=1), Hard (diff_id=3)
+INSERT INTO TrueFalseQuestions (questionText, correctAnswer, diff_id, cat_id) VALUES
+('The capital of Burundi is Gitega.', 1, 3, 1),
+('The Kuril Islands are part of Canada.', 0, 3, 1),
+('The Atoll of Palmyra is a U.S. territory.', 1, 3, 1),
+('The capital of Seychelles is Victoria.', 1, 3, 1),
+('The Altiplano Plateau is in Bolivia.', 1, 3, 1),
+('The capital of Eswatini is Mbabane.', 1, 3, 1),
+('The Chagos Archipelago is in the Pacific Ocean.', 0, 3, 1),
+('The capital of Benin is Porto-Novo.', 1, 3, 1),
+('The Nullarbor Plain is in Australia.', 1, 3, 1),
+('The capital of Timor-Leste is Dili.', 1, 3, 1),
+('The Taklamakan Desert is in China.', 1, 3, 1),
+('The capital of Comoros is Moroni.', 1, 3, 1),
+('The Faroe Islands are part of Denmark.', 1, 3, 1),
+('The capital of Nauru is Yaren.', 1, 3, 1),
+('The Deccan Plateau is in Brazil.', 0, 3, 1),
+('The capital of S?o Tomé and Príncipe is S?o Tomé.', 1, 3, 1),
+('The Drakensberg Mountains are in South Africa.', 1, 3, 1),
+('The capital of Tonga is Nuku?alofa.', 1, 3, 1),
+('The Kerguelen Islands are in the Indian Ocean.', 1, 3, 1),
+('The capital of Lesotho is Maseru.', 1, 3, 1),
+('The Qattara Depression is in Egypt.', 1, 3, 1),
+('The capital of Vanuatu is Port Vila.', 1, 3, 1),
+('The Patagonian Desert is in Argentina.', 1, 3, 1),
+('The capital of Djibouti is Djibouti City.', 1, 3, 1),
+('The Spratly Islands are in the Mediterranean Sea.', 0, 3, 1);
+
+-- History (cat_id=2), Easy (diff_id=1)
+INSERT INTO TrueFalseQuestions (questionText, correctAnswer, diff_id, cat_id) VALUES
+('The Industrial Revolution began in the 18th century.', 1, 1, 2),
+('The Roman Empire fell in the 20th century.', 0, 1, 2),
+('The Wright brothers invented the airplane.', 1, 1, 2),
+('The French Revolution occurred in the 17th century.', 0, 1, 2),
+('The Battle of Hastings was in 1066.', 1, 1, 2),
+('The Renaissance began in Asia.', 0, 1, 2),
+('The Magna Carta was signed in England.', 1, 1, 2),
+('The Vikings originated from South America.', 0, 1, 2),
+('The Suez Canal opened in 1869.', 1, 1, 2),
+('The Black Death was a war in Europe.', 0, 1, 2),
+('The Spanish Inquisition targeted heretics.', 1, 1, 2),
+('The Apollo 11 mission landed on Mars.', 0, 1, 2),
+('The Silk Road connected Europe and Asia.', 1, 1, 2),
+('The Cold War was fought with battles.', 0, 1, 2),
+('The Panama Canal was completed in 1914.', 1, 1, 2),
+('The Hundred Years’ War lasted 100 years.', 0, 1, 2),
+('The Crusades were religious wars.', 1, 1, 2),
+('The Great Fire of London occurred in the 18th century.', 0, 1, 2),
+('The printing press was invented by Johannes Gutenberg.', 1, 1, 2),
+('The Ottoman Empire was based in Africa.', 0, 1, 2),
+('The Boston Tea Party was a protest against taxes.', 1, 1, 2),
+('The Berlin Airlift occurred during World War II.', 0, 1, 2),
+('The Age of Exploration began in the 15th century.', 1, 1, 2),
+('The Glorious Revolution was in France.', 0, 1, 2),
+('The steam engine was invented in the 18th century.', 1, 1, 2);
+
+-- History (cat_id=2), Medium (diff_id=2)
+INSERT INTO TrueFalseQuestions (questionText, correctAnswer, diff_id, cat_id) VALUES
+('The Treaty of Tordesillas was signed in 1494.', 1, 2, 2),
+('The War of 1812 was fought between France and Russia.', 0, 2, 2),
+('The Meiji Restoration occurred in Japan.', 1, 2, 2),
+('The Battle of Trafalgar was in 1805.', 1, 2, 2),
+('The Taiping Rebellion was in China.', 1, 2, 2),
+('The Congress of Vienna occurred in the 17th century.', 0, 2, 2),
+('The Sepoy Mutiny was in India.', 1, 2, 2),
+('The Boxer Rebellion was in Japan.', 0, 2, 2),
+('The Louisiana Purchase was made by the United States.', 1, 2, 2),
+('The Battle of Austerlitz was fought by Napoleon.', 1, 2, 2),
+('The Opium Wars were fought in Africa.', 0, 2, 2),
+('The Emancipation Proclamation was issued in 1863.', 1, 2, 2),
+('The Zulu War was fought in South Africa.', 1, 2, 2),
+('The Treaty of Guadalupe Hidalgo ended the Mexican-American War.', 1, 2, 2),
+('The Crimean War was fought in the 20th century.', 0, 2, 2),
+('The Monroe Doctrine was issued by the United States.', 1, 2, 2),
+('The Battle of Gettysburg was in the American Civil War.', 1, 2, 2),
+('The Dreyfus Affair was in Germany.', 0, 2, 2),
+('The Franco-Prussian War unified Germany.', 1, 2, 2),
+('The Irish Potato Famine occurred in the 1840s.', 1, 2, 2),
+('The Scramble for Africa occurred in the 19th century.', 1, 2, 2),
+('The Boer War was fought in Australia.', 0, 2, 2),
+('The Reform Act of 1832 was in Britain.', 1, 2, 2),
+('The Russo-Japanese War was in the 20th century.', 1, 2, 2),
+('The Chartist Movement was in France.', 0, 2, 2);
+
+-- History (cat_id=2), Hard (diff_id=3)
+INSERT INTO TrueFalseQuestions (questionText, correctAnswer, diff_id, cat_id) VALUES
+('The Peace of Augsburg was signed in 1555.', 1, 3, 2),
+('The An Lushan Rebellion was in India.', 0, 3, 2),
+('The Edict of Milan was issued in 313 CE.', 1, 3, 2),
+('The Schmalkaldic League was formed in Germany.', 1, 3, 2),
+('The Diet of Worms was in 1521.', 1, 3, 2),
+('The Treaty of Brest-Litovsk was signed in 1918.', 1, 3, 2),
+('The Mau Mau Uprising was in Kenya.', 1, 3, 2),
+('The Battle of Lepanto was fought in Asia.', 0, 3, 2),
+('The Domesday Book was compiled in England.', 1, 3, 2),
+('The Revolt of the Comuneros was in Spain.', 1, 3, 2),
+('The Nika Riots occurred in Constantinople.', 1, 3, 2),
+('The Treaty of Waitangi was signed in New Zealand.', 1, 3, 2),
+('The Bantu Migration occurred in Europe.', 0, 3, 2),
+('The Council of Nicaea was held in 325 CE.', 1, 3, 2),
+('The Hussite Wars were in Bohemia.', 1, 3, 2),
+('The Glorious Revolution occurred in 1688.', 1, 3, 2),
+('The Revolt of 1857 was in China.', 0, 3, 2),
+('The Defenestration of Prague sparked the Thirty Years’ War.', 1, 3, 2),
+('The Ashanti Empire was in West Africa.', 1, 3, 2),
+('The Treaty of Kanagawa opened Japan to trade.', 1, 3, 2),
+('The Pazzi Conspiracy was in Florence.', 1, 3, 2),
+('The Great Schism of 1054 divided Christianity.', 1, 3, 2),
+('The Battle of Plassey was in India.', 1, 3, 2),
+('The Songhai Empire was in South America.', 0, 3, 2),
+('The Investiture Controversy was in the 11th century.', 1, 3, 2);
+
+-- Biology (cat_id=3), Easy (diff_id=1)
+INSERT INTO TrueFalseQuestions (questionText, correctAnswer, diff_id, cat_id) VALUES
+('The spine protects the spinal cord.', 1, 1, 3),
+('Plants use nitrogen for photosynthesis.', 0, 1, 3),
+('The diaphragm helps with breathing.', 1, 1, 3),
+('The human body has one lung.', 0, 1, 3),
+('Chlorophyll is found in plant leaves.', 1, 1, 3),
+('The brain is part of the digestive system.', 0, 1, 3),
+('Sweat helps regulate body temperature.', 1, 1, 3),
+('Fish have feathers.', 0, 1, 3),
+('The tongue is used for tasting food.', 1, 1, 3),
+('The skeleton is made of cartilage only.', 0, 1, 3),
+('The iris controls the size of the pupil.', 1, 1, 3),
+('Mammals are cold-blooded animals.', 0, 1, 3),
+('The esophagus transports food to the stomach.', 1, 1, 3),
+('Trees are animals.', 0, 1, 3),
+('The bladder stores urine.', 1, 1, 3),
+('The skin is an organ.', 1, 1, 3),
+('Birds have teeth instead of beaks.', 0, 1, 3),
+('The thyroid gland regulates metabolism.', 1, 1, 3),
+('The small intestine is shorter than the large intestine.', 0, 1, 3),
+('Fungi are a type of plant.', 0, 1, 3),
+('The cornea is part of the eye.', 1, 1, 3),
+('The human body has 12 ribs.', 0, 1, 3),
+('Pollen is produced by flowers.', 1, 1, 3),
+('The appendix is essential for survival.', 0, 1, 3),
+('The biceps are muscles in the arm.', 1, 1, 3);
+
+-- Biology (cat_id=3), Medium (diff_id=2)
+INSERT INTO TrueFalseQuestions (questionText, correctAnswer, diff_id, cat_id) VALUES
+('The adrenal glands produce adrenaline.', 1, 2, 3),
+('The Golgi apparatus is found in plant cells only.', 0, 2, 3),
+('Symbiosis is a relationship between two organisms.', 1, 2, 3),
+('The cerebellum is responsible for vision.', 0, 2, 3),
+('Antibodies are produced by the immune system.', 1, 2, 3),
+('The phloem transports nutrients in plants.', 1, 2, 3),
+('The pituitary gland is in the brain.', 1, 2, 3),
+('All bacteria are harmful to humans.', 0, 2, 3),
+('The retina detects light in the eye.', 1, 2, 3),
+('The trachea is part of the digestive system.', 0, 2, 3),
+('Lipids are a type of macromolecule.', 1, 2, 3),
+('The hypothalamus regulates body temperature.', 1, 2, 3),
+('Frogs are reptiles.', 0, 2, 3),
+('The pancreas produces glucagon.', 1, 2, 3),
+('The vacuole stores water in plant cells.', 1, 2, 3),
+('The aorta is a vein.', 0, 2, 3),
+('Enzymes speed up chemical reactions.', 1, 2, 3),
+('The thymus is part of the lymphatic system.', 1, 2, 3),
+('Coral reefs are living organisms.', 1, 2, 3),
+('The larynx is used for hearing.', 0, 2, 3),
+('Fermentation produces alcohol in yeast.', 1, 2, 3),
+('The clavicle is a bone in the leg.', 0, 2, 3),
+('Tropism is a plant’s response to stimuli.', 1, 2, 3),
+('The epidermis is the innermost layer of skin.', 0, 2, 3),
+('Capillaries connect arteries and veins.', 1, 2, 3);
+
+-- Biology (cat_id=3), Hard (diff_id=3)
+INSERT INTO TrueFalseQuestions (questionText, correctAnswer, diff_id, cat_id) VALUES
+('Telomeres protect chromosome ends.', 1, 3, 3),
+('The nucleolus is found in mitochondria.', 0, 3, 3),
+('Cytokinesis divides the cytoplasm during cell division.', 1, 3, 3),
+('The lac operon is found in human cells.', 0, 3, 3),
+('Epigenetics studies heritable changes in gene expression.', 1, 3, 3),
+('The endosymbiotic theory explains the origin of chloroplasts.', 1, 3, 3),
+('Introns are coding regions of DNA.', 0, 3, 3),
+('The sodium-potassium pump maintains cell membrane potential.', 1, 3, 3),
+('Glycolysis occurs in the nucleus.', 0, 3, 3),
+('Allosteric regulation alters enzyme activity.', 1, 3, 3),
+('The blastula is a stage in embryonic development.', 1, 3, 3),
+('Plasmids are found in eukaryotic cells.', 0, 3, 3),
+('The Hardy-Weinberg equilibrium describes population genetics.', 1, 3, 3),
+('The xylem transports sugars in plants.', 0, 3, 3),
+('Apoptosis is programmed cell death.', 1, 3, 3),
+('The citric acid cycle occurs in the cytoplasm.', 0, 3, 3),
+('Histones package DNA in eukaryotic cells.', 1, 3, 3),
+('The sinoatrial node is in the brain.', 0, 3, 3),
+('Autophagy recycles cellular components.', 1, 3, 3),
+('The mesophyll is a leaf tissue for photosynthesis.', 1, 3, 3),
+('The proton motive force drives ATP synthesis.', 1, 3, 3),
+('The myelin sheath is found in plant cells.', 0, 3, 3),
+('Crispr-Cas9 is a gene-editing tool.', 1, 3, 3),
+('The loop of Henle is in the liver.', 0, 3, 3),
+('Photophosphorylation occurs in chloroplasts.', 1, 3, 3);
+
+-- Movies (cat_id=4), Easy (diff_id=1)
+INSERT INTO TrueFalseQuestions (questionText, correctAnswer, diff_id, cat_id) VALUES
+('Aladdin is a Disney animated film.', 1, 1, 4),
+('The Hulk is a DC superhero.', 0, 1, 4),
+('Cinderella is a princess in a Disney movie.', 1, 1, 4),
+('The Smurfs are characters in a horror film.', 0, 1, 4),
+('The Jungle Book features a bear named Baloo.', 1, 1, 4),
+('Wonder Woman is a Marvel character.', 0, 1, 4),
+('Beauty and the Beast is a live-action film only.', 0, 1, 4),
+('Pocahontas is a Disney character.', 1, 1, 4),
+('The Minions are from Despicable Me.', 1, 1, 4),
+('Kung Fu Panda is a live-action film.', 0, 1, 4),
+('The Emperor’s New Groove is a Disney movie.', 1, 1, 4),
+('Shazam is a Marvel superhero.', 0, 1, 4),
+('Monsters, Inc. features a character named Sulley.', 1, 1, 4),
+('The Lego Movie is an animated film.', 1, 1, 4),
+('Ice Age is about dinosaurs only.', 0, 1, 4),
+('Tarzan is a Disney animated film.', 1, 1, 4),
+('Captain Marvel is a male superhero.', 0, 1, 4),
+('The Nightmare Before Christmas was directed by Tim Burton.', 1, 1, 4),
+('Cloudy with a Chance of Meatballs is a live-action film.', 0, 1, 4),
+('Hercules is a character in a Disney movie.', 1, 1, 4),
+('The Fantastic Four are DC characters.', 0, 1, 4),
+('Wreck-It Ralph is an animated film.', 1, 1, 4),
+('Ant-Man is a Marvel superhero.', 1, 1, 4),
+('The Secret Life of Pets is about farm animals.', 0, 1, 4),
+('Pinocchio is a Disney character.', 1, 1, 4);
+
+-- Movies (cat_id=4), Medium (diff_id=2)
+INSERT INTO TrueFalseQuestions (questionText, correctAnswer, diff_id, cat_id) VALUES
+('Whiplash is a film about a drummer.', 1, 2, 4),
+('The Revenant is a comedy film.', 0, 2, 4),
+('12 Years a Slave won an Oscar for Best Picture.', 1, 2, 4),
+('The Grand Budapest Hotel is a documentary.', 0, 2, 4),
+('Drive is a film starring Ryan Gosling.', 1, 2, 4),
+('Room is a science fiction film.', 0, 2, 4),
+('The Wolf of Wall Street was directed by Martin Scorsese.', 1, 2, 4),
+('Birdman is a film about a superhero.', 0, 2, 4),
+('Ex Machina is a film about artificial intelligence.', 1, 2, 4),
+('Spotlight is a musical.', 0, 2, 4),
+('The King’s Speech is about King George VI.', 1, 2, 4),
+('Her is a film about time travel.', 0, 2, 4),
+('The Social Network is about the founding of Facebook.', 1, 2, 4),
+('Argo is a film about a space mission.', 0, 2, 4),
+('Dallas Buyers Club is based on a true story.', 1, 2, 4),
+('Boyhood was filmed over 12 years.', 1, 2, 4),
+('The Artist is a silent film.', 1, 2, 4),
+('Gravity is a film set on Earth.', 0, 2, 4),
+('Inside Llewyn Davis is a Coen Brothers film.', 1, 2, 4),
+('Sicario is a romantic comedy.', 0, 2, 4),
+('The Theory of Everything is about Stephen Hawking.', 1, 2, 4),
+('The Imitation Game is about cooking.', 0, 2, 4),
+('Selma is about the civil rights movement.', 1, 2, 4),
+('Nightcrawler is a film about journalism.', 1, 2, 4),
+('Captain Phillips is a fantasy film.', 0, 2, 4);
+
+-- Movies (cat_id=4), Hard (diff_id=3)
+INSERT INTO TrueFalseQuestions (questionText, correctAnswer, diff_id, cat_id) VALUES
+('Yojimbo is a film by Akira Kurosawa.', 1, 3, 4),
+('The Seventh Seal is a comedy film.', 0, 3, 4),
+('La Dolce Vita was directed by Federico Fellini.', 1, 3, 4),
+('Tokyo Story is a Hollywood film.', 0, 3, 4),
+('Breathless is a French New Wave film.', 1, 3, 4),
+('Wild Strawberries is a science fiction film.', 0, 3, 4),
+('Aguirre, the Wrath of God was directed by Werner Herzog.', 1, 3, 4),
+('The 400 Blows is a documentary.', 0, 3, 4),
+('Rashomon is a film about a samurai.', 1, 3, 4),
+('Blow-Up is a British film by Michelangelo Antonioni.', 1, 3, 4),
+('8? is a film by Ingmar Bergman.', 0, 3, 4),
+('Persona is a Swedish film.', 1, 3, 4),
+('L’Avventura is a horror film.', 0, 3, 4),
+('Pather Panchali was directed by Satyajit Ray.', 1, 3, 4),
+('Hiroshima Mon Amour is a Japanese film.', 0, 3, 4),
+('The Rules of the Game is a French film.', 1, 3, 4),
+('Andrei Rublev is a comedy film.', 0, 3, 4),
+('Bicycle Thieves is an Italian neorealist film.', 1, 3, 4),
+('The Battle of Algiers is a documentary.', 0, 3, 4),
+('Ikiru is a film by Akira Kurosawa.', 1, 3, 4),
+('La Strada is a film by Federico Fellini.', 1, 3, 4),
+('Umberto D. is a French film.', 0, 3, 4),
+('Cleo from 5 to 7 is a French New Wave film.', 1, 3, 4),
+('Ordet is a Danish film.', 1, 3, 4),
+('Z is a political thriller by Costa-Gavras.', 1, 3, 4);

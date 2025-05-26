@@ -119,6 +119,40 @@ public class DatabaseServices
         }
         return questions;
     }
+    
+    public List<Question> GetTrueFalseQuestions(object selectedCategory, string selectedDifficulty)
+    {
+        List<Question> questions = new();
+        var query = "select questionText, correctAnswer, cat_id, diff_id, " +
+                    "c.nameCategory as category, d.nameDifficulty as difficulty " +
+                    "from TrueFalseQuestions " +
+                    "inner join Category c on cat_id = c.id " +
+                    "inner join Difficulty d on diff_id = d.id " +
+                    "where (@CategoryId is null or cat_id = @CategoryId) " +
+                    "and diff_id = @DifficultyId";
+
+        using (SqlCommand command = new SqlCommand(query, connection))
+        {
+            command.Parameters.AddWithValue("@CategoryId", selectedCategory ?? DBNull.Value);
+            command.Parameters.AddWithValue("@DifficultyId", selectedDifficulty);
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    questions.Add(new TrueFalseQuestion
+                    {
+                        QuestionText = reader["questionText"].ToString(),
+                        CorrectAnswer = (bool)reader["correctAnswer"],
+                        Category = reader["category"].ToString(),
+                        Difficulty = reader["difficulty"].ToString()
+                    });
+                }
+            }
+        }
+        return questions;
+    }
+
 
     public List<dynamic> GetCategories()
     {
@@ -232,31 +266,4 @@ public class DatabaseServices
 
         return topScores;
     }
-
-
-/*
-    public Dictionary<string, int> GetTopScores(int category, int difficulty)
-    {
-        Dictionary<string, int> topScores = new();
-
-        var query = "select top (5) p.username, score from Score"
-            + " inner join Player p on p.id = player_id"
-            + " where cat_id = @category and diff_id = @difficulty";
-
-        using (SqlCommand command = new SqlCommand(query, connection))
-        {
-            command.Parameters.AddWithValue("@category", category);
-            command.Parameters.AddWithValue("@difficulty", difficulty);
-
-            using (SqlDataReader reader = command.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    topScores.Add(reader["username"].ToString(), (int)reader["score"]);
-                }
-            }
-        }
-        return topScores;
-    }
-    */
 }

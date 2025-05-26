@@ -96,10 +96,12 @@ public partial class MainForm : Form
         var singleQuestions = services.GetSingleQuestions(selectedCategory, selectedDifficulty);
         var writtenAnswer = services.GetWrittenQuestions(selectedCategory, selectedDifficulty);
         var multipleQuestions = services.GetMultipleQuestions(selectedCategory, selectedDifficulty);
+        var trueFalseQuestions = services.GetTrueFalseQuestions(selectedCategory, selectedDifficulty);
         
         List<Question> questions = singleQuestions
             .Concat(writtenAnswer)
             .Concat(multipleQuestions)
+            .Concat(trueFalseQuestions)
             .ToList();
         
         var random = new Random();
