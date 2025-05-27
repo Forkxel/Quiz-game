@@ -15,6 +15,19 @@ public class MultipleChoiceQuestion : Question
     {
         quizPanel = panel;
         panel.Controls.Clear();
+        
+        Label multiAnswerLabel = new Label
+        {
+            Text = "Multiple answers possible",
+            Font = new Font("Arial", 12, FontStyle.Italic),
+            ForeColor = Color.DarkBlue,
+            TextAlign = ContentAlignment.MiddleCenter,
+            Dock = DockStyle.Top,
+            Height = 30,
+            Margin = new Padding(0, 10, 5, 0),
+            AutoSize = false
+        };
+        panel.Controls.Add(multiAnswerLabel);
 
         Label questionLabel = new Label
         {
