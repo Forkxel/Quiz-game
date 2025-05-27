@@ -4,6 +4,9 @@ using Timer = System.Windows.Forms.Timer;
 
 namespace quiz_game.Forms;
 
+/// <summary>
+/// Class for Main form of the application
+/// </summary>
 public partial class MainForm : Form
 {
     private Panel quizPanel;
@@ -29,6 +32,9 @@ public partial class MainForm : Form
         MaximizeBox = false;
     }
     
+    /// <summary>
+    /// Method to prepare layout for when the question is shown
+    /// </summary>
     private void InitializeLayout()
     {
         infoPanel = new Panel
@@ -74,6 +80,11 @@ public partial class MainForm : Form
         Controls.Add(infoPanel);    
     }
 
+    /// <summary>
+    /// Method where random questions are loaded when player click start button
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void startButton_Click(object sender, EventArgs e)
     {
         object selectedCategory = ((dynamic)categoriesCombo.SelectedItem)?.Id;
@@ -121,6 +132,9 @@ public partial class MainForm : Form
         infoPanel.Visible = true;
     }
 
+    /// <summary>
+    /// Method that displays new question when player click next button
+    /// </summary>
     private void DisplayNextQuestion()
     {
         if (CurrentQuestionIndex < currentQuestions.Count)
@@ -149,6 +163,9 @@ public partial class MainForm : Form
         }
     }
     
+    /// <summary>
+    /// Method that displays panel with final score and play again button
+    /// </summary>
     private void DisplayFinalScorePanel()
     {
         Controls.Clear();
@@ -206,6 +223,11 @@ public partial class MainForm : Form
         Controls.Add(finalScorePanel); 
     }
 
+    /// <summary>
+    /// Method that resets everything to start state when player click play again button
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void PlayAgainButton_Click(object? sender, EventArgs e)
     {
         score = 0;
@@ -223,6 +245,11 @@ public partial class MainForm : Form
         scoreLabel.Visible = false;
     }
 
+    /// <summary>
+    /// Method for timer to run
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void QuestionTimer_Tick(object sender, EventArgs e)
     {
         timeLeft--;
@@ -243,6 +270,11 @@ public partial class MainForm : Form
         }
     }
 
+    /// <summary>
+    ///  Method where timer is started and combo boxes are filled
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void Form_Load(object sender, EventArgs e)
     {
         QuestionTimer = new Timer
@@ -254,12 +286,20 @@ public partial class MainForm : Form
         LoadComboBoxes();
     }
 
+    /// <summary>
+    /// Method to switch to login form when login button is clicked
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void loginButton_Click(object sender, EventArgs e)
     {
         var loginForm = new LoginForm();
         loginForm.ShowDialog();
     }
     
+    /// <summary>
+    /// Method to fill combo boxes
+    /// </summary>
     private void LoadComboBoxes()
     {
         var categories = services.GetCategories();
@@ -277,6 +317,10 @@ public partial class MainForm : Form
         categoriesCombo.Items.Add(new { Id = (object)null, Name = "Mixed" });
     }
     
+    /// <summary>
+    /// Method to find if category user selected is Mixed
+    /// </summary>
+    /// <returns>true if category is Mixed</returns>
     private bool IsMixedCategorySelected()
     {
         if (categoriesCombo.SelectedItem != null && ((dynamic)categoriesCombo.SelectedItem).Name == "Mixed")
@@ -286,6 +330,11 @@ public partial class MainForm : Form
         return false;
     }
 
+    /// <summary>
+    /// Method to show score board form when score board button is clicked
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void scoreBoardButton_Click(object sender, EventArgs e)
     {
         var scoreBoardForm = new ScoreBoardForm();

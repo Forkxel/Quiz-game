@@ -3,6 +3,9 @@ using quiz_game.Tables;
 
 namespace quiz_game.Database;
 
+/// <summary>
+/// Class for every interaction with database
+/// </summary>
 public class DatabaseServices
 {
     private SqlConnection connection = DatabaseConnection.GetInstance();
@@ -15,6 +18,12 @@ public class DatabaseServices
         }
     }
     
+    /// <summary>
+    /// Method to get single answer question from database based on category and difficulty
+    /// </summary>
+    /// <param name="selectedCategory">Selected category</param>
+    /// <param name="selectedDifficulty">Selected difficulty</param>
+    /// <returns>List of single answer questions</returns>
     public List<Question> GetSingleQuestions(object selectedCategory, string selectedDifficulty)
     {
         List<Question> questions = new();
@@ -52,6 +61,12 @@ public class DatabaseServices
         return questions;
     }
     
+    /// <summary>
+    /// Method to get written answer question from database based on category and difficulty
+    /// </summary>
+    /// <param name="selectedCategory">Selected category</param>
+    /// <param name="selectedDifficulty">Selected difficulty</param>
+    /// <returns>List of written answer questions</returns>
     public List<Question> GetWrittenQuestions(object selectedCategory, string selectedDifficulty)
     {
         List<Question> questions = new List<Question>();
@@ -85,6 +100,12 @@ public class DatabaseServices
         return questions;
     }
     
+    /// <summary>
+    /// Method to get multiple answer question from database based on category and difficulty
+    /// </summary>
+    /// <param name="selectedCategory">Selected category</param>
+    /// <param name="selectedDifficulty">Selected difficulty</param>
+    /// <returns>List of multiple answer questions</returns>
     public List<Question> GetMultipleQuestions(object selectedCategory, string selectedDifficulty)
     {
         List<Question> questions = new();
@@ -120,6 +141,12 @@ public class DatabaseServices
         return questions;
     }
     
+    /// <summary>
+    /// Method to get true or false answer question from database based on category and difficulty
+    /// </summary>
+    /// <param name="selectedCategory">Selected category</param>
+    /// <param name="selectedDifficulty">Selected difficulty</param>
+    /// <returns>List of true or false questions</returns>
     public List<Question> GetTrueFalseQuestions(object selectedCategory, string selectedDifficulty)
     {
         List<Question> questions = new();
@@ -153,7 +180,10 @@ public class DatabaseServices
         return questions;
     }
 
-
+    /// <summary>
+    /// Method to get categories from database
+    /// </summary>
+    /// <returns>List of categories</returns>
     public List<dynamic> GetCategories()
     {
         List<dynamic> categories = new();
@@ -176,6 +206,10 @@ public class DatabaseServices
         return categories;
     }
 
+    /// <summary>
+    /// Method to get difficulties from database
+    /// </summary>
+    /// <returns>List of difficulties</returns>
     public List<dynamic> GetDifficulties()
     {
         List<dynamic> difficulties = new();
@@ -198,6 +232,11 @@ public class DatabaseServices
         return difficulties;
     }
     
+    /// <summary>
+    /// Method to find if user exists based on the username
+    /// </summary>
+    /// <param name="username">username of the user</param>
+    /// <returns>true if username already exists</returns>
     public bool UserExists(string username)
     {
         var query = "select count(*) from Player where username = @username";
@@ -209,6 +248,12 @@ public class DatabaseServices
         }
     }
     
+    /// <summary>
+    /// Method to add new user
+    /// </summary>
+    /// <param name="username">username of the user</param>
+    /// <param name="password">encrypted password</param>
+    /// <returns>true if the user is successfully added</returns>
     public bool AddUser(string username, string password)
     {
         var query = "insert into Player (username, userPassword) values (@username, @password)";
@@ -221,6 +266,11 @@ public class DatabaseServices
         }
     }
     
+    /// <summary>
+    /// Method to get password for user from database
+    /// </summary>
+    /// <param name="username">username of the user</param>
+    /// <returns>Returns encrypted password for the user or null if no user is found</returns>
     public string GetPasswordForUser(string username)
     {
         var query = "select userPassword from Player where username = @username";
@@ -232,6 +282,12 @@ public class DatabaseServices
         }
     }
 
+    /// <summary>
+    /// Method to update score for user
+    /// </summary>
+    /// <param name="username">username of the user</param>
+    /// <param name="score">new score</param>
+    /// <returns>true if the score is updated</returns>
     public bool UpdateScore(string username, int score)
     {
         var query = "update Player set score = @score where username = @username" +
@@ -246,6 +302,10 @@ public class DatabaseServices
         }
     }
     
+    /// <summary>
+    /// Method to get top 5 scores from database
+    /// </summary>
+    /// <returns>Dictionary with top 5 users as string and score as ints</returns>
     public Dictionary<string, int> GetTopScores()
     {
         Dictionary<string, int> topScores = new();

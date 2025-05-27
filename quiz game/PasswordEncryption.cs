@@ -3,11 +3,19 @@ using System.Text;
 
 namespace quiz_game;
 
-public class PasswordEncryption
+/// <summary>
+/// Class to Encrypt and decrypt password
+/// </summary>
+public static class PasswordEncryption
 {
     private static byte[] key = Encoding.UTF8.GetBytes("1234567890123456");
     private static byte[] iv = Encoding.UTF8.GetBytes("1234567890123456");
 
+    /// <summary>
+    /// Method used to encrypt password using AES
+    /// </summary>
+    /// <param name="password">original plaintext password</param>
+    /// <returns>encrypted password</returns>
     public static string Encrypt(string password)
     {
         using (Aes aes = Aes.Create())
@@ -31,6 +39,11 @@ public class PasswordEncryption
         }
     }
 
+    /// <summary>
+    /// Method used to decrypt password
+    /// </summary>
+    /// <param name="password">Encrypted password</param>
+    /// <returns>password in plaintext</returns>
     public static string Decrypt(string password)
     {
         using (Aes aes = Aes.Create())

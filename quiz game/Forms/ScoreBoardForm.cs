@@ -2,6 +2,9 @@
 
 namespace quiz_game.Forms;
 
+/// <summary>
+/// Class for score board form
+/// </summary>
 public partial class ScoreBoardForm : Form
 {
     private DatabaseServices services;
@@ -17,6 +20,9 @@ public partial class ScoreBoardForm : Form
         MaximizeBox = false;
     }
 
+    /// <summary>
+    /// Method to add top 5 scores to score board
+    /// </summary>
     private void AddScores()
     {
         Dictionary<string, int> scores = services.GetTopScores();
@@ -27,6 +33,11 @@ public partial class ScoreBoardForm : Form
         }
     }
 
+    /// <summary>
+    /// Method to close form
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void closeButton_Click(object sender, EventArgs e)
     {
         Close();

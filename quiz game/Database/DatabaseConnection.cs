@@ -3,10 +3,17 @@ using System.Data.SqlClient;
 
 namespace quiz_game.Database;
 
+/// <summary>
+/// Class to Connect to database using App.config
+/// </summary>
 public class DatabaseConnection
 {
     private static SqlConnection? conn = null;
 
+    /// <summary>
+    /// Method to connect to database
+    /// </summary>
+    /// <returns>A SqlConnection object representing the database connection</returns>
     public static SqlConnection GetInstance()
     {
         try
@@ -33,6 +40,11 @@ public class DatabaseConnection
         }
     }
 
+    /// <summary>
+    /// Reads a specific setting from the App.config file based on the provided key.
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns>The value associated with the key. If the key is not found, "Not Found" is returned.</returns>
     private static string ReadSetting(string key)
     {
         var appSettings = ConfigurationManager.AppSettings;

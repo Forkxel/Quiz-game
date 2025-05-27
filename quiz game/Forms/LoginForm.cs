@@ -2,6 +2,9 @@
 
 namespace quiz_game.Forms;
 
+/// <summary>
+/// Class for login form 
+/// </summary>
 public partial class LoginForm : Form
 {
     private DatabaseServices services;
@@ -14,6 +17,11 @@ public partial class LoginForm : Form
         MaximizeBox = false;
     }
 
+    /// <summary>
+    /// Method to validate if user exist based on password and username
+    /// </summary>
+    /// <param name="sender">The source of the event</param>
+    /// <param name="e">The event arguments</param>
     private void loginButton_Click(object sender, EventArgs e)
     {
         string username = usernameTextBox.Text.Trim();
@@ -44,7 +52,12 @@ public partial class LoginForm : Form
         DialogResult = DialogResult.OK;
         Close();
     }
-
+    
+    /// <summary>
+    /// Method to add new user 
+    /// </summary>
+    /// <param name="sender">The source of the event</param>
+    /// <param name="e">The event arguments</param>
     private void signUpButton_Click(object sender, EventArgs e)
     {
         string username = usernameTextBox.Text.Trim();

@@ -2,6 +2,9 @@
 
 namespace quiz_game.Tables;
 
+/// <summary>
+/// Class for questions that have written answers
+/// </summary>
 public class WrittenAnswer : Question
 {
     public string CorrectAnswer { get; set; }
@@ -9,6 +12,11 @@ public class WrittenAnswer : Question
     private Button confirmButton;
     private Label correctAnswerLabel;
     
+    /// <summary>
+    /// Method to display question on form
+    /// </summary>
+    /// <param name="panel">The panel on which the question UI will be displayed</param>
+    /// <param name="onAnswerSelected">Callback invoked with a boolean indicating whether the user's answer was correct</param>
     public override void Display(Panel panel, Action<bool> onAnswerSelected)
     {
         panel.Controls.Clear();
@@ -98,6 +106,10 @@ public class WrittenAnswer : Question
         panel.Visible = true;
     }
 
+    /// <summary>
+    /// Method used when the timer runs out
+    /// </summary>
+    /// <param name="onNextQuestion">Callback invoked to proceed to the next question</param>
     public override void TimeOut(Action onNextQuestion)
     {
         answerTextBox.ReadOnly = true;
@@ -115,6 +127,11 @@ public class WrittenAnswer : Question
         confirmButton.Click += (sender, e) => onNextQuestion();
     }
 
+    /// <summary>
+    /// Method used for confirming the answer using submit button
+    /// </summary>
+    /// <param name="confirmButton">The button used for submission or proceeding to the next question</param>
+    /// <param name="onAnswerConfirmed">Callback invoked with a boolean indicating whether the answer was correct</param>
     protected override void ConfirmAnswer(Button confirmButton, Action<bool> onAnswerConfirmed)
     {
         if (confirmButton.Text == "Submit")
