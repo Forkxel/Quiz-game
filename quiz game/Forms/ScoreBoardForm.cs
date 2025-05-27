@@ -36,8 +36,8 @@ public partial class ScoreBoardForm : Form
     /// <summary>
     /// Method to close form
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">The source of the event</param>
+    /// <param name="e">The event arguments</param>
     private void closeButton_Click(object sender, EventArgs e)
     {
         Close();

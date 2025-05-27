@@ -83,8 +83,8 @@ public partial class MainForm : Form
     /// <summary>
     /// Method where random questions are loaded when player click start button
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">The source of the event</param>
+    /// <param name="e">The event arguments</param>
     private void startButton_Click(object sender, EventArgs e)
     {
         object selectedCategory = ((dynamic)categoriesCombo.SelectedItem)?.Id;
@@ -226,8 +226,8 @@ public partial class MainForm : Form
     /// <summary>
     /// Method that resets everything to start state when player click play again button
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">The source of the event</param>
+    /// <param name="e">The event arguments</param>
     private void PlayAgainButton_Click(object? sender, EventArgs e)
     {
         score = 0;
@@ -248,8 +248,8 @@ public partial class MainForm : Form
     /// <summary>
     /// Method for timer to run
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">The source of the event</param>
+    /// <param name="e">The event arguments</param>
     private void QuestionTimer_Tick(object sender, EventArgs e)
     {
         timeLeft--;
@@ -273,8 +273,8 @@ public partial class MainForm : Form
     /// <summary>
     ///  Method where timer is started and combo boxes are filled
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">The source of the event</param>
+    /// <param name="e">The event arguments</param>
     private void Form_Load(object sender, EventArgs e)
     {
         QuestionTimer = new Timer
@@ -289,8 +289,8 @@ public partial class MainForm : Form
     /// <summary>
     /// Method to switch to login form when login button is clicked
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">The source of the event</param>
+    /// <param name="e">The event arguments</param>
     private void loginButton_Click(object sender, EventArgs e)
     {
         var loginForm = new LoginForm();
@@ -333,8 +333,8 @@ public partial class MainForm : Form
     /// <summary>
     /// Method to show score board form when score board button is clicked
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">The source of the event</param>
+    /// <param name="e">The event arguments</param>
     private void scoreBoardButton_Click(object sender, EventArgs e)
     {
         var scoreBoardForm = new ScoreBoardForm();
