@@ -470,7 +470,6 @@ INSERT INTO WrittenQuestions (questionText, correctAnswer, diff_id, cat_id) VALU
 -- Geography (cat_id=1), Hard (diff_id=3)
 INSERT INTO WrittenQuestions (questionText, correctAnswer, diff_id, cat_id) VALUES
 ('What is the capital of Mongolia?', 'Ulaanbaatar', 3, 1),
-('Which country has the most glaciers?', 'Antarctica', 3, 1),
 ('What is the deepest point in the Pacific Ocean?', 'Mariana Trench', 3, 1),
 ('Which river is the longest in Australia?', 'Murray River', 3, 1),
 ('What is the capital of Suriname?', 'Paramaribo', 3, 1),
