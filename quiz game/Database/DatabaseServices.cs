@@ -170,7 +170,7 @@ public class DatabaseServices
                     questions.Add(new TrueFalseQuestion
                     {
                         QuestionText = reader["questionText"].ToString(),
-                        CorrectAnswer = (bool)reader["correctAnswer"],
+                        CorrectAnswer = !(bool)reader["correctAnswer"],
                         Category = reader["category"].ToString(),
                         Difficulty = reader["difficulty"].ToString()
                     });

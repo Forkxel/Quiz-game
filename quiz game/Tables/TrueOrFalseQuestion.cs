@@ -166,8 +166,16 @@ public class TrueFalseQuestion : Question
     {
         if (confirmButton.Text == "Submit")
         {
-            trueOption.ForeColor = Color.Green;
-            falseOption.ForeColor = Color.Red;
+            if (!CorrectAnswer)
+            {
+                trueOption.ForeColor = Color.Green; // True je správná odpověď, takže je zelená
+                falseOption.ForeColor = Color.Red; // False je špatná odpověď, takže je červená
+            }
+            else
+            {
+                trueOption.ForeColor = Color.Red; // True je špatná odpověď, takže je červená
+                falseOption.ForeColor = Color.Green; // False je správná odpověď, takže je zelená
+            }
             
             bool trueChecked = trueOption.Checked;
             bool falseChecked = falseOption.Checked;
@@ -188,11 +196,11 @@ public class TrueFalseQuestion : Question
 
             bool isCorrect;
 
-            if (trueOption.Checked && CorrectAnswer)
+            if (trueOption.Checked && !CorrectAnswer)
             {
                 isCorrect = true;
             }
-            else if (falseOption.Checked && !CorrectAnswer)
+            else if (falseOption.Checked && CorrectAnswer)
             {
                 isCorrect = true;
             }
@@ -221,8 +229,16 @@ public class TrueFalseQuestion : Question
     /// <param name="onNextQuestion">Callback invoked to proceed to the next question</param>
     public override void TimeOut(Action onNextQuestion)
     {
-        trueOption.ForeColor = Color.Green;
-        falseOption.ForeColor = Color.Red;
+        if (!CorrectAnswer)
+        {
+            trueOption.ForeColor = Color.Green; // True je správná odpověď, takže je zelená
+            falseOption.ForeColor = Color.Red; // False je špatná odpověď, takže je červená
+        }
+        else
+        {
+            trueOption.ForeColor = Color.Red; // True je špatná odpověď, takže je červená
+            falseOption.ForeColor = Color.Green; // False je správná odpověď, takže je zelená
+        }
         
         bool trueChecked = trueOption.Checked;
         bool falseChecked = falseOption.Checked;
