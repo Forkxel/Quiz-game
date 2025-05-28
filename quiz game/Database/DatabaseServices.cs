@@ -28,13 +28,13 @@ public class DatabaseServices
     {
         List<Question> questions = new();
         
-        var query = "SELECT questionText, correctAnswer, option1, option2, option3, cat_id, diff_id," +
+        var query = "select questionText, correctAnswer, option1, option2, option3, cat_id, diff_id," +
                        " c.nameCategory as category, d.nameDifficulty as difficulty" +
-                       " FROM Questions " +
-                       "INNER JOIN Category c ON cat_id = c.id " +
-                       "INNER JOIN Difficulty d ON diff_id = d.id " +
-                       "WHERE (@CategoryId IS NULL OR cat_id = @CategoryId) " +
-                       "AND diff_id = @DifficultyId";
+                       " from Questions " +
+                       "inner join Category c ON cat_id = c.id " +
+                       "inner join Difficulty d ON diff_id = d.id " +
+                       "where (@CategoryId is null or cat_id = @CategoryId) " +
+                       "and diff_id = @DifficultyId";
 
         using (SqlCommand command = new SqlCommand(query, connection))
         {
@@ -109,12 +109,12 @@ public class DatabaseServices
     public List<Question> GetMultipleQuestions(object selectedCategory, string selectedDifficulty)
     {
         List<Question> questions = new();
-        var query = "SELECT questionText, option1, option2, option3, correctAnswer, cat_id, diff_id, " +
+        var query = "select questionText, option1, option2, option3, correctAnswer, cat_id, diff_id, " +
                     "c.nameCategory as category, d.nameDifficulty as difficulty " +
-                    "FROM MultipleChoiceQuestion " +
-                    "INNER JOIN Category c ON cat_id = c.id " +
-                    "INNER JOIN Difficulty d ON diff_id = d.id " +
-                    "WHERE (@CategoryId IS NULL OR cat_id = @CategoryId) AND diff_id = @DifficultyId";
+                    "from MultipleChoiceQuestion " +
+                    "inner join Category c ON cat_id = c.id " +
+                    "inner join Difficulty d ON diff_id = d.id " +
+                    "where (@CategoryId is null or cat_id = @CategoryId) and diff_id = @DifficultyId";
 
         using (SqlCommand command = new SqlCommand(query, connection))
         {
@@ -309,7 +309,7 @@ public class DatabaseServices
     public Dictionary<string, int> GetTopScores()
     {
         Dictionary<string, int> topScores = new();
-        var query = "SELECT TOP (5) username, score FROM Player WHERE score IS NOT NULL ORDER BY score DESC";
+        var query = "select top (5) username, score from Player where score is not null order by score desc";
 
         using (SqlCommand command = new SqlCommand(query, connection))
         {
@@ -325,5 +325,25 @@ public class DatabaseServices
         }
 
         return topScores;
+    }
+    
+    /// <summary>
+    /// Method to update password for a user
+    /// </summary>
+    /// <param name="username">Username of the user</param>
+    /// <param name="newPassword">New encrypted password</param>
+    /// <returns>true if the password is updated successfully</returns>
+    public bool UpdatePassword(string username, string newPassword)
+    {
+        var query = "update Player set userPassword = @newPassword where username = @username";
+
+        using (SqlCommand command = new SqlCommand(query, connection))
+        {
+            command.Parameters.AddWithValue("@username", username);
+            command.Parameters.AddWithValue("@newPassword", newPassword);
+
+            int rowsAffected = command.ExecuteNonQuery();
+            return rowsAffected > 0;
+        }
     }
 }

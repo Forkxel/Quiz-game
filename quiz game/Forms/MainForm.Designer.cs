@@ -38,11 +38,15 @@ partial class MainForm
         difficultyCombo = new System.Windows.Forms.ComboBox();
         categoriesCombo = new System.Windows.Forms.ComboBox();
         title = new System.Windows.Forms.Label();
+        difficultyTitle = new System.Windows.Forms.Label();
+        categoryTitle = new System.Windows.Forms.Label();
         panel.SuspendLayout();
         SuspendLayout();
         // 
         // panel
         // 
+        panel.Controls.Add(categoryTitle);
+        panel.Controls.Add(difficultyTitle);
         panel.Controls.Add(scoreBoardButton);
         panel.Controls.Add(loginButton);
         panel.Controls.Add(startButton);
@@ -68,7 +72,7 @@ partial class MainForm
         // 
         // loginButton
         // 
-        loginButton.Location = new System.Drawing.Point(862, 31);
+        loginButton.Location = new System.Drawing.Point(862, 51);
         loginButton.Name = "loginButton";
         loginButton.Size = new System.Drawing.Size(112, 36);
         loginButton.TabIndex = 4;
@@ -90,7 +94,7 @@ partial class MainForm
         // 
         difficultyCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
         difficultyCombo.FormattingEnabled = true;
-        difficultyCombo.Location = new System.Drawing.Point(383, 327);
+        difficultyCombo.Location = new System.Drawing.Point(383, 392);
         difficultyCombo.Name = "difficultyCombo";
         difficultyCombo.Size = new System.Drawing.Size(231, 28);
         difficultyCombo.TabIndex = 2;
@@ -100,7 +104,7 @@ partial class MainForm
         categoriesCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
         categoriesCombo.FormattingEnabled = true;
         categoriesCombo.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-        categoriesCombo.Location = new System.Drawing.Point(383, 179);
+        categoriesCombo.Location = new System.Drawing.Point(383, 249);
         categoriesCombo.Name = "categoriesCombo";
         categoriesCombo.Size = new System.Drawing.Size(231, 28);
         categoriesCombo.TabIndex = 1;
@@ -109,13 +113,33 @@ partial class MainForm
         // 
         title.BackColor = System.Drawing.Color.LightGray;
         title.Dock = System.Windows.Forms.DockStyle.Top;
-        title.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+        title.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
         title.Location = new System.Drawing.Point(0, 0);
         title.Name = "title";
         title.Size = new System.Drawing.Size(1000, 146);
         title.TabIndex = 0;
         title.Text = "Quiz game";
         title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        // 
+        // difficultyTitle
+        // 
+        difficultyTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+        difficultyTitle.Location = new System.Drawing.Point(383, 357);
+        difficultyTitle.Name = "difficultyTitle";
+        difficultyTitle.Size = new System.Drawing.Size(231, 32);
+        difficultyTitle.TabIndex = 7;
+        difficultyTitle.Text = "Difficulty";
+        difficultyTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        // 
+        // categoryTitle
+        // 
+        categoryTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+        categoryTitle.Location = new System.Drawing.Point(383, 214);
+        categoryTitle.Name = "categoryTitle";
+        categoryTitle.Size = new System.Drawing.Size(231, 32);
+        categoryTitle.TabIndex = 8;
+        categoryTitle.Text = "Category";
+        categoryTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         // 
         // MainForm
         // 
@@ -130,6 +154,10 @@ partial class MainForm
         panel.ResumeLayout(false);
         ResumeLayout(false);
     }
+
+    private System.Windows.Forms.Label categoryTitle;
+
+    private System.Windows.Forms.Label difficultyTitle;
 
     private System.Windows.Forms.Button scoreBoardButton;
 

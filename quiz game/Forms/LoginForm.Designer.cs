@@ -39,7 +39,7 @@ partial class LoginForm
         // 
         // usernameTextBox
         // 
-        usernameTextBox.Location = new System.Drawing.Point(75, 57);
+        usernameTextBox.Location = new System.Drawing.Point(75, 68);
         usernameTextBox.Name = "usernameTextBox";
         usernameTextBox.PlaceholderText = "Username";
         usernameTextBox.Size = new System.Drawing.Size(137, 27);
@@ -47,7 +47,7 @@ partial class LoginForm
         // 
         // passwordTextBox
         // 
-        passwordTextBox.Location = new System.Drawing.Point(75, 116);
+        passwordTextBox.Location = new System.Drawing.Point(75, 126);
         passwordTextBox.Name = "passwordTextBox";
         passwordTextBox.PasswordChar = '*';
         passwordTextBox.PlaceholderText = "Password";
@@ -83,6 +83,7 @@ partial class LoginForm
         Controls.Add(usernameTextBox);
         FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
         StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+        Text = "Profile";
         ResumeLayout(false);
         PerformLayout();
     }
