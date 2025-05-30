@@ -39,7 +39,8 @@ public partial class LoginForm : Form
             Name = "signOutButton",
             Size = new Size(137, 27),
             Text = "Sign Out",
-            Visible = false
+            Visible = false,
+            Cursor = Cursors.Hand
         };
 
         signOutButton.Click += SignOutButton_Click;
@@ -50,7 +51,8 @@ public partial class LoginForm : Form
             Name = "changePasswordButton",
             Size = new Size(137, 27),
             Text = "Change Password",
-            Visible = false
+            Visible = false,
+            Cursor = Cursors.Hand
         };
         changePasswordButton.Click += ChangePasswordButton_Click;
 
@@ -80,7 +82,8 @@ public partial class LoginForm : Form
             Name = "confirmChangePasswordButton",
             Size = new Size(90, 27),
             Text = "Confirm",
-            Visible = false
+            Visible = false,
+            Cursor = Cursors.Hand
         };
         confirmChangePasswordButton.Click += ConfirmChangePasswordButton_Click;
 
@@ -90,7 +93,8 @@ public partial class LoginForm : Form
             Name = "closeChangePasswordButton",
             Size = new Size(90, 27),
             Text = "Close",
-            Visible = false
+            Visible = false,
+            Cursor = Cursors.Hand
         };
         closeChangePasswordButton.Click += CloseChangePasswordButton_Click;
 
@@ -213,9 +217,7 @@ public partial class LoginForm : Form
         loginButton.Visible = false; 
         signUpButton.Visible = false; 
     }
-
-
-
+    
     /// <summary>
     /// Method to change form when user is not logged in
     /// </summary>

@@ -56,6 +56,7 @@ partial class LoginForm
         // 
         // loginButton
         // 
+        loginButton.Cursor = System.Windows.Forms.Cursors.Hand;
         loginButton.Location = new System.Drawing.Point(58, 190);
         loginButton.Name = "loginButton";
         loginButton.Size = new System.Drawing.Size(81, 29);
@@ -66,6 +67,7 @@ partial class LoginForm
         // 
         // signUpButton
         // 
+        signUpButton.Cursor = System.Windows.Forms.Cursors.Hand;
         signUpButton.Location = new System.Drawing.Point(145, 190);
         signUpButton.Name = "signUpButton";
         signUpButton.Size = new System.Drawing.Size(81, 29);

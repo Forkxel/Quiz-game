@@ -79,7 +79,8 @@ public class MultipleChoiceQuestion : Question
             Height = 60,
             TextAlign = ContentAlignment.MiddleCenter,
             Font = new Font("Arial", 16, FontStyle.Bold),
-            Enabled = false
+            Enabled = false,
+            Cursor = Cursors.Hand
         };
         
         List<string> options = new List<string> { Option1, Option2, Option3 }
@@ -99,7 +100,8 @@ public class MultipleChoiceQuestion : Question
                 AutoSize = true,
                 Font = new Font("Arial", 16, FontStyle.Regular),
                 Margin = new Padding(0, 15, 0, 15),
-                TextAlign = ContentAlignment.MiddleLeft
+                TextAlign = ContentAlignment.MiddleLeft,
+                Cursor = Cursors.Hand
             };
 
             checkBox.CheckedChanged += (sender, e) =>

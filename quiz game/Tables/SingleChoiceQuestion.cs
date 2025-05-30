@@ -68,7 +68,8 @@ public class SingleChoiceQuestion : Question
             Height = 60,
             TextAlign = ContentAlignment.MiddleCenter,
             Font = new Font("Arial", 16, FontStyle.Bold),
-            Enabled = false
+            Enabled = false,
+            Cursor = Cursors.Hand
         };
         
         Font radioFont = new Font("Arial", 16, FontStyle.Regular);
@@ -87,7 +88,8 @@ public class SingleChoiceQuestion : Question
                 AutoSize = true,
                 Margin = new Padding(0, 15, 0, 15),
                 TextAlign = ContentAlignment.MiddleCenter,
-                Font = radioFont
+                Font = radioFont,
+                Cursor = Cursors.Hand
             };
             
             rb.CheckedChanged += (sender, e) =>

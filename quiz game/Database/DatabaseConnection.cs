@@ -6,7 +6,7 @@ namespace quiz_game.Database;
 /// <summary>
 /// Class to Connect to database using App.config
 /// </summary>
-public class DatabaseConnection
+public static class DatabaseConnection
 {
     private static SqlConnection? conn = null;
 
@@ -34,7 +34,7 @@ public class DatabaseConnection
         }
         catch (Exception e)
         {
-            Console.WriteLine("Wrong App.config file.");
+            MessageBox.Show("Wrong App.config file", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Environment.Exit(0);
             throw;
         }
@@ -51,5 +51,4 @@ public class DatabaseConnection
         string result = appSettings[key] ?? "Not Found";
         return result;
     }
-
 }

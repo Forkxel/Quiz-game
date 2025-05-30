@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using System.Data;
+using System.Data.SqlClient;
 using quiz_game.Tables;
 
 namespace quiz_game.Database;
@@ -12,7 +13,7 @@ public class DatabaseServices
 
     public DatabaseServices()
     {
-        if (connection.State != System.Data.ConnectionState.Open)
+        if (connection.State != ConnectionState.Open)
         {
             connection.Open();
         }

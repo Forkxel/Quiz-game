@@ -53,6 +53,7 @@ partial class ScoreBoardForm
         // 
         // closeButton
         // 
+        closeButton.Cursor = System.Windows.Forms.Cursors.Hand;
         closeButton.Location = new System.Drawing.Point(193, 306);
         closeButton.Name = "closeButton";
         closeButton.Size = new System.Drawing.Size(120, 38);

@@ -73,7 +73,8 @@ public class WrittenAnswer : Question
             Height = 60,
             TextAlign = ContentAlignment.MiddleCenter,
             Font = new Font("Arial", 16, FontStyle.Bold),
-            Enabled = true
+            Enabled = true,
+            Cursor = Cursors.Hand
         };
         
         correctAnswerLabel = new Label

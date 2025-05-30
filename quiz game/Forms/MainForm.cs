@@ -214,7 +214,8 @@ public partial class MainForm : Form
             Text = "Play Again",
             Font = new Font("Arial", 12, FontStyle.Bold),
             Dock = DockStyle.Bottom,
-            Height = 50
+            Height = 50,
+            Cursor = Cursors.Hand
         };
         playAgainButton.Click += PlayAgainButton_Click;
         finalScorePanel.Controls.Add(playAgainButton);

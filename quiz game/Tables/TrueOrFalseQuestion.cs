@@ -50,7 +50,8 @@ public class TrueFalseQuestion : Question
             Text = "True",
             Font = new Font("Arial", 14),
             AutoSize = true,
-            Margin = new Padding(0, 15, 0, 15)
+            Margin = new Padding(0, 15, 0, 15),
+            Cursor = Cursors.Hand,
         };
 
         falseOption = new RadioButton
@@ -58,7 +59,8 @@ public class TrueFalseQuestion : Question
             Text = "False",
             Font = new Font("Arial", 14),
             AutoSize = true,
-            Margin = new Padding(0, 15, 0, 15)
+            Margin = new Padding(0, 15, 0, 15),
+            Cursor = Cursors.Hand,
         };
 
         optionsPanel.Controls.Add(trueOption);
@@ -83,7 +85,8 @@ public class TrueFalseQuestion : Question
             Height = 60,
             TextAlign = ContentAlignment.MiddleCenter,
             Font = new Font("Arial", 16, FontStyle.Bold),
-            Enabled = false
+            Enabled = false,
+            Cursor = Cursors.Hand,
         };
 
         trueOption.CheckedChanged += (sender, e) =>
