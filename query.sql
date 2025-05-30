@@ -57,15 +57,6 @@ create table Player(
 	score int
 );
 
-create table Score (
-    id int primary key identity(1,1),
-    player_id int foreign key(player_id) references Player(id),
-    score int,
-    diff_id int foreign key(diff_id) references Difficulty(id),
-	cat_id int foreign key(cat_id) references Category(id)
-);
-
-
 insert into Difficulty(nameDifficulty) values ('Easy'),('Medium'),('Hard');
 
 insert into Category(nameCategory) values ('Geography'), ('History'), ('Biology'), ('Films');
