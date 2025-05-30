@@ -118,6 +118,7 @@ partial class ScoreBoardForm
         Location = new System.Drawing.Point(19, 19);
         Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
         StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+        Text = "Score Board";
         ResumeLayout(false);
     }
 

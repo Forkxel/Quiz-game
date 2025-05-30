@@ -231,13 +231,13 @@ public class TrueFalseQuestion : Question
     {
         if (!CorrectAnswer)
         {
-            trueOption.ForeColor = Color.Green; // True je správná odpověď, takže je zelená
-            falseOption.ForeColor = Color.Red; // False je špatná odpověď, takže je červená
+            trueOption.ForeColor = Color.Green;
+            falseOption.ForeColor = Color.Red;
         }
         else
         {
-            trueOption.ForeColor = Color.Red; // True je špatná odpověď, takže je červená
-            falseOption.ForeColor = Color.Green; // False je správná odpověď, takže je zelená
+            trueOption.ForeColor = Color.Red; 
+            falseOption.ForeColor = Color.Green; 
         }
         
         bool trueChecked = trueOption.Checked;
