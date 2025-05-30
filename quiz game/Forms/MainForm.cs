@@ -12,7 +12,7 @@ public partial class MainForm : Form
     private Panel quizPanel;
     private List<Question> currentQuestions = new();
     public static int CurrentQuestionIndex { get; set; }
-    private const int MaxQuestions = 5;
+    private const int MaxQuestions = 6;
     private int score;
     private Label scoreLabel;
     private Label timerLabel;
