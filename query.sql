@@ -1,4 +1,4 @@
-use halik;
+use <your-database-name>;
 
 create table Category(
 	id int primary key identity(1,1),
