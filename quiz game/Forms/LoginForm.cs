@@ -17,6 +17,7 @@ public partial class LoginForm : Form
     private TextBox newPasswordTextBox;
     private Button confirmChangePasswordButton;
     private Button closeChangePasswordButton;
+    private const int MaxLength = 50;
     
     public LoginForm()
     {
@@ -137,6 +138,7 @@ public partial class LoginForm : Form
         if (string.IsNullOrEmpty(storedPassword))
         {
             MessageBox.Show("User does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            passwordTextBox.Text = string.Empty;
             return;
         }
         
@@ -168,9 +170,42 @@ public partial class LoginForm : Form
             return;
         }
 
+        if (username.Contains(" "))
+        {
+            MessageBox.Show("Username must not contain spaces.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+
+        if (password.Contains(" "))
+        {
+            MessageBox.Show("Password must not contain spaces.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            passwordTextBox.Text = string.Empty;
+            return;
+        }
+
+        if (password.Length < 5)
+        {
+            MessageBox.Show("Password must be at least 5 characters long.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            passwordTextBox.Text = string.Empty;    
+            return;
+        }
+
         if (services.UserExists(username))
         {
             MessageBox.Show("Username already exists. Please choose another.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+        
+        if (username.Length > MaxLength)
+        {
+            MessageBox.Show($"Username must not exceed {MaxLength} characters.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+
+        if (password.Length > MaxLength)
+        {
+            MessageBox.Show($"Password must not exceed {MaxLength} characters.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            passwordTextBox.Text = string.Empty;
             return;
         }
 
@@ -272,12 +307,31 @@ public partial class LoginForm : Form
         if (decryptedStoredPassword != currentPassword)
         {
             MessageBox.Show("Current password is incorrect.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            currentPasswordTextBox.Text = string.Empty;
+            newPasswordTextBox.Text = string.Empty;
             return;
         }
 
         if (newPassword == currentPassword)
         {
             MessageBox.Show("New password must be different from the current password.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            currentPasswordTextBox.Text = string.Empty;
+            newPasswordTextBox.Text = string.Empty;
+            return;
+        }
+        
+        if (newPassword.Contains(" "))
+        {
+            MessageBox.Show("Password must not contain spaces.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            currentPasswordTextBox.Text = string.Empty;
+            newPasswordTextBox.Text = string.Empty;
+            return;
+        }
+
+        if (newPassword.Length < MaxLength)
+        {
+            MessageBox.Show($"Password must not exceed {MaxLength} characters.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            newPasswordTextBox.Text = string.Empty;
             return;
         }
 
