@@ -43,7 +43,7 @@ public static class DatabaseConnection
     /// <summary>
     /// Reads a specific setting from the App.config file based on the provided key.
     /// </summary>
-    /// <param name="key"></param>
+    /// <param name="key">Key for the value</param>
     /// <returns>The value associated with the key. If the key is not found, "Not Found" is returned.</returns>
     private static string ReadSetting(string key)
     {

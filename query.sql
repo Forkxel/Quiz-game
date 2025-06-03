@@ -786,8 +786,7 @@ INSERT INTO MultipleChoiceQuestion (questionText, correctAnswer, option1, option
 ('Which inventors created machines?', 'Eli Whitney;Thomas Edison', 'Eli Whitney', 'Thomas Edison', 'Galileo', 1, 2),
 ('Which empires ruled Europe?', 'Habsburg Empire;Holy Roman Empire', 'Habsburg Empire', 'Holy Roman Empire', 'Maya Empire', 1, 2),
 ('Which events marked exploration?', 'Columbus’ Voyage;Cook’s Expeditions', 'Columbus’ Voyage', 'Cook’s Expeditions', 'Fall of Rome', 1, 2),
-('Which leaders fought for equality?', 'Sojourner Truth;Malcolm X', 'Sojourner Truth', 'Malcolm X', 'Hannibal', 1, 2),
-('Which years saw major reforms?', '1865;1948', '1865', '1948', '1400', 1, 2);
+('Which leaders fought for equality?', 'Sojourner Truth;Malcolm X', 'Sojourner Truth', 'Malcolm X', 'Hannibal', 1, 2);
 
 -- History (cat_id=2), Medium (diff_id=2)
 INSERT INTO MultipleChoiceQuestion (questionText, correctAnswer, option1, option2, option3, diff_id, cat_id) VALUES
@@ -798,7 +797,6 @@ INSERT INTO MultipleChoiceQuestion (questionText, correctAnswer, option1, option
 ('Which scientists studied chemistry?', 'Dmitri Mendeleev;Marie Curie', 'Dmitri Mendeleev', 'Marie Curie', 'Drake', 2, 2),
 ('Which events involved rebellions?', 'Taiping Rebellion;Indian Mutiny', 'Taiping Rebellion', 'Indian Mutiny', 'Battle of Waterloo', 2, 2),
 ('Which monarchs ruled during transitions?', 'Queen Isabella;Franz Joseph', 'Queen Isabella', 'Franz Joseph', 'Ramses II', 2, 2),
-('Which years marked global conflicts?', '1939;1950', '1939', '1950', '1300', 2, 2),
 ('Which thinkers influenced democracy?', 'Montesquieu;Mill', 'Montesquieu', 'Mill', 'Vercingetorix', 2, 2),
 ('Which countries were in the Warsaw Pact?', 'Poland;Hungary', 'Poland', 'Hungary', 'Brazil', 2, 2);
 

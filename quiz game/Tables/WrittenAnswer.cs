@@ -52,13 +52,6 @@ public class WrittenAnswer : Question
             (centerPanel.Width - answerTextBox.Width) / 2,
             (centerPanel.Height - answerTextBox.Height) / 2
         );
-        centerPanel.Resize += (s, e) =>
-        {
-            answerTextBox.Location = new Point(
-                (centerPanel.Width - answerTextBox.Width) / 2,
-                (centerPanel.Height - answerTextBox.Height) / 2
-            );
-        };
 
         panel.Controls.Add(centerPanel);
 
@@ -123,8 +116,7 @@ public class WrittenAnswer : Question
         confirmButton.Text = "Next";
         confirmButton.Enabled = true;
         MainForm.CurrentQuestionIndex++;
-
-        confirmButton.Click -= (sender, e) => ConfirmAnswer(confirmButton, _ => { });
+        
         confirmButton.Click += (sender, e) => onNextQuestion();
     }
 
@@ -168,16 +160,12 @@ public class WrittenAnswer : Question
             var form = (MainForm)confirmButton.FindForm();
             form.QuestionTimer.Stop();
             
-            confirmButton.Click -= (sender, e) => ConfirmAnswer(confirmButton, onAnswerConfirmed);
-            confirmButton.Click += (sender, e) =>
-            {
-                onAnswerConfirmed(isCorrect);
-            };
+            confirmButton.Click += (sender, e) => onAnswerConfirmed(isCorrect);
         }
         else if (confirmButton.Text == "Next")
         {
             MainForm.CurrentQuestionIndex--;
-            onAnswerConfirmed(false);
+            onAnswerConfirmed.Invoke(false);
         }
     }
 }

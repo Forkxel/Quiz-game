@@ -196,12 +196,7 @@ public class SingleChoiceQuestion : Question
 
             var form = (MainForm)confirmButton.FindForm();
             form.QuestionTimer.Stop();
-            
-            confirmButton.Click -= (sender, e) => ConfirmAnswer(confirmButton, onAnswerConfirmed);
-            confirmButton.Click += (sender, e) =>
-            {
-                onAnswerConfirmed.Invoke(isCorrect);
-            };
+            confirmButton.Click += (sender, e) => onAnswerConfirmed.Invoke(isCorrect);
         }
         else if(confirmButton.Text == "Next")
         {
@@ -259,7 +254,6 @@ public class SingleChoiceQuestion : Question
         confirmButton.Text = "Next";
         confirmButton.Enabled = true;
         MainForm.CurrentQuestionIndex++;
-        confirmButton.Click -= (sender, e) => onNextQuestion();
         confirmButton.Click += (sender, e) => onNextQuestion();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using quiz_game.Database;
 using System.Drawing;
+using System.Text.RegularExpressions;
 
 namespace quiz_game.Forms;
 
@@ -175,6 +176,13 @@ public partial class LoginForm : Form
             MessageBox.Show("Username must not contain spaces.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
+        
+        if (!Regex.IsMatch(username, @"^[\p{L}\p{N}\p{P}\p{S}]*$"))
+        {
+            MessageBox.Show("Username contains invalid characters. Emoji and other special symbols are not allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            passwordTextBox.Text = string.Empty;
+            return;
+        }
 
         if (password.Contains(" "))
         {
@@ -187,6 +195,13 @@ public partial class LoginForm : Form
         {
             MessageBox.Show("Password must be at least 5 characters long.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             passwordTextBox.Text = string.Empty;    
+            return;
+        }
+        
+        if (!Regex.IsMatch(password, @"^[\p{L}\p{N}\p{P}\p{S}]*$"))
+        {
+            MessageBox.Show("Password contains invalid characters. Emoji and other special symbols are not allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            passwordTextBox.Text = string.Empty;
             return;
         }
 
@@ -334,6 +349,23 @@ public partial class LoginForm : Form
             newPasswordTextBox.Text = string.Empty;
             return;
         }
+        
+        if (!Regex.IsMatch(newPassword, @"^[\p{L}\p{N}\p{P}\p{S}]*$"))
+        {
+            MessageBox.Show("Password contains invalid characters. Emoji and other special symbols are not allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            newPasswordTextBox.Text = string.Empty;
+            currentPasswordTextBox.Text = string.Empty;
+            return;
+        }
+        
+        if (!Regex.IsMatch(currentPassword, @"^[\p{L}\p{N}\p{P}\p{S}]*$"))
+        {
+            MessageBox.Show("Password contains invalid characters. Emoji and other special symbols are not allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            newPasswordTextBox.Text = string.Empty;
+            currentPasswordTextBox.Text = string.Empty;
+            return;
+        }
+
 
         string encryptedNewPassword = PasswordEncryption.Encrypt(newPassword);
         if (services.UpdatePassword(LoggedInUser, encryptedNewPassword))

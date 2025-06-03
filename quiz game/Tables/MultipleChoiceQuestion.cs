@@ -3,7 +3,7 @@
 namespace quiz_game.Tables;
 
 /// <summary>
-/// Class fo handling questions with multiple answers
+/// Class for handling questions with multiple answers
 /// </summary>
 public class MultipleChoiceQuestion : Question
 {
@@ -83,9 +83,7 @@ public class MultipleChoiceQuestion : Question
             Cursor = Cursors.Hand
         };
         
-        List<string> options = new List<string> { Option1, Option2, Option3 }
-            .Where(option => !string.IsNullOrEmpty(option))
-            .ToList();
+        List<string> options = new List<string> { Option1, Option2, Option3 };
         
         var rnd = new Random();
         options = options.OrderBy(x => rnd.Next()).ToList();
@@ -197,12 +195,8 @@ public class MultipleChoiceQuestion : Question
 
             var form = (MainForm)confirmButton.FindForm();
             form.QuestionTimer.Stop();
-
-            confirmButton.Click -= (sender, e) => ConfirmAnswer(confirmButton, onAnswerConfirmed);
-            confirmButton.Click += (sender, e) =>
-            {
-                onAnswerConfirmed.Invoke(isCorrect);
-            };
+            
+            confirmButton.Click += (sender, e) => onAnswerConfirmed.Invoke(isCorrect);
         }
         else if (confirmButton.Text == "Next")
         {
@@ -223,7 +217,15 @@ public class MultipleChoiceQuestion : Question
         
         foreach (var checkBox in selectedAnswers)
         {
-            checkBox.ForeColor = CorrectAnswers.Contains(checkBox.Text) ? Color.Green : Color.Red;
+            if (CorrectAnswers.Contains(checkBox.Text))
+            {
+                checkBox.ForeColor = Color.Green;
+            }
+            else
+            {
+                checkBox.ForeColor = Color.Red;
+            }
+
             checkBox.Click -= (sender, e) => { };
             checkBox.CheckedChanged -= (sender, e) => { };
             checkBox.CheckedChanged += (sender, e) =>
@@ -245,7 +247,6 @@ public class MultipleChoiceQuestion : Question
         confirmButton.Text = "Next";
         confirmButton.Enabled = true;
         MainForm.CurrentQuestionIndex++;
-        confirmButton.Click -= (sender, e) => onNextQuestion();
         confirmButton.Click += (sender, e) => onNextQuestion();
     }
 }

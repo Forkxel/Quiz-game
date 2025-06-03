@@ -279,7 +279,14 @@ public class DatabaseServices
         {
             command.Parameters.AddWithValue("@username", username);
             object result = command.ExecuteScalar();
-            return result != null ? result.ToString() : null;
+            if (result != null)
+            {
+                return result.ToString();
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 

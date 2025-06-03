@@ -99,10 +99,6 @@ public class TrueFalseQuestion : Question
             {
                 selectedOption = falseOption;
             }
-            else
-            {
-                selectedOption = null;
-            }
 
             if (selectedOption != null)
             {
@@ -112,7 +108,6 @@ public class TrueFalseQuestion : Question
             {
                 confirmButton.Enabled = false;
             }
-
         };
 
         falseOption.CheckedChanged += (sender, e) =>
@@ -125,11 +120,7 @@ public class TrueFalseQuestion : Question
             {
                 selectedOption = falseOption;
             }
-            else
-            {
-                selectedOption = null;
-            }
-
+            
             if (selectedOption != null)
             {
                 confirmButton.Enabled = true;
@@ -138,7 +129,6 @@ public class TrueFalseQuestion : Question
             {
                 confirmButton.Enabled = false;
             }
-
         };
 
         Panel buttonPanel = new Panel
@@ -171,13 +161,13 @@ public class TrueFalseQuestion : Question
         {
             if (!CorrectAnswer)
             {
-                trueOption.ForeColor = Color.Green; // True je správná odpověď, takže je zelená
-                falseOption.ForeColor = Color.Red; // False je špatná odpověď, takže je červená
+                trueOption.ForeColor = Color.Green;
+                falseOption.ForeColor = Color.Red;
             }
             else
             {
-                trueOption.ForeColor = Color.Red; // True je špatná odpověď, takže je červená
-                falseOption.ForeColor = Color.Green; // False je správná odpověď, takže je zelená
+                trueOption.ForeColor = Color.Red; 
+                falseOption.ForeColor = Color.Green;
             }
             
             bool trueChecked = trueOption.Checked;
@@ -216,7 +206,6 @@ public class TrueFalseQuestion : Question
             form.QuestionTimer.Stop();
 
             confirmButton.Text = "Next";
-            confirmButton.Click -= (sender, e) => ConfirmAnswer(confirmButton, onAnswerConfirmed);
             confirmButton.Click += (sender, e) => onAnswerConfirmed.Invoke(isCorrect);
         }
         else if (confirmButton.Text == "Next")
@@ -265,7 +254,6 @@ public class TrueFalseQuestion : Question
         confirmButton.Text = "Next";
         confirmButton.Enabled = true;
         MainForm.CurrentQuestionIndex++;
-        confirmButton.Click -= (sender, e) => onNextQuestion();
         confirmButton.Click += (sender, e) => onNextQuestion();
     }
 }

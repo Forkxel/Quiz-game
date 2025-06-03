@@ -20,7 +20,7 @@ public partial class MainForm : Form
     public Timer QuestionTimer { get; set; }
     private int timeLeft;
     private Panel infoPanel;
-    private DatabaseServices services;
+    private DatabaseServices services = new();
     private int currentTime;
     private bool mixedCategorySelected;
     
@@ -28,7 +28,6 @@ public partial class MainForm : Form
     {
         InitializeComponent();
         InitializeLayout();
-        services = new DatabaseServices();
         MaximizeBox = false;
     }
     
@@ -45,6 +44,7 @@ public partial class MainForm : Form
             BackColor = Color.LightGray,
             Visible = false
         };
+        
         quizPanel = new Panel
         {
             Visible = false,
@@ -89,7 +89,6 @@ public partial class MainForm : Form
     {
         object selectedCategory = ((dynamic)categoriesCombo.SelectedItem)?.Id;
         string selectedDifficulty = ((dynamic)difficultyCombo.SelectedItem)?.Id?.ToString();
-        
         
         if (selectedCategory == null && !IsMixedCategorySelected())
         {

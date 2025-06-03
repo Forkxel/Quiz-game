@@ -118,6 +118,10 @@ Resets score and form to selection of category and difficulty. User stay logged 
 
 You can add your custom questions using the query.sql 
 
+## Testing
+
+This project was tested by my brother and my classmates.
+
 ## Help
 
 If you do not use MSSQL server, this app might not work.
