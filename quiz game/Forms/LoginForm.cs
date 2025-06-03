@@ -177,7 +177,7 @@ public partial class LoginForm : Form
             return;
         }
         
-        if (!Regex.IsMatch(username, @"^[\p{L}\p{N}\p{P}\p{S}]*$"))
+        if (!Regex.IsMatch(username, @"^[\p{L}\p{N}\p{P}\p{S}]*$") || username.Contains('$'))
         {
             MessageBox.Show("Username contains invalid characters. Emoji and other special symbols are not allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             passwordTextBox.Text = string.Empty;
@@ -198,7 +198,7 @@ public partial class LoginForm : Form
             return;
         }
         
-        if (!Regex.IsMatch(password, @"^[\p{L}\p{N}\p{P}\p{S}]*$"))
+        if (!Regex.IsMatch(password, @"^[\p{L}\p{N}\p{P}\p{S}]*$") || password.Contains('$'))
         {
             MessageBox.Show("Password contains invalid characters. Emoji and other special symbols are not allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             passwordTextBox.Text = string.Empty;
@@ -350,7 +350,7 @@ public partial class LoginForm : Form
             return;
         }
         
-        if (!Regex.IsMatch(newPassword, @"^[\p{L}\p{N}\p{P}\p{S}]*$"))
+        if (!Regex.IsMatch(newPassword, @"^[\p{L}\p{N}\p{P}\p{S}]*$") || newPassword.Contains('$'))
         {
             MessageBox.Show("Password contains invalid characters. Emoji and other special symbols are not allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             newPasswordTextBox.Text = string.Empty;
@@ -358,7 +358,7 @@ public partial class LoginForm : Form
             return;
         }
         
-        if (!Regex.IsMatch(currentPassword, @"^[\p{L}\p{N}\p{P}\p{S}]*$"))
+        if (!Regex.IsMatch(currentPassword, @"^[\p{L}\p{N}\p{P}\p{S}]*$") || currentPassword.Contains('$'))
         {
             MessageBox.Show("Password contains invalid characters. Emoji and other special symbols are not allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             newPasswordTextBox.Text = string.Empty;
