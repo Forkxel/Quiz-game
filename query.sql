@@ -964,7 +964,7 @@ INSERT INTO TrueFalseQuestions (questionText, correctAnswer, diff_id, cat_id) VA
 ('The Faroe Islands are part of Denmark.', 1, 3, 1),
 ('The capital of Nauru is Yaren.', 1, 3, 1),
 ('The Deccan Plateau is in Brazil.', 0, 3, 1),
-('The capital of S?o Tomé and Príncipe is S?o Tomé.', 1, 3, 1),
+('The capital of Sao Tomé and Príncipe is Sao Tomé.', 1, 3, 1),
 ('The Drakensberg Mountains are in South Africa.', 1, 3, 1),
 ('The capital of Tonga is Nuku?alofa.', 1, 3, 1),
 ('The Kerguelen Islands are in the Indian Ocean.', 1, 3, 1),

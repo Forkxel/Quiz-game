@@ -185,9 +185,9 @@ public class DatabaseServices
     /// Method to get categories from database
     /// </summary>
     /// <returns>List of categories</returns>
-    public List<dynamic> GetCategories()
+    public List<Category> GetCategories()
     {
-        List<dynamic> categories = new();
+        List<Category> categories = new();
         var query = "select id, nameCategory from category";
 
         using (SqlCommand command = new SqlCommand(query, connection))
@@ -196,9 +196,9 @@ public class DatabaseServices
             {
                 while (reader.Read())
                 {
-                    categories.Add(new
+                    categories.Add(new Category
                     {
-                        Id = reader["id"],
+                        Id = reader["id"] as int?,
                         Name = reader["nameCategory"].ToString()
                     });
                 }
@@ -211,9 +211,9 @@ public class DatabaseServices
     /// Method to get difficulties from database
     /// </summary>
     /// <returns>List of difficulties</returns>
-    public List<dynamic> GetDifficulties()
+    public List<Difficulty> GetDifficulties()
     {
-        List<dynamic> difficulties = new();
+        List<Difficulty> difficulties = new();
         var query = "select id, nameDifficulty from difficulty";
 
         using (SqlCommand command = new SqlCommand(query, connection))
@@ -222,9 +222,9 @@ public class DatabaseServices
             {
                 while (reader.Read())
                 {
-                    difficulties.Add(new
+                    difficulties.Add(new Difficulty
                     {
-                        Id = reader["id"],
+                        Id = (int)reader["id"],
                         Name = reader["nameDifficulty"].ToString()
                     });
                 }

@@ -87,15 +87,15 @@ public partial class MainForm : Form
     /// <param name="e">The event arguments</param>
     private void startButton_Click(object sender, EventArgs e)
     {
-        object selectedCategory = ((dynamic)categoriesCombo.SelectedItem)?.Id;
-        string selectedDifficulty = ((dynamic)difficultyCombo.SelectedItem)?.Id?.ToString();
+        var selectedCategory = categoriesCombo.SelectedItem as Category;
+        var selectedDifficulty = difficultyCombo.SelectedItem as Difficulty;
         
         if (selectedCategory == null && !IsMixedCategorySelected())
         {
             MessageBox.Show("Please select a valid category.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
-        if (string.IsNullOrEmpty(selectedDifficulty))
+        if (selectedDifficulty == null)
         {
             MessageBox.Show("Please select a difficulty level.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
@@ -104,10 +104,10 @@ public partial class MainForm : Form
         currentQuestions.Clear();
         CurrentQuestionIndex = 0;
         
-        var singleQuestions = services.GetSingleQuestions(selectedCategory, selectedDifficulty);
-        var writtenAnswer = services.GetWrittenQuestions(selectedCategory, selectedDifficulty);
-        var multipleQuestions = services.GetMultipleQuestions(selectedCategory, selectedDifficulty);
-        var trueFalseQuestions = services.GetTrueFalseQuestions(selectedCategory, selectedDifficulty);
+        var singleQuestions = services.GetSingleQuestions(selectedCategory.Id, selectedDifficulty.Id.ToString());
+        var writtenAnswer = services.GetWrittenQuestions(selectedCategory.Id, selectedDifficulty.Id.ToString());
+        var multipleQuestions = services.GetMultipleQuestions(selectedCategory.Id, selectedDifficulty.Id.ToString());
+        var trueFalseQuestions = services.GetTrueFalseQuestions(selectedCategory.Id, selectedDifficulty.Id.ToString());
         
         List<Question> questions = singleQuestions
             .Concat(writtenAnswer)
@@ -314,7 +314,7 @@ public partial class MainForm : Form
         categoriesCombo.DisplayMember = "Name";
         difficultyCombo.DisplayMember = "Name";
 
-        categoriesCombo.Items.Add(new { Id = (object)null, Name = "Mixed" });
+        categoriesCombo.Items.Add(new Category{ Id = null, Name = "Mixed" });
     }
     
     /// <summary>
@@ -323,7 +323,7 @@ public partial class MainForm : Form
     /// <returns>true if category is Mixed</returns>
     private bool IsMixedCategorySelected()
     {
-        if (categoriesCombo.SelectedItem != null && ((dynamic)categoriesCombo.SelectedItem).Name == "Mixed")
+        if (categoriesCombo.SelectedItem is Category selectedCategory && selectedCategory.Name == "Mixed")
         {
             return true;
         }
