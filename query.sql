@@ -52,8 +52,8 @@ create table TrueFalseQuestions (
 
 create table Player(
 	id int primary key identity(1,1),
-	username varchar(50),
-	userPassword varchar(50),
+	username varchar(20),
+	userPassword varchar(max),
 	score int
 );
 

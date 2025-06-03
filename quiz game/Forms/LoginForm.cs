@@ -18,7 +18,6 @@ public partial class LoginForm : Form
     private TextBox newPasswordTextBox;
     private Button confirmChangePasswordButton;
     private Button closeChangePasswordButton;
-    private const int MaxLength = 50;
     
     public LoginForm()
     {
@@ -28,7 +27,7 @@ public partial class LoginForm : Form
         
         userLabel = new Label
         {
-            Location = new Point(5, 20),
+            Location = new Point(55, 20),
             Name = "userLabel",
             Size = new Size(200, 27),
             Text = "",
@@ -178,7 +177,7 @@ public partial class LoginForm : Form
             return;
         }
         
-        if (!Regex.IsMatch(username, @"^[\p{L}\p{N}\p{P}_-]*$"))
+        if (!Regex.IsMatch(username, @"^[\p{L}\p{N}\p{P}\p{S}]*$"))
         {
             MessageBox.Show("Username contains invalid characters. Emoji and other special symbols are not allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             passwordTextBox.Text = string.Empty;
@@ -199,7 +198,7 @@ public partial class LoginForm : Form
             return;
         }
         
-        if (!Regex.IsMatch(password, @"^[\p{L}\p{N}\p{P}_-]*$"))
+        if (!Regex.IsMatch(password, @"^[\p{L}\p{N}\p{P}\p{S}]*$"))
         {
             MessageBox.Show("Password contains invalid characters. Emoji and other special symbols are not allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             passwordTextBox.Text = string.Empty;
@@ -212,15 +211,15 @@ public partial class LoginForm : Form
             return;
         }
         
-        if (username.Length > MaxLength)
+        if (username.Length > 20)
         {
-            MessageBox.Show($"Username must not exceed {MaxLength} characters.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show($"Username must not exceed 20 characters.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
 
-        if (password.Length > MaxLength)
+        if (password.Length > 50)
         {
-            MessageBox.Show($"Password must not exceed {MaxLength} characters.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show($"Password must not exceed 50 characters.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             passwordTextBox.Text = string.Empty;
             return;
         }
@@ -344,14 +343,14 @@ public partial class LoginForm : Form
             return;
         }
 
-        if (newPassword.Length < MaxLength)
+        if (newPassword.Length > 50)
         {
-            MessageBox.Show($"Password must not exceed {MaxLength} characters.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show($"Password must not exceed 50 characters.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             newPasswordTextBox.Text = string.Empty;
             return;
         }
         
-        if (!Regex.IsMatch(newPassword, @"^[\p{L}\p{N}\p{P}-]*$"))
+        if (!Regex.IsMatch(newPassword, @"^[\p{L}\p{N}\p{P}\p{S}]*$"))
         {
             MessageBox.Show("Password contains invalid characters. Emoji and other special symbols are not allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             newPasswordTextBox.Text = string.Empty;
@@ -359,7 +358,7 @@ public partial class LoginForm : Form
             return;
         }
         
-        if (!Regex.IsMatch(currentPassword, @"^[\p{L}\p{N}\p{P}-]*$"))
+        if (!Regex.IsMatch(currentPassword, @"^[\p{L}\p{N}\p{P}\p{S}]*$"))
         {
             MessageBox.Show("Password contains invalid characters. Emoji and other special symbols are not allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             newPasswordTextBox.Text = string.Empty;
