@@ -114,6 +114,10 @@ There are 4 types of questions
 
 Resets score and form to selection of category and difficulty. User stay logged in after clicking this button.
 
+## Customization
+
+You can add your custom questions using the query.sql 
+
 ## Help
 
 If you do not use MSSQL server, this app might not work.
